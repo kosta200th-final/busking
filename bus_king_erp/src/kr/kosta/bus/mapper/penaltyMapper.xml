@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PenaltyDAO">
+
+	<select id="penaltyList" parameterType="HashMap" resultType="kr.kosta.bus.model.PenaltyDTO">
+		select d.* from ( select a.*, rownum rn from (
+		select p.p_code, p.p_e_licence, p.p_cost, p.p_payment, p.p_date, p_located, p_police, p_history, p_bigo, b.b_no as "p_b_no", e.e_no as "p_e_no"
+		from bus b, employer e, penalty p
+		where b.b_no = p.p_b_no and e.e_no = p.p_e_no order by p.p_code desc) a ) d
+		where rn between #{start} and #{end}
+  	</select>
+	
+	<insert id="penaltyInsert" parameterType="kr.kosta.bus.model.PenaltyDTO">
+		insert into penalty(p_code, p_b_no, p_e_no, p_e_licence, p_cost, p_payment, p_date, p_located, p_police, p_history, p_bigo) 
+		values(next_p_code, #{p_b_no}, #{p_e_no}, #{p_e_licence}, #{p_cost}, #{p_payment}, #{p_date}, #{p_located}, #{p_police}, #{p_history}, #{p_bigo} )
+	</insert>
+	
+	<update id="penaltyUpdate" parameterType="kr.kosta.bus.model.PenaltyDTO">
+		update penalty set p_payment = #{p_payment}, p_bigo = #{p_bigo} where p_code = #{p_code}
+	</update>
+	
+	<update id="p_paymentUpdate" parameterType="kr.kosta.bus.model.PenaltyDTO">
+            update penalty set p_payment = '납부완료' where p_code = #{p_code} 
+	</update> 
+	
+	<delete id="penaltyDelete" parameterType="String">
+		delete from penalty where p_code = #{p_code}
+	</delete>
+	
+	<select id="penaltyDetail" parameterType="String" resultType="kr.kosta.bus.model.PenaltyDTO">
+		select b.b_no as "p_b_no", e.e_no as "p_e_no", p.p_code, p.p_e_licence, p.p_cost, p.p_payment, p.p_date, p_located, p_police, p_history, p_bigo
+		from bus b, employer e, penalty p
+		where b.b_no = p.p_b_no and e.e_no = p.p_e_no and p_code = #{p_code}
+	</select>
+
+	<select id="getpenaltyCount" resultType="Integer">
+		select count(*) from penalty
+	</select>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RepairDAO">
+			<select id="repairList" parameterType="HashMap" resultType="kr.kosta.bus.model.RepairDTO">
+				select * from (select A.*, rownum r from (select * from repair order by re_code) A)
+				where r >= #{start} and r &lt;= #{end}
+			</select>
+			
+		<!--<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+			insert into repair values(repair_code, #{re_b_no}, #{re_date}, 
+			#{re_breakdown}, #{re_cost}, #{re_state}, #{re_bigo}) -->
+
+			<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+		    INSERT INTO repair VALUES
+		    	(repair_code, #{re_b_no}, #{re_date}, 
+				#{re_breakdown}, #{re_cost}, #{re_state}, #{re_bigo})
+			</insert>
+	
+			<update id="repairUpdate" parameterType="kr.kosta.bus.model.RepairDTO">
+				update repair set re_state =#{re_state}, re_bigo=#{re_bigo} where re_code=#{re_code} 
+			</update>
+	
+			<delete id="repairDelete" parameterType="String">
+				delete from repair where re_code = #{re_code}
+			</delete>
+			<select id="getRepairCount" resultType="Integer">
+				select count(*) from repair
+			</select>
+</mapper>

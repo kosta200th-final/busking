@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BusDAO">
+	<select id="busList" parameterType="HashMap"
+		resultType="kr.kosta.bus.model.BusDTO">
+		select * from (select A.*, rownum r from (select * from
+		bus order by b_no) A)
+		where r >= #{start} and r &lt;= #{end}
+
+	</select>
+	<select id="getBusCount" resultType="Integer">
+		select count(*) from bus
+	</select>
+	
+	<insert id="busInsert" parameterType="kr.kosta.bus.model.BusDTO">
+		insert into bus values (#{b_no}, #{b_year}, #{b_energy}, 
+			#{b_start}, #{b_type}, #{b_acc},
+			#{b_state}, #{b_mile},  #{b_recent})
+	</insert>
+	
+	<update id="busUpdate" parameterType="kr.kosta.bus.model.BusDTO">
+		update bus set b_year = #{b_year}, b_energy = #{b_energy}, 
+			b_start = #{b_start}, b_type = #{b_type}, b_acc = #{b_acc},
+			b_state = #{b_state}, b_mile = #{b_mile}, b_recent = #{b_recent}
+			where b_no = #{b_no}
+	</update>
+	
+	<delete id="busDelete" parameterType="String">
+		delete from bus where b_no = #{b_no}
+	</delete>
+
+</mapper>

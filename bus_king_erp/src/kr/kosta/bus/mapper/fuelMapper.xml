@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FuelDAO">
+			<select id="fuelList" parameterType="HashMap" resultType="kr.kosta.bus.model.FuelDTO">
+				select * from (select A.*, rownum r from (select * from fuel order by f_code) A)
+				where r >= #{start} and r &lt;= #{end}
+			</select>
+			
+		<!--<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+			insert into repair values(repair_code, #{re_b_no}, #{re_date}, 
+			#{re_breakdown}, #{re_cost}, #{re_state}, #{re_bigo}) -->
+
+			<insert id="fuelInsert" parameterType="kr.kosta.bus.model.FuelDTO">
+		    INSERT INTO fuel VALUES
+		    	(f_code, #{f_b_no}, #{f_b_energy}, #{f_date}, 
+				#{f_charge}, #{f_cost}, #{f_payment}, #{f_nametag}, #{f_bigo})
+			</insert>
+<!-- 	
+			<update id="repairUpdate" parameterType="kr.kosta.bus.model.FuelDTO">
+				update repair set re_state =#{re_state}, re_bigo=#{re_bigo} where re_code=#{re_code} 
+			</update> -->
+	
+			<delete id="fuelDelete" parameterType="String">
+				delete from repair where f_code = #{f_code}
+			</delete>
+			<select id="getfuelCount" resultType="Integer">
+				select count(*) from fuel
+			</select>
+</mapper>
