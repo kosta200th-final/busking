@@ -22,7 +22,7 @@
 		<input type="text" name="c_e_name" id="c_e_name" placeholder="기사 이름" value="${complaintupdate.c_e_name}" readonly="readonly"> <br>
 		<input type="text" name="c_e_no" id="c_e_no" placeholder="기사 사원번허" value="${complaintupdate.c_e_no}" readonly="readonly"> <br>
 		<input type="submit" value="수정">
-		<input type="reset" value="취소" onclick="location.href='comp-list.do'">
+		<input type="button" value="취소" onclick="location.href='comp-list.do'">
 	</form>
 </main>
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <body>
 <%@include file="/common/header.jsp" %>
 
@@ -17,26 +17,26 @@
 						<th class="column100 column6" data-column="column6">일별매출합계</th>
 						<th class="column100 column7" data-column="column7">설명</th>
 						<th class="column100 column8" data-column="column8">비고</th>
-						<th colspan="2" class="column100 column9" data-column="column9"><input type="button" 
-						value="BACK" onclick="location.href='cal-list.do'"></th>
+						<th colspan="2" class="column100 column9" data-column="column9"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><input type="text"  value="${dto.cal_code}" readonly="readonly" name="cal_code" id="cal_code"></td>
-						<td>
+						<td><input type="text"  value="${dto.cal_code}" readonly="readonly" class="code" name="cal_code" id="cal_code"></td>
+						<td class="date">
 							<fmt:parseDate value='${dto.cal_date}'
 								var='trading_day' pattern='yyyy-mm-dd' />
 							<fmt:formatDate value="${trading_day}"
 								pattern="yyyy.mm.dd" />
 						</td>
-						<td><input type="text" name="cal_hap_c" id="cal_hap_c" value="${dto.cal_hap_c}"></td>
-						<td><input type="text" name="cal_hap_m" id="cal_hap_m" value="${dto.cal_hap_m}"></td>
-						<td><input type="text" name="cal_total" id="cal_total" value="${dto.cal_total}"></td>
-						<td><input type="text" name="cal_nametag" id="cal_nametag" value="${dto.cal_nametag}"></td>
-						<td><input type="text" name="cal_bigo" id="cal_bigo" value="${dto.cal_bigo}"></td>
-						<td><input type="submit" value="EDIT">
-							<input type="reset" value="CANCLE" onclick="location.href='cal-list.do'">
+						<td><input type="text" class="price" name="cal_hap_c" id="cal_hap_c" value="${dto.cal_hap_c}"></td>
+						<td><input type="text" class="price" name="cal_hap_m" id="cal_hap_m" value="${dto.cal_hap_m}"></td>
+						<td><input type="text" class="price" name="cal_total" id="cal_total" value="${dto.cal_total}"></td>
+						<td><input type="text" class="note" name="cal_nametag" id="cal_nametag" value="${dto.cal_nametag}"></td>
+						<td><input type="text" class="note" name="cal_bigo" id="cal_bigo" value="${dto.cal_bigo}"></td>
+						<td><input type="submit" value="EDIT" class="button" style="background: #83d160">
+							<input type="reset" value="CANCLE" onclick="location.href='cal-list.do'" class="button" 
+							style="background:#999; margin-left: 5px">
 						</td>
 					</tr>
 				</tbody>

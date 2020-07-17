@@ -7,8 +7,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.ComplaintDAO;
 import kr.kosta.bus.model.ComplaintDTO;
+import kr.kosta.bus.model.EmployerDTO;
 
 @Service
 public class ComplaintServiceImpl implements ComplaintService {
@@ -16,6 +18,16 @@ public class ComplaintServiceImpl implements ComplaintService {
 	@Inject
 	ComplaintDAO complaintDAO;
 
+	@Override
+	public List<BusDTO> blist(HashMap map) {
+		return complaintDAO.blist(map);
+	}
+	
+	@Override
+	public List<EmployerDTO> elist(HashMap map) {
+		return complaintDAO.elist(map);
+	}
+	
 	@Override
 	public List<ComplaintDTO> complaintList(HashMap map) {
 		return complaintDAO.complaintList(map);
@@ -42,7 +54,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 
 	@Override
-	public ComplaintDTO complaintDetail(int c_no) {
+	public ComplaintDTO complaintDetail(String c_no) {
 		return complaintDAO.complaintDetail(c_no);
 	}
 }

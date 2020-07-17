@@ -5,6 +5,11 @@ import java.util.List;
 
 public interface ComplaintDAO {
 	
+	// 버스번호
+	public List<BusDTO> blist(HashMap map);
+	// 직원사번, 직원이름
+	public List<EmployerDTO> elist(HashMap map);
+	
 	public List<ComplaintDTO> complaintList(HashMap map);
 
 	public void complaintInsert(ComplaintDTO dto);
@@ -15,6 +20,6 @@ public interface ComplaintDAO {
 
 	public int getcomplaintCount();
 	
-	public ComplaintDTO complaintDetail(int c_no);
+	public ComplaintDTO complaintDetail(String c_no);
 
 }
