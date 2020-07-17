@@ -14,7 +14,7 @@
 				<th>금액</th>
 				<th>납부상태</th>
 				<th>위반일시</th>
-				<th>결제여부</th>
+				<th>납부완료</th>
 				<td><input type="button" value="ADD" onclick="location.href='p-insertform.do'"></td>
 			</tr>
 			<c:forEach items="${penaltylist}" var="list">
@@ -29,7 +29,7 @@
 						<fmt:parseDate value='${list.p_date}' var='trading_day' pattern='yyyy-mm-dd'/>
 						<fmt:formatDate value="${trading_day}" pattern="yyyy.mm.dd"/>
 					</td>
-					<td><input type='button' onclick="location.href='p-update.do?p_code=${list.p_code}'" value='납부'/></td>
+					<td><input type='button' onclick="location.href='p-ac.do?p_code=${list.p_code}'" value='납부완료'/></td>
 					<td>
 						<input type="button" value="EDIT" onclick="location.href='p-updateform.do?p_code=${list.p_code}'">
 						<input type="button" value="DELETE" onclick="location.href='p-delete.do?p_code=${list.p_code}'">
