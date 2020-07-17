@@ -18,8 +18,18 @@
 		<input type="text" name="p_e_no" id="p_e_no" placeholder="기사 사원번호" readonly="readonly" value="${penaltyupdate.p_e_no}"> <br>
 		<input type="text" name="p_e_licence" id="p_e_licence" placeholder="면허 번호" readonly="readonly" value="${penaltyupdate.p_e_licence}"> <br>
 		<input type="text" name="p_cost" id="p_cost" placeholder="부과 금액" readonly="readonly" value="${penaltyupdate.p_cost}"> <br>
-		<input type="radio" name="p_payment" value="납부전">납부전
-		<input type="radio" name="p_payment" value="납부완료">납부완료 <br>
+		
+		<c:if test="${penaltyupdate.p_payment =='납부전'}">
+			<input type="radio" name="p_payment" value="납부전" checked="checked">납부전
+			<input type="radio" name="p_payment" value="납부완료">납부완료 
+		</c:if>
+		<c:if test="${penaltyupdate.p_payment =='납부완료'}">
+			<input type="radio" name="p_payment" value="납부전">납부전
+			<input type="radio" name="p_payment" value="납부완료" checked="checked">납부완료 
+		</c:if>
+		<br>
+		
+		
 		<fmt:parseDate value="${penaltyupdate.p_date}" var='trading_day' pattern='yyyy-mm-dd' />
 		<fmt:formatDate value="${trading_day}" pattern="yyyy.mm.dd"/> <br>
 		<input type="text" name="p_located" id="p_located" placeholder="위반장소" readonly="readonly" value="${penaltyupdate.p_located}"> <br>
@@ -27,6 +37,8 @@
 		<input type="text" name="p_history" id="p_history" placeholder="내용" readonly="readonly" value="${penaltyupdate.p_history}"> <br>
 		<input type="text" name="p_bigo" id="p_bigo" placeholder="비고" value="${penaltyupdate.p_bigo}"> <br>
 		<input type="submit" value="수정">
+		<input type="button" value="취소" onclick="location.href='p-list.do'">
+		
 	</form>
 </main>
 

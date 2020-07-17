@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
 	<%@include file="/common/header.jsp" %>
+	<%-- <%@include file="/common/accountSubMenu.jsp" %> --%>
 	<main>
 
 	<form action="" method="post">
@@ -14,43 +15,43 @@
 					<tr class="row100 head">
 						<th class="column100 column1" data-column="column1">정산코드</th>
 						<th class="column100 column2" data-column="column2">정산날짜</th>
-						<th class="column100 column3" data-column="column3">차량번호</th>
+						<th class="column100 column3 carNum" data-column="column3">차량번호</th>
 						<th class="column100 column4" data-column="column4">카드매출합계</th>
 						<th class="column100 column5" data-column="column5">현금매출합계</th>
 						<th class="column100 column6" data-column="column6">일별매출합계</th>
 						<th class="column100 column7" data-column="column7">설명</th>
-						<th class="column100 column8" data-column="column8">비고
-						<th>
-						<th colspan="2" class="column100 column9" data-column="column9"><input
-							type="button" value="ADD"
-							onclick="location.href='cal-insertform.do'"></th>
+						<th class="column100 column8" data-column="column8">비고</th>
+						<th colspan="2" class="column100 column9" data-column="column9">
+							<input	type="button" value="추가" class="addBtn"
+							onclick="location.href='cal-insertform.do'">
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${callist}" var="list">
 						<tr>
-							<td>${list.cal_code}</td>
-							<td><fmt:parseDate value='${list.cal_date}'
+							<td class="code">${list.cal_code}</td>
+							<td class="date"><fmt:parseDate value='${list.cal_date}'
 								var='trading_day' pattern='yyyy-mm-dd' />
 							<fmt:formatDate value="${trading_day}"
 								pattern="yyyy-mm-dd" /></td>
 							<td>${list.cal_b_no}</td>
-							<td>${list.cal_hap_c}</td>
-							<td>${list.cal_hap_m}</td>
-							<td>${list.cal_total}</td>
-							<td>${list.cal_nametag}</td>
-							<td>${list.cal_bigo}</td>
+							<td class="price">${list.cal_hap_c}</td>
+							<td class="price">${list.cal_hap_m}</td>
+							<td class="price">${list.cal_total}</td>
+							<td class="note">${list.cal_nametag}</td>
+							<td class="note">${list.cal_bigo}</td>
 
-							<td><input type="button" value="EDIT"
+							<td><input type="button" value="수정" class="button"
 								onclick="location.href='cal-update.do?cal_code=${list.cal_code}'"></td>
-							<td><input type="button" value="DETAILED" class="btn"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</form>
-	<table width="600">
+	
+	<table width="600" class="pgTable">
 		<tr>
 			<td align="center">
 				<!-- 처음 이전 링크 --> <c:if test="${pg>block}">

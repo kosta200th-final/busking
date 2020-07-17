@@ -9,7 +9,7 @@
 			<table data-vertable="ver2">
 				<thead>
 					<tr class="row100 head">
-						<th class="column100 column1" data-column="column1">정산코드</th>
+						<!-- <th class="column100 column1" data-column="column1">정산코드</th> -->
 						<th class="column100 column2" data-column="column2">정산날짜</th>
 						<th class="column100 column3" data-column="column3">차량번호</th>
 						<th class="column100 column4" data-column="column4">카드매출합계</th>
@@ -22,7 +22,7 @@
 				</thead>
 				<tbody>
 						<tr>
-							<td><input type="text" name="cal_code" id="cal_code" placeholder="정산코드"></td>
+							<!-- <td><input type="text" name="cal_code" id="cal_code" placeholder="정산코드"></td> -->
 							<td><input type="date" name="cal_date" id="cal_date" placeholder="정산날짜"></td>
 							<td><input type="text" name="cal_b_no" id="cal_b_no"placeholder="차량번호"></td>
 							<td><input type="text" name="cal_hap_c" id="cal_hap_c"placeholder="카드매출합계"> </td>

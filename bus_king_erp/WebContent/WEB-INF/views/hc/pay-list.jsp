@@ -107,7 +107,7 @@
 					<td>${list.pay_m}</td>
 					<td>${list.pay_tax}</td>
 					<td>${list.pay_total}</td>
-					
+					</tr>					
 			</c:forEach>
 		</table>
 	</form>

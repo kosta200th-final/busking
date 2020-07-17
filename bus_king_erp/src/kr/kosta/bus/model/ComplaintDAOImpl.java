@@ -14,6 +14,16 @@ public class ComplaintDAOImpl implements ComplaintDAO {
 	SqlSession sqlSession;
 	
 	@Override
+	public List<BusDTO> blist(HashMap map) {
+		return sqlSession.selectList("ComplaintDAO.blist", map);
+	}
+	
+	@Override
+	public List<EmployerDTO> elist(HashMap map) {
+		return sqlSession.selectList("ComplaintDAO.elist", map);
+	}
+	
+	@Override
 	public List<ComplaintDTO> complaintList(HashMap map) {
 		return sqlSession.selectList("ComplaintDAO.complaintList", map) ;
 	}
@@ -39,7 +49,7 @@ public class ComplaintDAOImpl implements ComplaintDAO {
 	}
 	
 	@Override
-	public ComplaintDTO complaintDetail(int c_no) {
+	public ComplaintDTO complaintDetail(String c_no) {
 		return sqlSession.selectOne("ComplaintDAO.complaintDetail", c_no);
 	}
 
