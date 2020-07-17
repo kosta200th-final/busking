@@ -7,6 +7,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.kosta.bus.model.AccountDTO;
+import kr.kosta.bus.model.BusDTO;
+import kr.kosta.bus.model.EmployerDTO;
 import kr.kosta.bus.model.PenaltyDAO;
 import kr.kosta.bus.model.PenaltyDTO;
 
@@ -15,7 +18,17 @@ public class PenaltyServiceImpl implements PenaltyService {
 
 	@Inject
 	PenaltyDAO penaltyDAO;
-	
+
+	@Override
+	public List<BusDTO> blist(HashMap map) {
+		return penaltyDAO.blist(map);
+	}
+
+	@Override
+	public List<EmployerDTO> elist(HashMap map) {
+		return penaltyDAO.elist(map);
+	}
+
 	@Override
 	public List<PenaltyDTO> penaltyList(HashMap map) {
 		return penaltyDAO.penaltyList(map);
@@ -49,5 +62,10 @@ public class PenaltyServiceImpl implements PenaltyService {
 	@Override
 	public void p_paymentUpdate(String p_code) {
 		penaltyDAO.p_paymentUpdate(p_code);
+	}
+	
+	@Override
+	public void accountInsert(AccountDTO dto) {
+		penaltyDAO.accountInsert(dto);
 	}
 }
