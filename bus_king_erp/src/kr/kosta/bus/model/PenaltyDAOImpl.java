@@ -14,6 +14,16 @@ public class PenaltyDAOImpl implements PenaltyDAO {
 	SqlSession sqlSession;
 	
 	@Override
+	public List<BusDTO> blist(HashMap map) {
+		return sqlSession.selectList("PenaltyDAO.blist", map);
+	}
+	
+	@Override
+	public List<EmployerDTO> elist(HashMap map) {
+		return sqlSession.selectList("PenaltyDAO.elist", map);
+	} 
+	
+	@Override
 	public List<PenaltyDTO> penaltyList(HashMap map) {
 		return sqlSession.selectList("PenaltyDAO.penaltyList", map);
 	}
@@ -46,6 +56,11 @@ public class PenaltyDAOImpl implements PenaltyDAO {
 	@Override
 	public void p_paymentUpdate(String p_code) {
 		sqlSession.update("PenaltyDAO.p_paymentUpdate", p_code);
+	}
+	
+	@Override
+	public void accountInsert(AccountDTO dto) {
+		sqlSession.insert("PenaltyDAO.accountInsert", dto);
 	}
 
 }
