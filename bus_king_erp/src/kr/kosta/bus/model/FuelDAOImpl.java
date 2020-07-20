@@ -24,8 +24,8 @@ public class FuelDAOImpl implements FuelDAO{
 	}
 
 	@Override
-	public void fuelUpdate(FuelDTO dto) {
-		sqlSession.update("FuelDAO.fuelUpdate",dto);
+	public void fuelUpdate(String f_code) {
+		sqlSession.update("FuelDAO.fuelUpdate",f_code);
 		
 	}
 

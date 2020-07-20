@@ -23,6 +23,7 @@ margin: auto;
 				<th>No</th>
 				<th>버스 차량번호</th>
 				<th>정비 접수일</th>
+				<th>정비 완료일</th>
 				<th>정비 내역</th>
 				<th>정비 비용</th>
 				<th>정비 상태</th>
@@ -33,7 +34,11 @@ margin: auto;
 				<tr>
 					<td>${repairlist.re_code}</td>
 					<td>${repairlist.re_b_no}</td>
-					<td>${repairlist.re_date}</td>
+					<%-- <td>${repairlist.re_date}</td> --%>
+				<td><fmt:parseDate value='${repairlist.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
+             <fmt:formatDate value="${re_date}" pattern="yyyy.mm.dd"/></td>
+             <td><fmt:parseDate value='${repairlist.re_date2}' var='re_date2' pattern='yyyy-mm-dd'/>
+             <fmt:formatDate value="${re_date2}" pattern="yyyy.mm.dd"/></td>
 					<td>${repairlist.re_breakdown}</td>
 					<td>${repairlist.re_cost}</td>
 					<td>${repairlist.re_state}</td>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="Wonlyo2_DAO">
+	
+			<select id="wonlyo2List" parameterType="HashMap" resultType="kr.kosta.bus.model.Wonlyo2_DTO">
+				select * from wonlyo2
+			</select>
+			
+		 <insert id="wonlyo2Insert" parameterType="kr.kosta.bus.model.Wonlyo2_DTO" >
+			insert into wonlyo2 values(NEXT_WO2_CODE,#{wo2_iptype}, #{wo2_type},#{wo2_number},#{wo2_date})
+		</insert> 
+		
+<!-- 		<delete id="repairDelete" parameterType="String">
+				delete from repair where re_code = #{re_code}
+			</delete>
+			<select id="getRepairCount" resultType="Integer">
+				select count(*) from repair	
+
+			</select> --> 
+
+			<select id="getwonlyo2Count" resultType="Integer">
+				select count(*) from wonlyo2
+			</select>
+</mapper>

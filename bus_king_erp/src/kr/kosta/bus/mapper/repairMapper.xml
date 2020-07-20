@@ -9,18 +9,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where r >= #{start} and r &lt;= #{end}
 			</select>
 			
-		<!--<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
-			insert into repair values(repair_code, #{re_b_no}, #{re_date}, 
-			#{re_breakdown}, #{re_cost}, #{re_state}, #{re_bigo}) -->
+			<select id="select" parameterType="HashMap" resultType="kr.kosta.bus.model.RepairDTO">
+				select * from repair where re_code = #{re_code}
+			</select>
 
 			<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
-		    INSERT INTO repair VALUES
-		    	(repair_code, #{re_b_no}, #{re_date}, 
-				#{re_breakdown}, #{re_cost}, #{re_state}, #{re_bigo})
+				insert into repair(re_code,re_b_no,re_date,re_cost,re_breakdown,re_state,re_bigo)
+				 values(NEXT_RE_CODE, #{re_b_no}, #{re_date}, #{re_cost},#{re_breakdown}, #{re_state},#{re_bigo})
 			</insert>
 	
 			<update id="repairUpdate" parameterType="kr.kosta.bus.model.RepairDTO">
-				update repair set re_state =#{re_state}, re_bigo=#{re_bigo} where re_code=#{re_code} 
+				update repair set re_state =#{re_state},re_date2=#{re_date2}, re_bigo=#{re_bigo} where re_code=#{re_code} 
 			</update>
 	
 			<delete id="repairDelete" parameterType="String">
