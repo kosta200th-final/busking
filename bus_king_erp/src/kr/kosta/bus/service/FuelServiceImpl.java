@@ -27,8 +27,8 @@ public class FuelServiceImpl implements FuelService {
 	}
 
 	@Override
-	public void fuelUpdate(FuelDTO dto) {
-		// TODO Auto-generated method stub
+	public void fuelUpdate(String f_code) {
+		fuelDAO.fuelUpdate(f_code);
 		
 	}
 
