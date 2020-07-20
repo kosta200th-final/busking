@@ -31,23 +31,24 @@ margin: auto;
 				<th>비고(특이사항)</th>
 
 				</tr>
-			<c:forEach items="${fuel}" var="fuellist">
+			<c:forEach items="${fuel}" var="fuel">
 				<tr>
-					<td>${fuellist.f_code}</td>
-					<td>${fuellist.f_b_no}</td>
-					<td>${fuellist.f_b_energy}</td>
-					<td>${fuellist.f_date}</td>
-					<td>${fuellist.f_charge}</td>
-					<td>${fuellist.f_cost}</td>
-					<td>${fuellist.f_payment}</td>
-					<td>${fuellist.f_nametage}</td>
-					<td>${fuellist.f_bigo}</td>
+					<td>${fuel.f_code}</td>
+					<td>${fuel.f_b_no}</td>
+					<td>${fuel.f_b_energy}</td>
+					<%-- <td>${fuel.f_date}</td> --%>
+				<td><fmt:parseDate value='${fuel.f_date}' var='f_date' pattern='yyyy-mm-dd'/>
+	             <fmt:formatDate value="${f_date}" pattern="yyyy.mm.dd"/></td>
+					<td>${fuel.f_charge}</td>
+					<td>${fuel.f_cost}</td>
+					<td>${fuel.f_payment}</td>
+					<td>${fuel.f_nametag}</td>
+					<td>${fuel.f_bigo}</td>
 					
 
-					<td><input type="button" value="수정"
-						onclick="location.href='f-updateform.do?f_code=${fuellist.f_code}'"></td>
+					<td><input type='button' onclick="location.href='f-update.do?f_code=${fuel.f_code}'" value='결제'/></td>
 					<td><input type="button" value="삭제"
-						onclick="location.href='f-delete.do?f_code=${fuellist.f_code}'">
+						onclick="location.href='f-delete.do?f_code=${fuel.f_code}'">
 				</tr>
 
 			</c:forEach>

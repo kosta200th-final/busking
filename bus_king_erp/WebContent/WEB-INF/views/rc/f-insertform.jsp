@@ -14,16 +14,20 @@
 <form action="f-insert.do" method="post">
 <h1 style="text-align: center;">주유 등록</h1>
 	<div align="center">
-	1<input type="text" id="f_code" hidden="" name="f_code"><br><br>
-	2<input type="text" id="f_b_no"  name="f_b_no"><br><br>
-	3<input type="text" id="f_b_energy"  name="f_b_energy"><br><br>
-	4<input type="date" id="f_date" name="f_date"><br><br>
-	5<input type="text" id="f_charge"  name="f_charge"><br><br>
-	6<input type="text" id="f_cost"  name="f_cost"><br><br>
-	7<input type="text" id="f_payment"  name="f_payment"><br><br>
-	8<input type="text" id="f_nametag"  name="f_nametag"><br><br>
-	9<input type="text" id="f_bigo"  name="f_bigo">
-        	
+
+	    <input type="text" name="f_code" id="f_code" placeholder="f_code" value="${fuel.f_code}" hidden=""><br><br>
+	       버스 번호 :<input type="text" name="f_b_no" id="f_b_no" placeholder="버스번호" value="${fuel.f_b_no}"><br><br>
+	   <label for = "f_b_energy">주유 타입 : </label>
+	    <input type = "radio" name = "f_b_energy" id="f_b_energy" value = "전기">전기
+        <input type = "radio" name = "f_b_energy"id="f_b_energy" value = "경유">경유<br><br>
+		접수 날짜 :<input type="date" name="f_date" id="f_date"placeholder="re_date"><br><br>
+		주유 량 :<input type="number" name="f_charge" id="f_charge" placeholder="숫자로만 입력"><br><br>
+		주유 비 :<input type="number" name="f_cost" id="f_cost"placeholder="숫자로만 입력"><br><br>
+		<label for = "f_payment">결제 여부 : </label>
+		<input type = "radio" name = "f_payment" id="f_payment"value = "미결제">미결제
+       	<input type = "radio" name = "f_payment" id="f_payment" value = "결제완료">결제완료<br><br>
+	          요약 :<input type="text" name="f_nametag" id="f_nametag" placeholder="차량번호/날짜/주유 비"><br><br>
+                   비고(특이사항) : <textarea  rows="10" cols="30" name="f_bigo"></textarea><br><br>
 	<input type="submit" value="확인" >&nbsp;&nbsp;&nbsp;
 	<input type="reset" value="취소" >
 	</div>
