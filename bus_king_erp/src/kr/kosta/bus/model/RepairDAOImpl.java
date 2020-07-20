@@ -43,6 +43,11 @@ public class RepairDAOImpl implements RepairDAO{
 			return sqlSession.selectOne("RepairDAO.getRepairCount");
 		}
 
+		@Override
+		public RepairDTO select(RepairDTO dto) {
+			return sqlSession.selectOne("RepairDAO.select",dto);
+		}
+
 
 
 	
