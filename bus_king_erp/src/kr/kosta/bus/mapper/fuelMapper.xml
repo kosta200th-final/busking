@@ -15,17 +15,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 			<insert id="fuelInsert" parameterType="kr.kosta.bus.model.FuelDTO">
 		    INSERT INTO fuel VALUES
-		    	(f_code, #{f_b_no}, #{f_b_energy}, #{f_date}, 
-				#{f_charge}, #{f_cost}, #{f_payment}, #{f_nametag}, #{f_bigo})
+		    	(NEXT_F_CODE, #{f_b_no,jdbcType=VARCHAR}, #{f_b_energy,jdbcType=VARCHAR}, #{f_date}, 
+				#{f_charge}, #{f_cost}, #{f_payment,jdbcType=VARCHAR}, #{f_nametag,jdbcType=VARCHAR}, #{f_bigo,jdbcType=VARCHAR})
 			</insert>
-<!-- 	
-			<update id="repairUpdate" parameterType="kr.kosta.bus.model.FuelDTO">
-				update repair set re_state =#{re_state}, re_bigo=#{re_bigo} where re_code=#{re_code} 
-			</update> -->
-	
+		
+			<update id="fuelUpdate" parameterType="kr.kosta.bus.model.FuelDTO">
+	            update fuel set f_payment='결제완료' where f_code=#{f_code} 
+	         </update>
+	         
 			<delete id="fuelDelete" parameterType="String">
 				delete from repair where f_code = #{f_code}
 			</delete>
+			
 			<select id="getfuelCount" resultType="Integer">
 				select count(*) from fuel
 			</select>

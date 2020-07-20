@@ -48,4 +48,11 @@ public class RepairServiceImpl implements RepairService{
 	}
 
 
+
+	@Override
+	public RepairDTO select(RepairDTO dto) {
+		return repairDAO.select(dto);
+	}
+
+
 }

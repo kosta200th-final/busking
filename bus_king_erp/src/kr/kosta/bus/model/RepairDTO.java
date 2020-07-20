@@ -1,11 +1,12 @@
 package kr.kosta.bus.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class RepairDTO {
 
-	private String re_code,re_b_no,re_state,re_bigo,re_breakdown , re_date;
+	private String re_code,re_b_no,re_state,re_bigo,re_breakdown,re_date,re_date2;
 	private int re_cost;
+	
 	public String getRe_code() {
 		return re_code;
 	}
@@ -43,11 +44,24 @@ public class RepairDTO {
 	public void setRe_cost(int re_cost) {
 		this.re_cost = re_cost;
 	}
+	
+
 	public String getRe_date() {
 		return re_date;
 	}
 	public void setRe_date(String re_date) {
 		this.re_date = re_date;
+	}
+	@Override
+	public String toString() {
+		return "RepairDTO [re_code=" + re_code + ", re_b_no=" + re_b_no + ", re_state=" + re_state + ", re_bigo="
+				+ re_bigo + ", re_breakdown=" + re_breakdown + ", re_date=" + re_date + ", re_cost=" + re_cost + "]";
+	}
+	public String getRe_date2() {
+		return re_date2;
+	}
+	public void setRe_date2(String re_date2) {
+		this.re_date2 = re_date2;
 	}
 
 
