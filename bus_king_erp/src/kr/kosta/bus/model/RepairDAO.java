@@ -8,6 +8,7 @@ public interface RepairDAO {
 	public void repairInsert(RepairDTO dto);
 	public void repairUpdate(RepairDTO dto);
 	public void repairDelete(String re_code);
+	public RepairDTO select(RepairDTO dto);
 	public int getRepairCount();
 	
 }
