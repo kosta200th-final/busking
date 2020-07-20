@@ -60,4 +60,12 @@ public class FuelDTO {
 	public void setF_charge(int f_charge) {
 		this.f_charge = f_charge;
 	}
+	@Override
+	public String toString() {
+		return "FuelDTO [f_code=" + f_code + ", f_b_no=" + f_b_no + ", f_b_energy=" + f_b_energy + ", f_date=" + f_date
+				+ ", f_nametag=" + f_nametag + ", f_bigo=" + f_bigo + ", f_payment=" + f_payment + ", f_cost=" + f_cost
+				+ ", f_charge=" + f_charge + "]";
+	}
+	
+	
 }
