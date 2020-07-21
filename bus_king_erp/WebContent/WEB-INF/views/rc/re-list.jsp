@@ -2,13 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
-<%@include file="/common/header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@include file="/common/header.jsp" %>
+<%@include file="/common/repairSubMenu.jsp" %>
+<script> 
+function formSubmit(){ 
+	document.getElementById("frm").submit();
+}
+</script>
 <style type="text/css">
-ma{
+#ma{
 text-align: center;
-margin: auto;
+width: 350;
+line-height:1.5;
 }
 </style>
 <meta charset="UTF-8">
@@ -17,45 +23,43 @@ margin: auto;
 </head>
 <body>
 	<main>
-	<form action="" method="post">
-		<table id="ma">
-			<tr>
-				<th>No</th>
-				<th>버스 차량번호</th>
-				<th>정비 접수일</th>
-				<th>정비 완료일</th>
-				<th>정비 내역</th>
-				<th>정비 비용</th>
-				<th>정비 상태</th>
-				<th>비고</th>
-
-				</tr>
+	<form action="" method="post" id="frm">
+			<div class="table100 ver2 m-b-110">
+			<table data-vertable="ver2" id=ma>
+					<thead>
+				<tr class="row100 head">
+							<th class="column100 column1" data-column="column1">No</th>
+							<th class="column100 column2" data-column="column2">버스 차량번호</th>
+							<th class="column100 column3" data-column="column3">정비 접수일</th>
+							<th class="column100 column4" data-column="column4">정비 완료일</th>
+							<th class="column100 column4" data-column="column5">정비 내역</th>
+							<th class="column100 column4" data-column="column6">정비 상태</th>
+							<th class="column100 column4" data-column="column7">비고</th>
+						</tr>
+			
 			<c:forEach items="${repairlist}" var="repairlist">
 				<tr>
 					<td>${repairlist.re_code}</td>
 					<td>${repairlist.re_b_no}</td>
-					<%-- <td>${repairlist.re_date}</td> --%>
-				<td><fmt:parseDate value='${repairlist.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
+			<td><fmt:parseDate value='${repairlist.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
              <fmt:formatDate value="${re_date}" pattern="yyyy.mm.dd"/></td>
              <td><fmt:parseDate value='${repairlist.re_date2}' var='re_date2' pattern='yyyy-mm-dd'/>
              <fmt:formatDate value="${re_date2}" pattern="yyyy.mm.dd"/></td>
 					<td>${repairlist.re_breakdown}</td>
-					<td>${repairlist.re_cost}</td>
+					<td>${repairlist.re_cost} 원</td>
 					<td>${repairlist.re_state}</td>
 					<td>${repairlist.re_bigo}</td>
-
 					<td><input type="button" value="수정"
 						onclick="location.href='re-updateform.do?re_code=${repairlist.re_code}'"></td>
 					<td><input type="button" value="삭제"
 						onclick="location.href='re-delete.do?re_code=${repairlist.re_code}'">
 				</tr>
-
 			</c:forEach>
-				<td><input type="button" background="red" value="추가하기"
-					onclick="location.href='re-insertform.do'"></td>
-		</table>
+			</thead></table></div>
+				<input type="button" style="background: red" value="추가하기"
+					onclick="location.href='re-insertform.do'">
 	</form>
-	<table width="600">
+	 <table width="600" class="pgTable">
 		<tr>
 			<td align="center">
 				<!-- 처음 이전 링크 --> <c:if test="${pg>block}">

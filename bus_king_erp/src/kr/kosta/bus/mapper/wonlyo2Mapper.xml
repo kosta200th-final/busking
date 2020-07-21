@@ -6,7 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<mapper namespace="Wonlyo2_DAO">
 	
 			<select id="wonlyo2List" parameterType="HashMap" resultType="kr.kosta.bus.model.Wonlyo2_DTO">
-				select * from wonlyo2
+				select * from (select A.*, rownum r from (select * from wonlyo2 order by wo2_no) A)
+				where r >= #{start} and r &lt;= #{end}
 			</select>
 			
 		 <insert id="wonlyo2Insert" parameterType="kr.kosta.bus.model.Wonlyo2_DTO" >

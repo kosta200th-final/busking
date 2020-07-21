@@ -17,4 +17,7 @@ public interface AllocationDAO {
 	public void allocationUpdate(AllocationDTO dto);
 	public void allocationDelete(AllocationDTO dto);
 	public int getAllocationCount(String zo);
+	public void stateUpdateRun(AllocationDTO dto);
+	public void stateUpdateStop(AllocationDTO dto);
+	public String bstate(String b_no);
 }

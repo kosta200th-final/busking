@@ -20,8 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="routeUpdate" parameterType="kr.kosta.bus.model.RouteDTO">
-		update route set r_start = #{r_start}, r_end = #{r_end}, 
-			r_s_time = #{r_s_time}, r_e_time = #{r_e_time}, r_interval = #{r_interval},
+		update route set r_start = #{r_start}, r_end = #{r_end}, r_s_time = #{r_s_time}, r_e_time = #{r_e_time}, r_interval = #{r_interval},
 			r_map = #{r_map}, r_pay_adult = #{r_pay_adult}, r_pay_adult2 = #{r_pay_adult2}, r_pay_teen = #{r_pay_teen},
 			r_pay_teen2 = #{r_pay_teen2}, r_pay_kid = #{r_pay_kid}, r_pay_kid2 = #{r_pay_kid2}
 			where r_no = #{r_no}
@@ -30,5 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="routeDelete" parameterType="String">
 		delete from route where r_no = #{r_no}
 	</delete>
+	
+	<select id="routeSelect" parameterType="kr.kosta.bus.model.RouteDTO" resultType="kr.kosta.bus.model.RouteDTO">
+		select * from route where r_no = #{r_no}
+	</select>
+	
+	<select id="routealloc" parameterType="String" resultType="Integer">
+		select count(*) from allocation where a_r_no = #{r_no}
+	</select>
 	
 </mapper>

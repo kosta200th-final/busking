@@ -53,4 +53,19 @@ public class AllocationDAOImpl implements AllocationDAO {
 		return sqlSession.selectOne("AllocationDAO.getAllocationCount", zo);
 	}
 
+	@Override
+	public void stateUpdateRun(AllocationDTO dto) {
+		sqlSession.update("AllocationDAO.stateUpdateRun", dto);
+	}
+
+	@Override
+	public void stateUpdateStop(AllocationDTO dto) {
+		sqlSession.update("AllocationDAO.stateUpdateStop", dto);
+	}
+
+	@Override
+	public String bstate(String b_no) {
+		return sqlSession.selectOne("AllocationDAO.bstate", b_no);
+	}
+	
 }

@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	         </update>
 	         
 			<delete id="fuelDelete" parameterType="String">
-				delete from repair where f_code = #{f_code}
+				delete from fuel where f_code = #{f_code}
 			</delete>
 			
 			<select id="getfuelCount" resultType="Integer">
