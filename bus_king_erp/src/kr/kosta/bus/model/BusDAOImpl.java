@@ -38,4 +38,18 @@ public class BusDAOImpl implements BusDAO {
 		return sqlSession.selectOne("BusDAO.getBusCount");
 	}
 
+	@Override
+	public BusDTO busSelect(String b_no) {
+		return sqlSession.selectOne("BusDAO.busSelect", b_no);
+	}
+
+	@Override
+	public void busRepairInsert(String b_no) {
+		sqlSession.insert("BusDAO.busRepairInsert", b_no);
+	}
+	
+	@Override
+	public void stateUpdateRrepair(String b_no) {
+		sqlSession.update("BusDAO.stateUpdateRrepair", b_no);
+	}
 }

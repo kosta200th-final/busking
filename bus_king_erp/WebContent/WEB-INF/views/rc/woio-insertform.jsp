@@ -2,14 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
-<%-- <%@include file="/common/header.jsp" %> --%>
+<%@include file="/common/header.jsp" %>
+<%@include file="/common/repairSubMenu.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style type="text/css">
-id.ma {
+#ma {
 border:1px;
 text-align: center;
 margin-right: auto;
+width: 350;
+line-height:1.5;
  }
 </style>
 <head>
@@ -26,12 +29,12 @@ margin-right: auto;
 		<table id="ma">
 			<tr>
 
-				<th>입/출고</th>
-				<th>종류</th>
-				<th>수량</th>
-				<th>날짜</th></tr>
+				<th width="100">입/출고</th>
+				<th width="100">종류</th>
+				<th width="100">수량</th>
+				<th width="100">날짜</th></tr>
 			<tr>
-				<td><input type="hidden" name="wo2_no" value="${wo2.wo2_no}"></td>
+				<%-- <td><input type="hidden" name="wo2_no" value="${wo2.wo2_no}"></td> --%>
 				<td><select name="wo2_iptype">
 		   		 <option value="입고">입고</option>
 		   		 <option value="출고">출고</option></select>

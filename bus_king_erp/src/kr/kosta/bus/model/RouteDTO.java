@@ -83,26 +83,12 @@ public class RouteDTO {
 	public void setR_pay_kid2(int r_pay_kid2) {
 		this.r_pay_kid2 = r_pay_kid2;
 	}
-	
-	public RouteDTO() {}
-	
-	public RouteDTO(String r_no, String r_start, String r_end, String r_map, String r_s_time, String r_e_time,
-			int r_interval, int r_pay_adult, int r_pay_adult2, int r_pay_teen, int r_pay_teen2, int r_pay_kid,
-			int r_pay_kid2) {
-		super();
-		this.r_no = r_no;
-		this.r_start = r_start;
-		this.r_end = r_end;
-		this.r_map = r_map;
-		this.r_s_time = r_s_time;
-		this.r_e_time = r_e_time;
-		this.r_interval = r_interval;
-		this.r_pay_adult = r_pay_adult;
-		this.r_pay_adult2 = r_pay_adult2;
-		this.r_pay_teen = r_pay_teen;
-		this.r_pay_teen2 = r_pay_teen2;
-		this.r_pay_kid = r_pay_kid;
-		this.r_pay_kid2 = r_pay_kid2;
+	@Override
+	public String toString() {
+		return "RouteDTO [r_no=" + r_no + ", r_start=" + r_start + ", r_end=" + r_end + ", r_map=" + r_map
+				+ ", r_s_time=" + r_s_time + ", r_e_time=" + r_e_time + ", r_interval=" + r_interval + ", r_pay_adult="
+				+ r_pay_adult + ", r_pay_adult2=" + r_pay_adult2 + ", r_pay_teen=" + r_pay_teen + ", r_pay_teen2="
+				+ r_pay_teen2 + ", r_pay_kid=" + r_pay_kid + ", r_pay_kid2=" + r_pay_kid2 + "]";
 	}
 	
 }

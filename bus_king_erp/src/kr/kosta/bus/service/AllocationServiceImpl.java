@@ -59,4 +59,19 @@ public class AllocationServiceImpl implements AllocationService {
 		return allocationDAO.getAllocationCount(zo);
 	}
 
+	@Override
+	public void stateUpdateRun(AllocationDTO dto) {
+		allocationDAO.stateUpdateRun(dto);
+	}
+
+	@Override
+	public void stateUpdateStop(AllocationDTO dto) {
+		allocationDAO.stateUpdateStop(dto);
+	}
+
+	@Override
+	public String bstate(String b_no) {
+		return allocationDAO.bstate(b_no);
+	}
+	
 }

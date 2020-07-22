@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,17 @@ import kr.kosta.bus.service.PayService;
 @Controller
 @RequestMapping("/hc/*")
 public class HrController {
+	
+	//@Inject
+	//ShaEncoder shaEncoder; //암호화 빈
+	
+	
+	
+	//로그인 페이지로 이동
+	@RequestMapping("/login.do")
+	public String login() {
+		return "/user/login";
+	}
 
 	@Autowired
 	EmployerService service;
@@ -59,7 +71,6 @@ public class HrController {
 			toPage = allPage;
 		}
 		
-		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
@@ -75,7 +86,6 @@ public class HrController {
 			List<EmployerDTO> dto = service.employerList(map);
 			model.addAttribute("employerlist", dto);
 		}
-			
 		
 		model.addAttribute("pg", pg);
 		model.addAttribute("allPage", allPage);
@@ -142,20 +152,21 @@ public class HrController {
 	@Autowired
 	PayService pay_service;
 	
-	//페이관리
-	@RequestMapping("pay-list-n.do")
-	public String pay_list_n() {
-		return "/hc/pay-list-n";
-	}
-	
+	//페이관리	
+	static String py = " ";
+	static String pm = " ";
+	static String peno = " ";
 	@RequestMapping("pay-list.do")	
 	public String pay_list(HttpServletRequest request, Model model) { // home -> rlist
-
+		
+		if(request.getParameter("pay_year") != null && !request.getParameter("pay_year").equals("==연도==")) py = request.getParameter("pay_year");
+		if(request.getParameter("pay_month") != null && !request.getParameter("pay_month").equals("==월==")) pm = request.getParameter("pay_month");
+		if(request.getParameter("pay_e_no") != null && !request.getParameter("pay_e_no").equals("==사번==")) peno = request.getParameter("pay_e_no");
 		
 		HashMap map = new HashMap();
-		map.put("pay_year", Integer.parseInt(request.getParameter("pay_year")));
-		map.put("pay_month", Integer.parseInt(request.getParameter("pay_month"))); //
-		map.put("pay_e_no", request.getParameter("pay_e_no")); //
+		map.put("pay_year", py);
+		map.put("pay_month", pm); //
+		map.put("pay_e_no", peno); //
 		
 		List<PayDTO> dto = pay_service.payList(map);
 		model.addAttribute("paylist", dto);
@@ -231,14 +242,25 @@ public class HrController {
 		map.put("comm_month_m", cmm);
 		map.put("comm_e_no_m", cem);
 		
+		System.out.println("day");
 		System.out.println(request.getParameter("comm_year_d"));
 		System.out.println(request.getParameter("comm_month_d"));
 		System.out.println(request.getParameter("comm_day_d"));
+		
+		System.out.println("month");
+		System.out.println(request.getParameter("comm_year_m"));
+		System.out.println(request.getParameter("comm_month_m"));
+		System.out.println(request.getParameter("comm_e_no_m"));
 		
 		List<Commute2DTO> dto2 = comm_service.commuteList_day(map);
 		List<Commute3DTO> dto3 = comm_service.commuteList_month(map);
 		model.addAttribute("comm_list_d", dto2);
 		model.addAttribute("comm_list_m", dto3);
+		
+		System.out.println("dto2의 투스트링");
+		System.out.println(dto2.toString());
+		System.out.println("dto3의 투스트링");
+		System.out.println(dto3.toString());
 		
 		return "/hc/comm-list";
 	}
