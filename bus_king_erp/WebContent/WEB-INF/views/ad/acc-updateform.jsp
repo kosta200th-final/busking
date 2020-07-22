@@ -10,6 +10,7 @@
 </head>
 <body>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/accidentSubMenu.jsp" %>
 
 <main>
 ${accidentupdate}

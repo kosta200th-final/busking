@@ -38,4 +38,14 @@ public class RouteDAOImpl implements RouteDAO {
 		return sqlSession.selectOne("RouteDAO.getRouteCount");
 	}
 
+	@Override
+	public RouteDTO routeSelect(RouteDTO dto) {
+		return sqlSession.selectOne("RouteDAO.routeSelect", dto);
+	}
+
+	@Override
+	public int routealloc(String r_no) {
+		return sqlSession.selectOne("RouteDAO.routealloc", r_no);
+	}
+	
 }

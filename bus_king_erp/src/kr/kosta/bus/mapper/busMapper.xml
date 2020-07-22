@@ -18,18 +18,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="busInsert" parameterType="kr.kosta.bus.model.BusDTO">
 		insert into bus values (#{b_no}, #{b_year}, #{b_energy}, 
 			#{b_start}, #{b_type}, #{b_acc},
-			#{b_state}, #{b_mile},  #{b_recent})
+			'대기중', #{b_mile},  #{b_recent})
 	</insert>
 	
 	<update id="busUpdate" parameterType="kr.kosta.bus.model.BusDTO">
-		update bus set b_year = #{b_year}, b_energy = #{b_energy}, 
-			b_start = #{b_start}, b_type = #{b_type}, b_acc = #{b_acc},
-			b_state = #{b_state}, b_mile = #{b_mile}, b_recent = #{b_recent}
+		update bus set b_type = #{b_type}, b_acc = #{b_acc}, b_mile = #{b_mile}
 			where b_no = #{b_no}
 	</update>
 	
 	<delete id="busDelete" parameterType="String">
 		delete from bus where b_no = #{b_no}
 	</delete>
+	
+	<select id="busSelect" parameterType="String" resultType="kr.kosta.bus.model.BusDTO">
+		select * from bus where b_no = #{b_no,jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="busRepairInsert" parameterType="String">
+		insert into repair (re_code, re_b_no) values(NEXT_RE_CODE, #{b_no})
+	</insert>
+	
+	<update id="stateUpdateRrepair" parameterType="String">
+		update bus set b_state = '정비접수' where b_no = #{a_b_no}
+	</update>
 
 </mapper>

@@ -21,12 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="allocationList" parameterType="HashMap" resultType="kr.kosta.bus.model.AllocationDTO">
 		select * from (select A.*, rownum r from (select * from
-			allocation where a_time = #{zo} order by a_r_no, a_b_no) A)
+			allocation where a_time like #{zo} and a_r_no like #{nosun} order by a_r_no, a_b_no) A)
 			where r >= #{start} and r &lt;= #{end}
 	</select>
 	<select id="getAllocationCount" parameterType="String" resultType="Integer">
 		select count(*) from allocation
-		where a_time = #{zo}
+		where a_time like #{zo} and a_r_no like #{nosun}
 	</select>
 
 	<insert id="allocationInsert" parameterType="kr.kosta.bus.model.AllocationDTO">
@@ -44,5 +44,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from allocation where a_b_no = #{a_b_no}
 			and a_r_no = #{a_r_no} and a_e_no = #{a_e_no}
 	</delete>
+	
+	<update id="stateUpdateRun" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update bus set b_state = '운행중' where b_no = #{a_b_no}
+	</update>
+	
+	<update id="stateUpdateStop" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update bus set b_state = '대기중' where b_no = #{a_b_no}
+	</update>
+	
+	<select id="bstate" parameterType="String" resultType="String">
+		select b_state from bus where b_no = #{b_no}
+	</select>
 
 </mapper>

@@ -41,4 +41,18 @@ public class BusServiceImpl implements BusService {
 		return busDAO.getBusCount();
 	}
 
+	@Override
+	public BusDTO busSelect(String b_no) {
+		return busDAO.busSelect(b_no);
+	}
+
+	@Override
+	public void busRepairInsert(String b_no) {
+		busDAO.busRepairInsert(b_no);
+	}
+	
+	@Override
+	public void stateUpdateRrepair(String b_no) {
+		busDAO.stateUpdateRrepair(b_no);
+	}
 }

@@ -41,4 +41,14 @@ public class RouteServiceImpl implements RouteService {
 		return routeDAO.getRouteCount();
 	}
 	
+	@Override
+	public RouteDTO routeSelect(RouteDTO dto) {
+		return routeDAO.routeSelect(dto);
+	}
+
+	@Override
+	public int routealloc(String r_no) {
+		return routeDAO.routealloc(r_no);
+	}
+	
 }
