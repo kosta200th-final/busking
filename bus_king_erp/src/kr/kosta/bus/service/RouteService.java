@@ -11,5 +11,6 @@ public interface RouteService {
 	public void routeUpdate(RouteDTO dto);
 	public void routeDelete(String r_no);
 	public int getRouteCount();
-	
+	public RouteDTO routeSelect(RouteDTO dto);
+	public int routealloc(String r_no);
 }

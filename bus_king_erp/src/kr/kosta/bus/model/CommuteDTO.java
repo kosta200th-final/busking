@@ -94,5 +94,13 @@ public class CommuteDTO {
 	public void setComm_work(String comm_work) {
 		this.comm_work = comm_work;
 	}
+
+	@Override
+	public String toString() {
+		return "CommuteDTO [comm_no=" + comm_no + ", comm_time=" + comm_time + ", comm_year=" + comm_year
+				+ ", comm_month=" + comm_month + ", comm_day=" + comm_day + ", comm_type_d=" + comm_type_d
+				+ ", comm_e_no=" + comm_e_no + ", comm_e_name=" + comm_e_name + ", comm_e_dname=" + comm_e_dname
+				+ ", comm_e_position=" + comm_e_position + ", comm_work=" + comm_work + "]";
+	}
 	
 }

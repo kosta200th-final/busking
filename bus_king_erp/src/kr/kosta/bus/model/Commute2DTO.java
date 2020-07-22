@@ -54,4 +54,10 @@ public class Commute2DTO {
 		this.c2_chong = c2_chong;
 	}
 
+	@Override
+	public String toString() {
+		return "Commute2DTO [c2_e_dname=" + c2_e_dname + ", c2_chul=" + c2_chul + ", c2_gyul=" + c2_gyul + ", c2_byung="
+				+ c2_byung + ", c2_hyu=" + c2_hyu + ", c2_chong=" + c2_chong + "]";
+	}
+	
 }

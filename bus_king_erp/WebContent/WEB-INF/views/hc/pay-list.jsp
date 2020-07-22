@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/hrSubMenu.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
 	<main>
@@ -14,32 +15,48 @@
 	<form action="pay-list.do" method="get">
 	<select name="pay_year" id="pay_year">
 		<option>==연도==</option>
-		<option value="2018">2018년도</option>
-		<option value="2019">2019년도</option>
+<!-- 		<option value="2018">2018년도</option>
+		<option value="2019">2019년도</option> -->
 		<option value="2020">2020년도</option>
 	</select>&nbsp;&nbsp;
 	
 	<select name="pay_month">
 		<option>==월==</option>
-		<option value="1">1월</option>
+<!-- 		<option value="1">1월</option>
 		<option value="2">2월</option>
 		<option value="3">3월</option>
 		<option value="4">4월</option>
-		<option value="5">5월</option>
+		<option value="5">5월</option> -->
 		<option value="6">6월</option>
 		<option value="7">7월</option>
-		<option value="8">8월</option>
+<!-- 		<option value="8">8월</option>
 		<option value="9">9월</option>
 		<option value="10">10월</option>
 		<option value="11">11월</option>
-		<option value="12">12월</option>
+		<option value="12">12월</option> -->
 	</select>&nbsp;&nbsp;
 	
 	<select name="pay_e_no">
 		<option>==사번==</option>
-		<option value="0001">1번사원</option>
-		<option value="0002">2번사원</option>
-		<option value="0003">3번사원</option>
+			<option value="E0001">1번사원</option>
+			<option value="E0002">2번사원</option>
+			<option value="E0003">3번사원</option>
+			<option value="E0004">4번사원</option>
+			<option value="E0005">5번사원</option>
+			<option value="E0006">6번사원</option>
+			<option value="E0007">7번사원</option>
+			<option value="E0008">8번사원</option>
+			<option value="E0009">9번사원</option>
+			<option value="E0010">10번사원</option>
+			<option value="E0011">11번사원</option>
+			<option value="E0012">12번사원</option>
+			<option value="E0013">13번사원</option>
+			<option value="E0014">14번사원</option>
+			<option value="E0015">15번사원</option>
+			<option value="E0016">16번사원</option>
+			<option value="E0017">17번사원</option>
+			<option value="E0018">18번사원</option>
+			<option value="E0019">19번사원</option>
 	</select>&nbsp;&nbsp;
 	
 	<input type="submit" value="검색">
