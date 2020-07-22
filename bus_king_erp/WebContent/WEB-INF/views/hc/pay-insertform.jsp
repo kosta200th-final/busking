@@ -9,6 +9,7 @@
 <body>
 
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/hrSubMenu.jsp" %>
 
 <main>
 <form action="pay-insert.do" method="post">

@@ -1,24 +1,34 @@
 package kr.kosta.bus.controller;
 
+import java.net.URLEncoder;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import kr.kosta.bus.model.AllocationDTO;
+import kr.kosta.bus.model.BriDTO;
 import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.EmployerDTO;
 import kr.kosta.bus.model.RouteDTO;
 import kr.kosta.bus.service.AllocationService;
 import kr.kosta.bus.service.BusService;
 import kr.kosta.bus.service.RouteService;
+import oracle.net.aso.m;
 
 @Controller
 @RequestMapping("/bc/*")
@@ -84,41 +94,90 @@ public class BaechaController {
 	}
 
 	@RequestMapping(value = "b-insert.do", method = RequestMethod.POST)
-	public String b_insert(HttpServletRequest request, BusDTO dto) {
-		dto.setB_no(request.getParameter("b_no"));
-		dto.setB_year(Integer.parseInt(request.getParameter("b_year")));
-		dto.setB_energy(request.getParameter("b_energy"));
-		dto.setB_start(Date.valueOf(request.getParameter("b_start")));
-		dto.setB_type(request.getParameter("b_type"));
-		dto.setB_acc(Integer.parseInt(request.getParameter("b_acc")));
+	public String b_insert(HttpServletRequest request, Model model) {
+		 BusDTO dto = new BusDTO();
+		if (request.getParameter("b_no").length() > 0 && request.getParameter("b_year").length() > 0
+				&& request.getParameter("b_acc").length() > 0 && request.getParameter("b_mile").length() > 0) {
+			dto.setB_no(request.getParameter("b_no"));
+			dto.setB_year(Integer.parseInt(request.getParameter("b_year")));
+			dto.setB_energy(request.getParameter("b_energy"));
+			dto.setB_start(Date.valueOf(request.getParameter("b_start")));
+			dto.setB_type(request.getParameter("b_type"));
+			dto.setB_acc(Integer.parseInt(request.getParameter("b_acc")));
 
-		dto.setB_state(request.getParameter("b_state"));
-		dto.setB_mile(Integer.parseInt(request.getParameter("b_mile")));
-		dto.setB_recent(Date.valueOf(request.getParameter("b_recent")));
-		bservice.busInsert(dto);
-		return "redirect:b-list.do";
+			dto.setB_mile(Integer.parseInt(request.getParameter("b_mile")));
+			dto.setB_recent(Date.valueOf(request.getParameter("b_recent")));
+			bservice.busInsert(dto);
+			return "redirect:b-list.do";
+		}
+		else {
+			model.addAttribute("reject", "잘못된 입력입니다.");
+			model.addAttribute("url", "b-insertform.do");
+			return "/bc/bc-reject";
+		}
 	}
 
 	// b-update
 	@RequestMapping(value = "b-update.do", method = RequestMethod.GET)
 	public String busupdateform(BusDTO dto, Model model) {
+		System.out.println(dto.getB_no());
+		dto = bservice.busSelect(dto.getB_no());
 		model.addAttribute("dto", dto);
 		return "/bc/b-updateform";
 	}
 
 	@RequestMapping(value = "b-update.do", method = RequestMethod.POST)
-	public String busupdate(BusDTO dto, Model model) {
-		bservice.busUpdate(dto);
-		return "redirect:b-list.do";
+	public String busupdate(HttpServletRequest request, Model model) {
+		if (request.getParameter("b_acc").length() > 0 && request.getParameter("b_mile").length() > 0) {
+			BusDTO dto = new BusDTO();
+			dto.setB_no(request.getParameter("b_no"));
+			dto.setB_type(request.getParameter("b_type"));
+			dto.setB_acc(Integer.parseInt(request.getParameter("b_acc")));
+			dto.setB_mile(Integer.parseInt(request.getParameter("b_mile")));
+			bservice.busUpdate(dto);
+			return "redirect:b-list.do";
+		}
+		else {
+			model.addAttribute("reject", "잘못된 입력입니다.");
+			model.addAttribute("url", "b-list.do");
+			return "/bc/bc-reject";
+		}
 	}
 
 	// b-delete
 	@RequestMapping("b-delete.do")
-	public String busdelete(String b_no) {
-		bservice.busDelete(b_no);
-		return "redirect:b-list.do";
+	public String busdelete(String b_no, Model model) {
+		BusDTO dto = new BusDTO();
+		dto = bservice.busSelect(b_no);
+		if (dto.getB_state().equals("운행중") || dto.getB_state().equals("정비접수") || dto.getB_state().equals("정비중")) {
+			model.addAttribute("reject", "대기중인 차량만 삭제할 수 있습니다.");
+			model.addAttribute("url", "b-list.do");
+			return "/bc/bc-reject";
+		} else {
+			bservice.busDelete(b_no);
+			return "redirect:b-list.do";
+		}
 	}
 	
+	// b-delete
+		@RequestMapping("b-repair.do")
+		public String busrepair(BusDTO dto, Model model) {
+			System.out.println(dto.getB_state());
+			if(dto.getB_state().equals("운행중")) {
+				model.addAttribute("reject", "운행중인 차량은 접수할 수 없습니다.");
+				model.addAttribute("url", "b-list.do");
+				return "/bc/bc-reject";
+			}
+			else if(dto.getB_state().equals("정비접수") || dto.getB_state().equals("정비중")) {
+				model.addAttribute("reject", "이미 접수된 차량입니다.");
+				model.addAttribute("url", "b-list.do");
+				return "/bc/bc-reject";
+			}
+			bservice.busRepairInsert(dto.getB_no());
+			bservice.stateUpdateRrepair(dto.getB_no());
+			return "redirect:b-list.do";
+		}
+		
 	
 
 	// ###############################
@@ -174,55 +233,107 @@ public class BaechaController {
 	}
 
 	@RequestMapping(value = "r-insert.do", method = RequestMethod.POST)
-	public String insert(HttpServletRequest request, RouteDTO dto) {
-		dto.setR_no(request.getParameter("r_no"));
-		dto.setR_start(request.getParameter("r_start"));
-		dto.setR_end(request.getParameter("r_end"));
-		dto.setR_s_time(request.getParameter("r_s_time"));
-		dto.setR_e_time(request.getParameter("r_e_time"));
-		dto.setR_interval(Integer.parseInt(request.getParameter("r_interval")));
+	public String insert(HttpServletRequest request, Model model) {
+		if (	request.getParameter("r_no").length() > 0 && request.getParameter("r_start").length() > 0 && request.getParameter("r_end").length() > 0 && request.getParameter("r_s_time").length() > 0 && 
+				request.getParameter("r_e_time").length() > 0 && request.getParameter("r_interval").length() > 0 && request.getParameter("r_pay_adult").length() > 0 && request.getParameter("r_pay_adult2").length() > 0 &&
+				request.getParameter("r_pay_teen").length() > 0 && request.getParameter("r_pay_teen2").length() > 0 && request.getParameter("r_pay_kid").length() > 0 && request.getParameter("r_pay_kid2").length() > 0) {
+			RouteDTO dto = new RouteDTO();
+			dto.setR_no(request.getParameter("r_no"));
+			dto.setR_start(request.getParameter("r_start"));
+			dto.setR_end(request.getParameter("r_end"));
+			dto.setR_s_time(request.getParameter("r_s_time"));
+			dto.setR_e_time(request.getParameter("r_e_time"));
+			dto.setR_interval(Integer.parseInt(request.getParameter("r_interval")));
 
-		dto.setR_map(request.getParameter("r_map"));
-		dto.setR_pay_adult(Integer.parseInt(request.getParameter("r_pay_adult")));
-		dto.setR_pay_adult2(Integer.parseInt(request.getParameter("r_pay_adult2")));
-		dto.setR_pay_teen(Integer.parseInt(request.getParameter("r_pay_teen")));
-		dto.setR_pay_teen2(Integer.parseInt(request.getParameter("r_pay_teen2")));
-		dto.setR_pay_kid(Integer.parseInt(request.getParameter("r_pay_kid")));
-		dto.setR_pay_kid2(Integer.parseInt(request.getParameter("r_pay_kid2")));
-		rservice.routeInsert(dto);
-		return "redirect:r-list.do";
+			dto.setR_map(request.getParameter("r_map"));
+			dto.setR_pay_adult(Integer.parseInt(request.getParameter("r_pay_adult")));
+			dto.setR_pay_adult2(Integer.parseInt(request.getParameter("r_pay_adult2")));
+			dto.setR_pay_teen(Integer.parseInt(request.getParameter("r_pay_teen")));
+			dto.setR_pay_teen2(Integer.parseInt(request.getParameter("r_pay_teen2")));
+			dto.setR_pay_kid(Integer.parseInt(request.getParameter("r_pay_kid")));
+			dto.setR_pay_kid2(Integer.parseInt(request.getParameter("r_pay_kid2")));
+			rservice.routeInsert(dto);
+			return "redirect:r-list.do";
+		}
+		else {
+			model.addAttribute("reject", "잘못된 입력입니다.");
+			model.addAttribute("url", "r-insertform.do");
+			return "/bc/bc-reject";
+		}
 	}
 
 	// r-update
 	@RequestMapping(value = "r-update.do", method = RequestMethod.GET)
 	public String routeupdateform(RouteDTO dto, Model model) {
+		dto = rservice.routeSelect(dto);
 		model.addAttribute("dto", dto);
+		System.out.println(dto.toString());
 		return "/bc/r-updateform";
 	}
 
 	@RequestMapping(value = "r-update.do", method = RequestMethod.POST)
-	public String routeupdate(RouteDTO dto, Model model) {
-		rservice.routeUpdate(dto);
-		return "redirect:r-list.do";
+	public String routeupdate(HttpServletRequest request, Model model) {
+		if (	request.getParameter("r_no").length() > 0 && request.getParameter("r_start").length() > 0 && request.getParameter("r_end").length() > 0 && request.getParameter("r_s_time").length() > 0 && request.getParameter("r_e_time").length() > 0 &&
+				request.getParameter("r_interval").length() > 0 && request.getParameter("r_pay_adult").length() > 0 && request.getParameter("r_pay_adult2").length() > 0 &&
+				request.getParameter("r_pay_teen").length() > 0 && request.getParameter("r_pay_teen2").length() > 0 && request.getParameter("r_pay_kid").length() > 0 && request.getParameter("r_pay_kid2").length() > 0) {
+			RouteDTO dto = new RouteDTO();
+			dto.setR_no(request.getParameter("r_no"));
+			dto.setR_start(request.getParameter("r_start"));
+			dto.setR_end(request.getParameter("r_end"));
+			dto.setR_s_time(request.getParameter("r_s_time"));
+			dto.setR_e_time(request.getParameter("r_e_time"));
+			
+			dto.setR_interval(Integer.parseInt(request.getParameter("r_interval")));
+			dto.setR_map(request.getParameter("r_map"));
+			dto.setR_pay_adult(Integer.parseInt(request.getParameter("r_pay_adult")));
+			dto.setR_pay_adult2(Integer.parseInt(request.getParameter("r_pay_adult2")));
+			
+			dto.setR_pay_teen(Integer.parseInt(request.getParameter("r_pay_teen")));
+			dto.setR_pay_teen2(Integer.parseInt(request.getParameter("r_pay_teen2")));
+			dto.setR_pay_kid(Integer.parseInt(request.getParameter("r_pay_kid")));
+			dto.setR_pay_kid2(Integer.parseInt(request.getParameter("r_pay_kid2")));
+
+			rservice.routeUpdate(dto);
+			return "redirect:r-list.do";
+		}
+		else {
+			model.addAttribute("reject", "잘못된 입력입니다.");
+			model.addAttribute("url", "r-list.do");
+			return "/bc/bc-reject";
+		}
 	}
 
 	// r-delete
 	@RequestMapping("r-delete.do")
-	public String routedelete(String r_no) {
-		rservice.routeDelete(r_no);
-		return "redirect:r-list.do";
+	public String routedelete(String r_no, Model model) {
+		if (rservice.routealloc(r_no) == 0) {
+			rservice.routeDelete(r_no);
+			return "redirect:r-list.do";
+		}
+		else {
+			model.addAttribute("reject", "해당 노선에 배차된 차량이 있습니다.");
+			model.addAttribute("url", "r-list.do");
+			return "/bc/bc-reject";
+		}
 	}
 
 	
-	public static String time = "A조";
+	public static String time = "%";
+	public static String nosun = "%";
 	// ###############################
 	// 배차
 	@RequestMapping("a-list.do")
 	public String a_list(HttpServletRequest request, Model model) {
 		
 		String a_time = request.getParameter("time");
-		if(a_time != null) time = a_time;
-		System.out.println(time + "asdf");
+		if(a_time != null && a_time.length() > 0) time = a_time;
+		if(time.equals("전체")) time = "%";
+		System.out.println(time);
+		
+		String a_r = request.getParameter("a_r");
+		if(a_r != null && a_r.length() > 0) nosun = a_r;
+		if(nosun.equals("전체")) nosun = "%";
+		System.out.println(nosun);
 		
 		int pg = 1;
 		String strPg = request.getParameter("pg");
@@ -255,6 +366,7 @@ public class BaechaController {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("zo", time);
+		map.put("nosun", nosun);
 		
 
 		List<AllocationDTO> dto = aservice.allocationList(map);
@@ -275,12 +387,26 @@ public class BaechaController {
 	}
 
 	// a-insert
-	@RequestMapping(value = "a-insert.do", method = RequestMethod.POST)
-	public String a_insert(HttpServletRequest request, AllocationDTO dto) {
-		String[] sp = dto.getA_e_no().split(":", 2);
-		dto.setA_e_no(sp[0]);
-		System.out.println(dto);
-		aservice.allocationInsert(dto);
+	@RequestMapping(value="a-insert.do", method = RequestMethod.POST)
+	public String a_insert(AllocationDTO dto, Model model) throws Exception{
+		String state = aservice.bstate(dto.getA_b_no());
+		if(dto.getA_b_no().equals("선택") || dto.getA_r_no().equals("선택") || dto.getA_e_no().equals("선택")) {
+			model.addAttribute("reject", "선택되지 않은 항목이 있습니다.");
+			model.addAttribute("url", "a-list.do");
+			return "/bc/bc-reject";
+		}
+		else if(state.equals("정비접수") || state.equals("정비중")) {
+			model.addAttribute("reject", "정비중이거나 정비접수중인 차량입니다.");
+			model.addAttribute("url", "a-list.do");
+			return "/bc/bc-reject";
+		}
+		else {
+			String[] sp = dto.getA_e_no().split(":", 2);
+			dto.setA_e_no(sp[0]);
+			System.out.println(dto);
+			aservice.allocationInsert(dto);
+			aservice.stateUpdateRun(dto);
+		}
 		return "redirect:a-list.do";
 	}
 
@@ -301,7 +427,82 @@ public class BaechaController {
 	@RequestMapping("a-delete.do")
 	public String allocationdelete(AllocationDTO dto) {
 		aservice.allocationDelete(dto);
+		aservice.stateUpdateStop(dto);
 		return "redirect:a-list.do";
 	}
+	
+	
+	
+	
+	
+	
+	
+	// ###############################
+	// 운행
+	private static String getTagValue(String tag, Element eElement) {
+		NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+		Node nValue = (Node) nlList.item(0);
+		if (nValue == null)
+			return null;
+		return nValue.getNodeValue();
+	}
+
+	@RequestMapping("bri.do")
+	public String a_bri(HttpServletRequest request, Model model) throws Exception {
+		StringBuilder urlBuilder = new StringBuilder("http://openapi.gbis.go.kr/ws/rest/buslocationservice"); /* URL */
+		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=서비스키"); /* Service Key */
+		urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "="
+				+ URLEncoder.encode("1234567890", "UTF-8")); /* 인증키(공공데이터포털 발급) */
+		urlBuilder.append("&" + URLEncoder.encode("routeId", "UTF-8") + "="
+				+ URLEncoder.encode("233000031", "UTF-8")); /* 노선 ID */
+		String url = urlBuilder.toString();
+		try {
+
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
+
+			// root tag
+			doc.getDocumentElement().normalize();
+			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+			// 파싱할 tag
+			NodeList nList = doc.getElementsByTagName("busLocationList");
+			// System.out.println("파싱할 리스트 수 : "+ nList.getLength());
+
+			List<BriDTO> dto = new ArrayList<BriDTO>();
+			
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					
+					if (Integer.parseInt(getTagValue("stationSeq", eElement)) <= 15) {
+						BriDTO bdto = new BriDTO();
+						bdto.setPlate(getTagValue("plateNo", eElement));
+						bdto.setSeat(Integer.parseInt(getTagValue("remainSeatCnt", eElement)));
+						bdto.setStation(Integer.parseInt(getTagValue("stationSeq", eElement)));
+						System.out.println("번호판  : " + getTagValue("plateNo", eElement));
+						System.out.println("빈 좌석  : " + getTagValue("remainSeatCnt", eElement));
+						System.out.println("현재 위치 : " + getTagValue("stationSeq", eElement));
+						
+						dto.add(bdto);
+						
+						System.out.println(bdto.toString());
+						System.out.println();
+					}
+				} // if end
+			} // for end
+			model.addAttribute("bri", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} // try~catch end
+		
+		return "/bc/bri";
+	} // main end
+	
+	
 
 }

@@ -7,33 +7,28 @@
 </head>
 <body>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/baechaSubMenu.jsp" %>
 
 	<main>
 	<form action="r-update.do" method="post">
-		<table border="1">
-		<tr><td><br></td></tr>
-		<tr>
-			<td> <input type="text" value="${ dto.r_no }" name="r_no" id="r_no" readonly="readonly"> </td>
-			<td> <input type="text" name="r_start" id="r_start" placeholder="r_start"> </td>
-			<td> <input type="text" name="r_end" id="r_end" placeholder="r_end"> </td>
-			<td> <input type="text" name="r_s_time" id="r_s_time" placeholder="r_s_time"> </td>
-			<td> <input type="text" name="r_e_time" id="r_e_time" placeholder="r_e_time"> </td>
-			<td> <input type="text" name="r_interval" id="r_interval" placeholder="r_interval"> </td>
-		</tr> 
-		<tr><td><br></td></tr>
-		<tr>	
 		
-			<td> <input type="text" name="r_map" id="r_map"placeholder="r_map"> </td>
-			<td> <input type="text" name="r_pay_adult" id="r_pay_adult"placeholder="r_pay_adult"> </td>
-			<td> <input type="text" name="r_pay_adult2" id="r_pay_adult2"placeholder="r_pay_adult2"> </td>
-			<td> <input type="text" name="r_pay_teen" id="r_pay_teen"placeholder="r_pay_teen"> </td>
-			<td> <input type="text" name="r_pay_teen2" id="r_pay_teen2"placeholder="r_pay_teen2"> </td>
-			<td> <input type="text" name="r_pay_kid" id="r_pay_kid"placeholder="r_pay_kid"> </td>
-			<td> <input type="text" name="r_pay_kid2" id="r_pay_kid2"placeholder="r_pay_kid2"> </td>
-		<td><input type="submit" value="수정">
-		<input type="reset" value="취소" onclick="location.href='r-list.do'"></td>
-		</tr>
-	</table>
+			노선번호 : <input type="text" value="${ dto.r_no }" name="r_no" readonly="readonly"><br><br>
+			출발지 : <input type="text" value="${ dto.r_start }" name="r_start"><br><br>
+			도착지 : <input type="text" value="${ dto.r_end }" name="r_end"> <br><br>
+			첫차시간 : <input type="text" value="${ dto.r_s_time }" name="r_s_time"> <br><br>
+			막차시간 : <input type="text" value="${ dto.r_e_time }" name="r_e_time"><br><br>
+			배차간격 : <input type="text" value="${ dto.r_interval }" name="r_interval"><br><br>
+		
+			노선도(이미지) : <input type="text" value="${ dto.r_map }" name="r_map"> <br><br>
+			성인요금(카드) : <input type="text" value="${ dto.r_pay_adult }" name="r_pay_adult"><br><br>
+			성인요금(현금) : <input type="text" value="${ dto.r_pay_adult2 }" name="r_pay_adult2"><br><br>
+			청소년요금(카드) : <input type="text" value="${ dto.r_pay_teen }" name="r_pay_teen"> <br><br>
+			청소년요금(현금) : <input type="text" value="${ dto.r_pay_teen2 }" name="r_pay_teen2"><br><br>
+			어린이요금(카드) : <input type="text" value="${ dto.r_pay_kid }" name="r_pay_kid"> <br><br>
+			어린이요금(현금) : <input type="text" value="${ dto.r_pay_kid2 }" name="r_pay_kid2"> <br><br>
+			<input type="submit" value="수정">&nbsp;&nbsp;&nbsp;
+			<input type="reset" value="취소" onclick="location.href='r-list.do'">
+
 </form>
 </main>
 

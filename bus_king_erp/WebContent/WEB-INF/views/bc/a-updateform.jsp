@@ -7,6 +7,7 @@
 </head>
 <body>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/baechaSubMenu.jsp" %>
 
 	<main>
 	<form action="a-update.do" method="post">

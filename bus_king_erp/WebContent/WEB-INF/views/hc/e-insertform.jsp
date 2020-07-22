@@ -61,7 +61,7 @@
 			운전경력 : <input type="text" name="e_career" id="e_career" placeholder="e_career"><br>  <!-- 운전경력 -->
 			남은 휴가일 : <input type="text" name="e_break" id="e_break" placeholder="e_break"><br>  <!-- 남은 휴가일 수 -->
 			입사일 : <input type="date" name="e_start" id="e_start" placeholder="e_start"><br>  <!-- 입사일 -->
-			톼사일 : <input type="date" name="e_end" id="e_end" placeholder="e_end"><br>  <!-- 퇴사일 -->
+			퇴사일 : <input type="date" name="e_end" id="e_end" placeholder="e_end"><br>  <!-- 퇴사일 -->
 			
 			<input type="submit" value="등록">
 			</form>
