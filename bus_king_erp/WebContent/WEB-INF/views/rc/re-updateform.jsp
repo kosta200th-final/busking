@@ -3,24 +3,29 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@include file="/common/header.jsp" %> 
+<%@include file="/common/repairSubMenu.jsp" %>
 <html>
 <meta charset="UTF-8">
 <head>
-
+<style type="text/css">
+ma {
+border:1px;
+text-align: center;
+margin-right: auto;
+ }
+</style>
 	<title>Home</title>
 </head>
 <body>
-<%@include file="/common/header.jsp" %> 
 <main>
 <form action="re-update.do" method="post">
 <h1 style="text-align: center;">차량 점검 </h1><br><br>
 	<div align="center">
 			<div style="width: auto;">
-			<%-- 접수 번호 :<input type="text" name="re_code"  placeholder="re_code" value="${repairlist.re_code}"></div><br><br> --%>
 
 			접수 번호 : <input type="text" name="re_code" value="${dto.re_code}"><br><br>
 			차량 번호 :<input type="text" name="re_b_no" value="${dto.re_b_no}"><br><br>
-			<%-- 접수 날짜 :<input type="text" name=re_date value="${dto.re_date}"><br><br> --%>
 			접수 날짜 : <fmt:parseDate value='${dto.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
              <fmt:formatDate value="${re_date}" pattern="yyyy.mm.dd"/><br><br>
          	완료 날짜 :<input type="date" name="re_date2"><br><br>

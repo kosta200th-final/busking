@@ -10,6 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Insert title here</title>
 	<c:forEach items="${wo2}" var="wo2">
+		var text[${wo2.wo2_no}]
 		
 		</c:forEach>
 		
@@ -18,7 +19,6 @@
 	
 		 google.charts.load('current', {'packages':['corechart']}); 
 		 google.charts.setOnLoadCallback(drawVisualization);
-		var text=[${wo2.wo2_no}]
 		
 		function drawVisualization() { 
 			var data = google.visualization.arrayToDataTable([

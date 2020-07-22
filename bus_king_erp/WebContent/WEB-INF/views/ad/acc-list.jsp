@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/accidentSubMenu.jsp" %>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
 

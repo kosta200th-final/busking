@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="PayDAO">
 	<select id="payList_n" parameterType="HashMap" resultType="kr.kosta.bus.model.PayDTO">
-		
 	</select>
 
 	<select id="payList" parameterType="HashMap" resultType="kr.kosta.bus.model.PayDTO">

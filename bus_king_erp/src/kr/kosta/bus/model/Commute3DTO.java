@@ -69,5 +69,12 @@ public class Commute3DTO {
 	public void setC3_hyu(int c3_hyu) {
 		this.c3_hyu = c3_hyu;
 	}
+
+	@Override
+	public String toString() {
+		return "Commute3DTO [comm_e_no=" + comm_e_no + ", comm_e_name=" + comm_e_name + ", comm_year=" + comm_year
+				+ ", comm_month=" + comm_month + ", c3_chul=" + c3_chul + ", c3_gyul=" + c3_gyul + ", c3_byung="
+				+ c3_byung + ", c3_hyu=" + c3_hyu + "]";
+	}
 	
 }

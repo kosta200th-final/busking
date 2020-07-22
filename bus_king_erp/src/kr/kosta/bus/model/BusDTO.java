@@ -67,5 +67,11 @@ public class BusDTO {
 	public void setB_recent(Date b_recent) {
 		this.b_recent = b_recent;
 	}
+	@Override
+	public String toString() {
+		return "BusDTO [b_no=" + b_no + ", b_year=" + b_year + ", b_energy=" + b_energy + ", b_start=" + b_start
+				+ ", b_type=" + b_type + ", b_acc=" + b_acc + ", b_state=" + b_state + ", b_mile=" + b_mile
+				+ ", b_recent=" + b_recent + "]";
+	}
 	
 }

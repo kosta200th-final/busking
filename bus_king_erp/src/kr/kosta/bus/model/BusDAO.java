@@ -10,4 +10,7 @@ public interface BusDAO {
 	public void busUpdate(BusDTO dto);
 	public void busDelete(String b_no);
 	public int getBusCount();
+	public BusDTO busSelect(String b_no);
+	public void busRepairInsert(String b_no);
+	public void stateUpdateRrepair(String b_no);
 }
