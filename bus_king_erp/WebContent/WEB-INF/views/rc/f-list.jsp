@@ -2,61 +2,68 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
-<%@include file="/common/header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<style type="text/css">
-ma{
-text-align: center;
-margin: auto;
+<%@include file="/common/header.jsp" %>
+<%@include file="/common/repairSubMenu.jsp" %>
+<script> 
+function formSubmit(){ 
+	document.getElementById("frm").submit();
 }
-</style>
+</script>
+<style type="text/css">
+#ma{
+text-align: center;
+width: 350;
+line-height:1.5;
+}
+</style> 
 <meta charset="UTF-8">
 <title>차량점검리스트</title>
 
 </head>
 <body>
 	<main>
-	<form action="" method="post">
-		<table id="ma">
-			<tr>
-				<th>No</th>
-				<th>버스 차량번호</th>
-				<th>주유 타입</th>
-				<th>주유 날짜</th>
-				<th>충전 & 주유 량</th>
-				<th>충전&주유 비용</th>
-				<th>결제여부</th>
-				<th>회계처리 내용</th>
-				<th>비고(특이사항)</th>
-
-				</tr>
+	<form action="" method="post" id="frm">
+				<div class="table100 ver2 m-b-110">
+			<table data-vertable="ver2" id=ma>
+				<thead>
+				<tr class="row100 head">
+							<th class="column100 column1" data-column="column1">No</th>
+							<th class="column100 column2" data-column="column2">버스 차량번호</th>
+							<th class="column100 column3" data-column="column3">주유 타입</th>
+							<th class="column100 column4" data-column="column4">주유 날짜</th>
+							<th class="column100 column4" data-column="column5">충전 & 주유 량</th>
+							<th class="column100 column4" data-column="column6">충전&주유 비용</th>
+							<th class="column100 column4" data-column="column7">회계처리 내용</th>
+							<th class="column100 column4" data-column="column8">비고(특이사항)</th>
+						</tr>
+			</thead>
+			<tbody>
 			<c:forEach items="${fuel}" var="fuel">
 				<tr>
 					<td>${fuel.f_code}</td>
 					<td>${fuel.f_b_no}</td>
 					<td>${fuel.f_b_energy}</td>
-					<%-- <td>${fuel.f_date}</td> --%>
 				<td><fmt:parseDate value='${fuel.f_date}' var='f_date' pattern='yyyy-mm-dd'/>
 	             <fmt:formatDate value="${f_date}" pattern="yyyy.mm.dd"/></td>
-					<td>${fuel.f_charge}</td>
-					<td>${fuel.f_cost}</td>
+					<td>${fuel.f_charge}(L/Kw)</td>
+					<td>${fuel.f_cost}원</td>
 					<td>${fuel.f_payment}</td>
 					<td>${fuel.f_nametag}</td>
 					<td>${fuel.f_bigo}</td>
-					
-
-					<td><input type='button' onclick="location.href='f-update.do?f_code=${fuel.f_code}'" value='결제'/></td>
-					<td><input type="button" value="삭제"
+					<td><input type='button' style="background-color: red" onclick="location.href='f-update.do?f_code=${fuel.f_code}'" value='결제'/></td>
+					<td><input type="button" style="background: yellow" value="삭제"
 						onclick="location.href='f-delete.do?f_code=${fuel.f_code}'">
-				</tr>
-
-			</c:forEach>
-				<td><input type="button" background="red" value="추가하기"
-					onclick="location.href='f-insertform.do'"></td>
-		</table>
+				</tr></c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+		<input type="button" style="margin: auto; background: skyblue" value="추가하기"
+					onclick="location.href='f-insertform.do'">
+		
 	</form>
-	<table width="600">
+		<table style=width:600 class="pgTable">
 		<tr>
 			<td align="center">
 				<!-- 처음 이전 링크 --> <c:if test="${pg>block}">
@@ -84,10 +91,9 @@ margin: auto;
 				[<span style="color: gray">▶▶</span>]
 		
 		</c:if>
-
-			</td>
+		</td>
 		</tr>
-	</table>
+		</table>
 	</main>
 </body>
 </html>

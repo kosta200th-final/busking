@@ -5,9 +5,13 @@
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
 <%@include file="/common/header.jsp"%>
 <%@include file="/common/accountSubMenu.jsp" %>
-
+<script>
+function formSubmit(){ 
+	document.getElementById("frm").submit();
+}
+</script>
 <main>
-	<form action="ac-list.do" method="post">
+	<form action="ac-list.do" method="post" id="frm">
 		<div class="table100 ver2 m-b-110">
 			<table data-vertable="ver2">
 				<thead>
@@ -38,28 +42,14 @@
 						<th class="column100 column5"
 							data-column="column5">
 							매입∙매출
-							<!-- <select name="ac_state">
-								<option>전체</option>
-								<option>매입</option>
-								<option>매출</option>
-							</select> -->
 						</th>
 						<th class="column100 column6"
 							data-column="column6">
 							비고
 						</th>
-						<td>
-							<input type="submit" value="확인"></td>
-						<td>
-							<input type="button" name="state" value="전체"
-								onclick="location.href='ac-list.do?cnt_state=전체'">
-							<input type="button" name="state" value="매입"
-								onclick="location.href='ac-list.do?cnt_state=매입'">
-							<input type="button" name="state" value="매출"
-								onclick="location.href='ac-list.do?cnt_state=매출'">
-							<input type="hidden" value="${ state }"
-								name="cnt_state">
-						</td>
+						<th><!-- <input type="submit"> -->
+							<a class="okBtn" onclick="formSubmit(); return false;">검색</a>
+						</th>
 					</tr>
 				</thead>
 				<!--  
@@ -71,25 +61,36 @@
 					AC_BIGO VARCHAR2(40)
 				-->
 				<tbody>
-					
+						<tr>
+							<td colspan="7" style="background: transparent">
+								<input type="button" name="state" value="전체" class="type button all"
+									onclick="location.href='ac-list.do?cnt_state=전체'">
+								<input type="button" name="state" value="매입" class="type button red"
+									onclick="location.href='ac-list.do?cnt_state=매입'">
+								<input type="button" name="state" value="매출" class="type button blue"
+									onclick="location.href='ac-list.do?cnt_state=매출'">
+								<input type="hidden" value="${ state }"
+									name="cnt_state">
+							</td>
+						</tr>
 						<c:forEach items="${accountList}" var="list">
 						<tr>
-							<td>${list.ac_code}</td>
-							<td>${list.ac_name}</td>
-							<td>${list.ac_cost}</td>
-							<td>
+							<td class="code">${list.ac_code}</td>
+							<td class="centre">${list.ac_name}</td>
+							<td class="price">${list.ac_cost}</td>
+							<td class="date">
 								<fmt:parseDate value='${list.ac_date}'
 									var='trading_day' pattern='yyyy-mm-dd' />
 								<fmt:formatDate value="${trading_day}"
 									pattern="yyyy-mm-dd" />
 							</td>
-							<td>${list.ac_state}</td>
-							<td>${list.ac_bigo}</td>
+							<td class="centre" id="state"><span>${list.ac_state}</span></td>
+							<td class="note">${list.ac_bigo}</td>
 							<td>
-								<input type="button" value="EDIT"
+								<input type="button" value="수정" class="editBtn"
 									onclick="location.href='ac-update.do?ac_code=${list.ac_code}'">
-								<input type="button" value="DETAILED"
-									class="btn">
+								<!-- <input type="button" value="DETAILED"
+									class="btn"> -->
 							</td>
 							</tr>
 						</c:forEach>
@@ -97,15 +98,15 @@
 				</tbody>
 			</table>
 		</div>
-	</form action=>
+	</form>
 
-	<table width="600">
+	<table width="600" class="pgTable">
 		<tr>
 			<td align="center">
 				<!-- 처음 이전 링크 --> <c:if test="${pg>block}">
 					<!-- 5>10 : false / 15>10 : true -->
-			[<a href="cal-list.do?pg=1">◀◀</a>]
-			[<a href="cal-list.do?pg=${fromPage-1}">◀</a>]		
+			[<a href="ac-list.do?pg=1">◀◀</a>]
+			[<a href="ac-list.do?pg=${fromPage-1}">◀</a>]		
 		</c:if> <c:if test="${pg<=block}">
 					<!-- 5<=10 :true / 15<=10:false -->
 			[<span style="color: gray">◀◀</span>]	
@@ -114,12 +115,12 @@
 					var="i">
 					<c:if test="${i==pg}">[${i}]</c:if>
 					<c:if test="${i!=pg}">
-				[<a href="cal-list.do?pg=${i}">${i}</a>]
+				[<a href="ac-list.do?pg=${i}">${i}</a>]
 			</c:if>
 				</c:forEach> <!-- 다음, 이후 --> <c:if test="${toPage<allPage}">
 					<!-- 20<21 : true -->
-				[<a href="cal-list.do?pg=${toPage+1}">▶</a>]
-				[<a href="cal-list.do?pg=${allPage}">▶▶</a>]
+				[<a href="ac-list.do?pg=${toPage+1}">▶</a>]
+				[<a href="ac-list.do?pg=${allPage}">▶▶</a>]
 		
 		</c:if> <c:if test="${toPage>=allPage}">
 					<!-- 21>=21 :true -->
@@ -132,8 +133,12 @@
 		</tr>
 	</table>
 
-
 </main>
+<script type="text/javascript"> 
 
+$("span:contains('매입')").css({color:"#A72734"});
+$("span:contains('매출')").css({color:"#0062C1"});
+
+</script>
 </body>
 </html>
