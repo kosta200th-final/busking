@@ -11,21 +11,60 @@
   <style type="text/css">
   </style>
 </head>
+
+<style>
+.routeimg{
+	background-image: url('../resources/img/nosun.png');
+	background-size: 1000px 400px;
+	padding: 10px;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 5%;
+	position: inherit;
+	width: 1000px;
+	height: 400px;
+}
+.nosun{
+	background: transparent;
+	border: 1;
+	width: 600px;
+    height: 365px;
+    margin-top: -31px;
+    margin-left: 182px;
+}
+
+td{
+	width: 120px;
+}
+</style>
+
 <body>
  <main>
- 
-<table border="2" width="700" height="150">
-		<tr>
-			<td id="st1">1</td>	<td id="st2">2</td>	<td id="st3">3</td>	<td id="st4">4</td>	<td id="st5">5</td>
-		</tr>
-		<tr>
-			<td id="st10">10</td>	<td id="st9">9</td>	<td id="st8">8</td>	<td id="st7">7</td>	<td id="st6">6</td>
-		</tr>
-		<tr>
-			<td id="st11">11</td>	<td id="st12">12</td>	<td id="st13">13</td>	<td id="st14">14</td>	<td id="st15">15</td>
-		</tr>
-</table>
- 
+<div class="routeimg">
+	<table class="nosun">
+				<tr align="center">
+					<td id="st1"></td>
+					<td id="st2"></td>
+					<td id="st3"></td>
+					<td id="st4"></td>
+					<td id="st5"></td>
+				</tr>
+				<tr align="center">
+					<td id="st10"></td>
+					<td id="st9"></td>
+					<td id="st8"></td>
+					<td id="st7"></td>
+					<td id="st6"></td>
+				</tr>
+				<tr align="center">
+					<td id="st11"></td>
+					<td id="st12"></td>
+					<td id="st13"></td>
+					<td id="st14"></td>
+					<td id="st15"></td>
+				</tr>
+			</table>
+ </div>
 
 <script type="text/javascript">
 
@@ -33,8 +72,7 @@
 
 		for(var i = 0; i < bri.length; i++){
 			var st = '#st' + bri[i][2];
-			var tag = bri[i][0];
-			tag += '<br>빈자리 : ' + bri[i][1];
+			var tag = '<span style="background-color:#FFF">' + bri[i][0] + '<br>빈자리 : ' + bri[i][1] + "</span>";
 			$(st).html(tag);
 		}
 	

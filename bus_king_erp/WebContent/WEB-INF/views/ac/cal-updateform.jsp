@@ -3,6 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <body>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/accountSubMenu.jsp" %>
+
+<style type="text/css">
+
+.btn-width {
+	width: 130px
+}
+
+</style>
 
 	<main>
 	<form action="cal-update.do" method="post" style="width:'80%'">
@@ -34,7 +43,7 @@
 						<td><input type="text" class="price" name="cal_total" id="cal_total" value="${dto.cal_total}"></td>
 						<td><input type="text" class="note" name="cal_nametag" id="cal_nametag" value="${dto.cal_nametag}"></td>
 						<td><input type="text" class="note" name="cal_bigo" id="cal_bigo" value="${dto.cal_bigo}"></td>
-						<td><input type="submit" value="EDIT" class="button" style="background: #83d160">
+						<td class="btn-width"><input type="submit" value="EDIT" class="button" style="background: #83d160">
 							<input type="reset" value="CANCLE" onclick="location.href='cal-list.do'" class="button" 
 							style="background:#999; margin-left: 5px">
 						</td>

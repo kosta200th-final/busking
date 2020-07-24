@@ -30,8 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="allocationInsert" parameterType="kr.kosta.bus.model.AllocationDTO">
-		insert into allocation values (#{a_b_no}, #{a_r_no},
-			#{a_e_no}, #{a_time})
+		insert into allocation values (#{a_b_no}, #{a_r_no}, #{a_e_no}, #{a_e_name}, #{a_time})
 	</insert>
 
 	<update id="allocationUpdate" parameterType="kr.kosta.bus.model.AllocationDTO">
@@ -56,5 +55,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="bstate" parameterType="String" resultType="String">
 		select b_state from bus where b_no = #{b_no}
 	</select>
+	
+	<update id="employerUpdateBno" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update employer set e_b_no = #{a_b_no} where e_no = #{a_e_no}
+	</update>
+	
+	<update id="employerUpdateBnull" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update employer set e_b_no = null where e_no = #{a_e_no}
+	</update>
 
 </mapper>

@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.kosta.bus.model.AccidentDAO;
 import kr.kosta.bus.model.AccidentDTO;
 import kr.kosta.bus.model.BusDTO;
-import kr.kosta.bus.model.ComplaintDAO;
 import kr.kosta.bus.model.EmployerDTO;
-import kr.kosta.bus.model.RepairDTO;
 
 @Service
 public class AccidentServiceImpl implements AccidentService {
@@ -66,8 +64,14 @@ public class AccidentServiceImpl implements AccidentService {
 	} 
 	
 	@Override
-	public void repairInsert(RepairDTO dto) {
+	public void repairInsert(AccidentDTO dto) {
 		accidentDAO.repairInsert(dto);
 	}
+	
+	@Override
+	public List<AccidentDTO> getChart() {
+		return accidentDAO.getChart();
+	}
+	
 
 }

@@ -73,5 +73,15 @@ public class AllocationServiceImpl implements AllocationService {
 	public String bstate(String b_no) {
 		return allocationDAO.bstate(b_no);
 	}
+
+	@Override
+	public void employerUpdateBno(AllocationDTO dto) {
+		allocationDAO.employerUpdateBno(dto);
+	}
+
+	@Override
+	public void employerUpdateBnull(AllocationDTO dto) {
+		allocationDAO.employerUpdateBnull(dto);
+	}
 	
 }

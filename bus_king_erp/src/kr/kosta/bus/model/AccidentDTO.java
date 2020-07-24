@@ -3,7 +3,7 @@ package kr.kosta.bus.model;
 public class AccidentDTO {
 
 	private int acc_no;
-	private String acc_b_no, acc_e_no, acc_e_licence, acc_state, acc_located, acc_breakdown;
+	private String acc_b_no, acc_e_no, acc_e_license, acc_state, acc_located, acc_breakdown;
 	private String acc_date;
 
 	public int getAcc_no() {
@@ -30,12 +30,12 @@ public class AccidentDTO {
 		this.acc_e_no = acc_e_no;
 	}
 
-	public String getAcc_e_licence() {
-		return acc_e_licence;
+	public String getAcc_e_license() {
+		return acc_e_license;
 	}
 
-	public void setAcc_e_licence(String acc_e_licence) {
-		this.acc_e_licence = acc_e_licence;
+	public void setAcc_e_license(String acc_e_license) {
+		this.acc_e_license = acc_e_license;
 	}
 
 	public String getAcc_state() {
@@ -73,7 +73,7 @@ public class AccidentDTO {
 	@Override
 	public String toString() {
 		return "AccidentDTO [acc_no=" + acc_no + ", acc_b_no=" + acc_b_no + ", acc_e_no=" + acc_e_no
-				+ ", acc_e_licence=" + acc_e_licence + ", acc_state=" + acc_state + ", acc_located=" + acc_located
+				+ ", acc_e_license=" + acc_e_license + ", acc_state=" + acc_state + ", acc_located=" + acc_located
 				+ ", acc_breakdown=" + acc_breakdown + ", acc_date=" + acc_date + "]";
 	}
 

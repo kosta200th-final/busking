@@ -62,7 +62,11 @@ public class AccountController {
 		int start = (pg*rowSize) - (rowSize-1);
 		int end = pg*rowSize;
 		
-		int total = accountService.getAccountCount(cnt_state);
+		HashMap map = new HashMap();
+		map.put("state", cnt_state);
+		map.put("ac_code", cnt_code);
+		
+		int total = accountService.getAccountCount(map);
 		System.out.println("start : " + start + " end : " + end);
 		System.out.println("wtire count : " + total);
 		
@@ -79,11 +83,10 @@ public class AccountController {
 		
 		
 		//-------------------------------------------------------------
-		HashMap map = new HashMap();
+		
 		map.put("start", start);
 		map.put("end", end);
-		map.put("state", cnt_state);
-		map.put("ac_code", cnt_code);
+		
 		System.out.println(cnt_state);
 		System.out.println(cnt_code);
 		
@@ -174,7 +177,9 @@ public class AccountController {
 	
 	@RequestMapping(value="cal-insert.do", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request, CalculateDTO dto) {
+		System.out.println(dto.toString());
 		dto.setCal_code(request.getParameter("cal_code"));
+		
 		dto.setCal_b_no(request.getParameter("cal_b_no"));
 		dto.setCal_nametag(request.getParameter("cal_nametag"));
 		dto.setCal_bigo(request.getParameter("cal_bigo"));
@@ -199,7 +204,7 @@ public class AccountController {
 
 	@RequestMapping(value="cal-update.do", method= RequestMethod.POST)
 	public String calculateUpdate(CalculateDTO dto, Model model) {
-		
+		System.out.println(dto.toString());
 		calculateService.calUpdate(dto);
 		return "redirect:cal-list.do";
 		
