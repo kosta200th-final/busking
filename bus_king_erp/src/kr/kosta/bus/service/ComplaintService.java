@@ -13,7 +13,7 @@ public interface ComplaintService {
 	public List<BusDTO> blist(HashMap map);
 	// 직원사번, 직원이름
 	public List<EmployerDTO> elist(HashMap map);
-
+	
 	public List<ComplaintDTO> complaintList(HashMap map);
 
 	public void complaintInsert(ComplaintDTO dto);

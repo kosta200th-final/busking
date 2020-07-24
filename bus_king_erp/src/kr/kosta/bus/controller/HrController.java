@@ -29,14 +29,6 @@ public class HrController {
 	//@Inject
 	//ShaEncoder shaEncoder; //암호화 빈
 	
-	
-	
-	//로그인 페이지로 이동
-	@RequestMapping("/login.do")
-	public String login() {
-		return "/user/login";
-	}
-
 	@Autowired
 	EmployerService service;
 	
@@ -171,7 +163,7 @@ public class HrController {
 		List<PayDTO> dto = pay_service.payList(map);
 		model.addAttribute("paylist", dto);
 		
-		return "/hc/pay-list";
+		return "/hc/pay-list2";
 	}
 	
 	@RequestMapping("pay-insertform.do")
@@ -209,7 +201,7 @@ public class HrController {
 		  
 		pay_service.payInsert(dto);
 		
-		return "redirect:pay-list-n.do";
+		return "redirect:pay-list.do";
 	}
 	
 	

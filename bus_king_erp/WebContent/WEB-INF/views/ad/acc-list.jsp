@@ -1,107 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accidentSubMenu.jsp" %>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script>
 
-	google.load('visualization', '1', {
-
-	'packages' : [ 'corechart' ]
-
-		});
-
-		google.setOnLoadCallback(drawChart2);
- 	// 차트 그리기 함수
-	function drawChart2() {
-		//json 데이터 받아로기
-		// dataType : "json" 결과값이 json 형식
-		// async :false  비동기식 옵션을 끔(동기식)
-		// ajax 는 비동기식이다. 즉 기본값이 비동기식 true 이다
-		// 즉 차트가 그려지기 전에는 다른 작업은 하지 못한다.
-		//responseText  : 서버의 응답 텍스트
-			var jsonData = $.ajax({
-			
-			url : "/ad/acc-list-chart.do",
-			
-			dataType : "json",
-			
-			async : false
-			
-			}).responseText;
-			
-		alert(jsonData);
-		//json 데이터를 데이터 테이블로 변환
-		var data = new google.visualization.DataTable(jsonData);
-		
-		// 차트 그리기 (PieChart, LineChart, ColumnChart)
-		var chart = new google.visualization.PieChart(document
-		
-			.getElementById('chart_div'));
-			
-			//draw(데이터, 옵션)
-			chart.draw(data, {
-				width : 400,
-				height : 240
-		});
-
- }
-
-
-</script>
-
-	<main>
-	 <div id="chart_div">
- 
- 	</div>
-		<table border='1'>
-			<tr>
-				<th>사고접수번호</th>
-				<th>사고버스번호</th>
-				<th>직원 사원번호</th>
-				<th>면허번호</th>
-				<th>차량상태</th>
-				<td><input type="button" value="ADD" onclick="location.href='acc-insertform.do'"></td>
-			</tr>
-			<c:forEach items="${accidentlist}" var="list">
-				<tr>
-					<td>${list.acc_no}</td>
-					<td>${list.acc_b_no}</td>
-					<td>${list.acc_e_no}</td>
-					<td>${list.acc_e_licence}</td>
-					<td>${list.acc_state}</td>
-					
-					<c:if test="${list.acc_state == '수리요함'}">
-						<td><input type='button' onclick="location.href='acc-repair.do?acc_no=${list.acc_no}'" value='정비접수'/></td>
-					</c:if>
-					<c:if test="${list.acc_state == '정비접수'}">
-						<td><input type='button' onclick="location.href='acc-repair.do?acc_no=${list.acc_no}'" value='운행가능'/></td>
-					</c:if>
-					<c:if test="${list.acc_state == '운행가능'}">
-						<td><input type='button' onclick="location.href='acc-repair.do?acc_no=${list.acc_no}'" value='운행가능'/></td>
-					</c:if>
-					
-					<td>
-						<input type="button" value="EDIT" onclick="location.href='acc-updateform.do?acc_no=${list.acc_no}'">
-						<input type="button" value="DELETE" onclick="location.href='acc-delete.do?acc_no=${list.acc_no}'">
-						<input type="button" value="DETAILED" class="btn">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6"><aside>
-						<ul>
-							<li>사고난 시각 : ${list.acc_date}</li>
-							<li>사고난 장소 : ${list.acc_located}</li>
-							<li>사고난 내용 : ${list.acc_breakdown}</li>
-						</ul>
-					</aside>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<table width="600">
+<main>
+   <div class="table100 ver2 m-b-110">
+      <table data-vertable="ver2" class="accTable">
+         <thead>
+            <tr class="row100 head">
+               <th class="column100 column1" data-column="column1">접수번호</th>
+               <th class="column100 column2" data-column="column2">버스번호</th>
+               <th class="column100 column3" data-column="column3">사원번호</th>
+               <th class="column100 column4" data-column="column4">면허번호</th>
+               <th class="column100 column5" data-column="column5">차량상태</th>
+               <th class="column100 column6" data-column="column6">확인</th>
+               <th class="column100 column7" data-column="column7">
+                  <a class="okBtn" onclick="location.href='acc-insertform.do'">추가</a>&nbsp;&nbsp;
+                  <a id="addBtn" class="okBtn" onclick="location.href='acc-chart.do'">교통사고차트</a>
+               </th>
+<!--                <th style="color:#333">.</th> -->
+            </tr>
+         </thead>
+         <tbody>
+            <c:forEach items="${accidentlist}" var="list">
+               <tr>
+                  <td class="code">${list.acc_no}</td>
+                  <td class="carNum">${list.acc_b_no}</td>
+                  <td class="price" style="text-align:center">${list.acc_e_no}</td>
+                  <td class="price" style="text-align:center">${list.acc_e_license}</td>
+                  <td class="state"><span>${list.acc_state}</span></td>
+                  <c:if test="${list.acc_state == '운행가능'}">
+                     <td class="result"><span></span></td>
+                  </c:if>
+                  <c:if test="${list.acc_state == '수리요함'}">
+                     <td class="result">
+                        <a href="acc-repair.do?acc_no=${list.acc_no}" class="stateBtn">정비접수</a>   
+                     </td>
+                  </c:if>
+                  <c:if test="${list.acc_state == '정비접수'}">
+                     <td class="result">
+                        <%-- <a href="acc-repair.do?acc_no=${list.acc_no}" class="stateBtn">운행가능</a> --%>
+                     </td>
+                  </c:if>
+                  <td class="btn-width" >
+                     <span class="btn-wrap">
+                        <input type="button" value="수정"
+                           class="button type green"
+                           onclick="location.href='acc-updateform.do?acc_no=${list.acc_no}'">
+                        <input type="button" value="삭제"
+                           class="button type red"
+                           onclick="location.href='acc-delete.do?acc_no=${list.acc_no}'">
+                        <input type="button" value="더보기"
+                           class="button type all btn">
+                     </span>
+                     <aside>
+                        <ul>
+                           <li>
+                              사고난 시각 :
+                              <fmt:parseDate
+                                 value='${list.acc_date}' var='trading_day'
+                                 pattern='yyyy-MM-dd HH:mm' />
+                              <fmt:formatDate
+                                 value="${trading_day}" pattern="yyyy/MM/dd HH:mm" />
+                           </li>
+                           <li>
+                              사고난 장소 : ${list.acc_located}
+                           </li>
+                           <li>
+                              사고난 내용 : ${list.acc_breakdown}
+                           </li>
+                        </ul>
+                     </aside>
+                  </td>
+               </tr>
+            </c:forEach>
+         </tbody>
+      </table>
+   </div>
+      
+     <table width="600" class="pgTable">
 		<tr>
 			<td align="center">
 				<!-- 처음 이전 링크 --> <c:if test="${pg>block}">
@@ -129,10 +108,16 @@
 				[<span style="color: gray">▶▶</span>]
 		
 		</c:if>
-
 			</td>
 		</tr>
 	</table>
-	</main>
-</body>
+</main>
+
+<script type="text/javascript"> 
+
+$("span:contains('수리요함')").css({color:"#A72734"});
+$("span:contains('정비접수')").css({color:"green"});
+$("span:contains('운행가능')").css({color:"#0062C1"});
+
+</script>
 </html>

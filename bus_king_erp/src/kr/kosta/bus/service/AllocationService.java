@@ -25,4 +25,6 @@ public interface AllocationService {
 	public void stateUpdateRun(AllocationDTO dto);
 	public void stateUpdateStop(AllocationDTO dto);
 	public String bstate(String b_no);
+	public void employerUpdateBno(AllocationDTO dto);
+	public void employerUpdateBnull(AllocationDTO dto);
 }

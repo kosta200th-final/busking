@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</select>
 			
 		 <insert id="wonlyo2Insert" parameterType="kr.kosta.bus.model.Wonlyo2_DTO" >
-			insert into wonlyo2 values(NEXT_WO2_CODE,#{wo2_iptype}, #{wo2_type},#{wo2_number},#{wo2_date})
+			insert into wonlyo2 values(NEXT_WO2_CODE, #{wo2_iptype}, #{wo2_type},#{wo2_number},#{wo2_date})
 		</insert> 
 		
 <!-- 		<delete id="repairDelete" parameterType="String">

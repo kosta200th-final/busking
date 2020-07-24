@@ -34,8 +34,8 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public int getAccountCount(String state) {
-		return sqlsession.selectOne("AccountDAO.getAccountCount", state);
+	public int getAccountCount(HashMap map) {
+		return sqlsession.selectOne("AccountDAO.getAccountCount", map);
 	}
 
 

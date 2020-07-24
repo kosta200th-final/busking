@@ -3,7 +3,7 @@ package kr.kosta.bus.model;
 public class FuelDTO {
 
 
-	private String f_code,f_b_no,f_b_energy,f_date,f_nametag,f_bigo,f_payment;
+	private String f_code,f_b_no,f_b_energy,f_date,f_nametag,f_bigo,f_payment,f_date2;
 	private int f_cost,f_charge;
 	
 	public String getF_code() {
@@ -60,12 +60,18 @@ public class FuelDTO {
 	public void setF_charge(int f_charge) {
 		this.f_charge = f_charge;
 	}
+	public String getF_date2() {
+		return f_date2;
+	}
+	public void setF_date2(String f_date2) {
+		this.f_date2 = f_date2;
+	}
 	@Override
 	public String toString() {
 		return "FuelDTO [f_code=" + f_code + ", f_b_no=" + f_b_no + ", f_b_energy=" + f_b_energy + ", f_date=" + f_date
-				+ ", f_nametag=" + f_nametag + ", f_bigo=" + f_bigo + ", f_payment=" + f_payment + ", f_cost=" + f_cost
-				+ ", f_charge=" + f_charge + "]";
+				+ ", f_nametag=" + f_nametag + ", f_bigo=" + f_bigo + ", f_payment=" + f_payment + ", f_date2="
+				+ f_date2 + ", f_cost=" + f_cost + ", f_charge=" + f_charge + "]";
 	}
-	
+
 	
 }
