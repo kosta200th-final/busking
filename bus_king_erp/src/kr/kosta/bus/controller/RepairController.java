@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.FuelDTO;
 import kr.kosta.bus.model.RepairDTO;
 import kr.kosta.bus.model.Wonlyo2_DTO;
@@ -87,7 +88,11 @@ public class RepairController {
 	}
 	
 	@RequestMapping(value = "re-insertform.do", method = RequestMethod.GET)
-	public String insertform() {
+	public String insertform(Model model) {
+		HashMap map = new HashMap();
+		
+		List<BusDTO> blist = Reservice.buslist(map);
+		model.addAttribute("blist", blist);
 		return "/rc/re-insertform";
 	}
 	@RequestMapping(value = "re-insert.do", method = RequestMethod.POST)
@@ -97,10 +102,10 @@ public class RepairController {
 		dto.setRe_code(request.getParameter("re_code"));
 		dto.setRe_b_no(request.getParameter("re_b_no"));
 		dto.setRe_date(request.getParameter("re_date"));
-		dto.setRe_cost(Integer.parseInt(request.getParameter("re_cost")));
+//		dto.setRe_cost(Integer.parseInt(request.getParameter("re_cost")));
 		dto.setRe_state(request.getParameter("re_state"));
-		dto.setRe_breakdown(request.getParameter("re_breakdown"));
-		dto.setRe_bigo(request.getParameter("re_bigo"));
+//		dto.setRe_breakdown(request.getParameter("re_breakdown"));
+//		dto.setRe_bigo(request.getParameter("re_bigo"));
 //		dto.setRe_date2(request.getParameter("re_date2"));
 		Reservice.repairInsert(dto);
 		return "redirect:re-list.do";
@@ -117,6 +122,10 @@ public class RepairController {
 	public String routeupdate(RepairDTO dto,Model model) {
 		model.addAttribute("repair",dto);
 		Reservice.repairUpdate(dto);
+		if(dto.getRe_state().equals("정비완료")) dto.setRe_state("대기중");
+		Reservice.busUpdatestate(dto);
+		if(dto.getRe_state().equals("대기중")) dto.setRe_state("운행가능");
+		Reservice.accUpdatestate(dto);
 		return "redirect:re-list.do";
 	}
 	
@@ -125,6 +134,8 @@ public class RepairController {
     	Reservice.repairDelete(re_code);
       return "redirect:re-list.do";
     }
+
+    
     
 //-------------------------------------------------------------------------------------FUEL
     
@@ -177,7 +188,11 @@ public class RepairController {
 	}
 	
 	@RequestMapping(value = "f-insertform.do", method = RequestMethod.GET)
-	public String finsertform() {
+	public String finsertform(Model model) {
+		HashMap map = new HashMap();
+		
+		List<BusDTO> blist = Reservice.buslist(map);
+		model.addAttribute("blist", blist);
 		return "/rc/f-insertform";
 	}
 	@RequestMapping(value = "f-insert.do", method = RequestMethod.POST)
@@ -186,7 +201,7 @@ public class RepairController {
 		System.out.println(dto.toString());
 		dto.setF_code(request.getParameter("f_code"));
 		dto.setF_b_no(request.getParameter("f_b_no"));
-		dto.setF_b_energy(request.getParameter("f_energy"));
+		dto.setF_b_energy(request.getParameter("f_b_energy"));
 		dto.setF_date(request.getParameter("f_date"));
 		dto.setF_charge(Integer.parseInt(request.getParameter("f_charge")));
 		dto.setF_cost(Integer.parseInt(request.getParameter("f_cost")));

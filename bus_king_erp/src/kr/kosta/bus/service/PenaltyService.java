@@ -29,5 +29,5 @@ public interface PenaltyService {
 
 	public void p_paymentUpdate(String p_code);
 	
-	public void accountInsert(AccountDTO dto);
+	public void accountInsert(PenaltyDTO dto);
 }

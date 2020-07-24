@@ -19,27 +19,70 @@ margin-right: auto;
 </head>
 <body>
 <main>
-<form action="re-update.do" method="post">
-<h1 style="text-align: center;">차량 점검 </h1><br><br>
-	<div align="center">
-			<div style="width: auto;">
-
-			접수 번호 : <input type="text" name="re_code" value="${dto.re_code}"><br><br>
-			차량 번호 :<input type="text" name="re_b_no" value="${dto.re_b_no}"><br><br>
-			접수 날짜 : <fmt:parseDate value='${dto.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
-             <fmt:formatDate value="${re_date}" pattern="yyyy.mm.dd"/><br><br>
-         	완료 날짜 :<input type="date" name="re_date2"><br><br>
-			정비 내역 :<input type="text" name="re_breakdown" value="${dto.re_breakdown}"><br><br>
-			정비 가격 :<input type="text" name="re_cost" value="${dto.re_cost}"><br><br>
-			<label for = "re_state">정비 상태 : </label>
-			<input type = "radio" name = "re_state" value = "정비중">정비중
-        	<input type = "radio" name = "re_state" value = "정비완료">정비완료<br><br>
-        	<a style="margin: auto; text-align: center;">비고(특이사항) : <textarea  rows="10" cols="30" name="re_bigo" value="${dto.re_bigo}">
-        	</textarea></a><br>
-        	<br> 
-        	<input type="submit" value="수정"  onclick="location.href='re-update.do?re_code=${repair.re_code}'">&nbsp;&nbsp;&nbsp;
-			<input type="reset" value="취소" onclick="location.href='re-list.do?re_code=${repair.re_code}'"> 
+<form action="re-update.do" method="post" class="form">
+<fieldset>
+<legend style="text-align: center"><!-- <img alt="icon" src="../resources/img/regi.png" class="formImg"> --> 차량 정비 현황</legend>
+	<div class="form-con">
+		<ul>
+		<li>
+			<span>정비 코드</span>
+				<input type="text" name="re_code" value="${dto.re_code}" id="re_code">
+			</li>
+			<li>
+			<span>버스번호</span>
+			<input type="text" name="re_b_no" id="re_b_no" class="resized-input"
+					value="${dto.re_b_no}" 
+					style="display: inline; width: 168px">
+			</li>
+			<li>
+				<span>접수날짜</span>
+				<fmt:parseDate value='${dto.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
+             <fmt:formatDate value="${re_date}" pattern="yyyy.mm.dd"/>
+			</li>
+			<li>
+				<span>완료 날짜</span>
+				<input type="date" name="re_date2">
+			</li>
+			<li>
+				<span>정비가격</span>
+				<input type="text" name="re_cost" class="resized-input">
+			</li>
+			<li>
+			<label for="re_breakdown" class="br">정비내역 </label>
+				<input type="radio" name="re_breakdown"
+					value="자가점검" class="radio">
+				자가점검(물품)
+				<input type="radio" name="re_breakdown"
+					value="차량사고" class="radio">
+				차량사고
+				<input type="radio" name="re_breakdown"
+					value="차량노후" class="radio">
+				차량노후
+			</li>
+			<%-- <li>
+				<label for="re_breakdown" class="br">정비내역 </label>
+				<input type="text" name="re_breakdown" value="${dto.re_breakdown}">
+			</li> --%>
+			<li>
+				<label for="re_state" class="br">정비상태 </label>
+				<input type="radio" name="re_state" value="정비중"  class="radio">
+				정비중
+				<input type="radio" name="re_state" value="정비완료"  class="radio">
+				정비완료
+			</li>
+			<li>
+				<span>비고(특이사항)
+					<textarea rows="10" cols="30" name="re_bigo"></textarea>
+				</span>
+			</li>
+			
+		</ul>
+		<div class="btn-wrap">
+			<input type="submit" value="수정" class="editBtn formBtn" onclick="location.href='re-update.do?re_code=${repair.re_code}'">
+			<input type="reset" value="취소" class="editBtn formBtn red" onclick="location.href='re-list.do?re_code=${repair.re_code}'">
+		</div>
 	</div>
+	</fieldset>
 	</form>
 	</main>
 </body>

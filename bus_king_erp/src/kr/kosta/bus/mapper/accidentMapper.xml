@@ -7,40 +7,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="blist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
 		select b_no from bus
-		where b_no not in (select acc_b_no from accident)
 		order by b_no
 	</select>
 
 	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.EmployerDTO">
-		select e_no, e_name, e_license from employer
-		where e_no not in (select acc_e_no from accident)
+		select e_no, e_license from employer
 		order by e_no
 	</select>
 	
-	<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+	<insert id="repairInsert" parameterType="kr.kosta.bus.model.AccidentDTO">
     	insert into repair(re_code, re_b_no, re_date, re_state)
-		select r_code, acc_b_no, acc_date, acc_state from accident
+		select NEXT_RE_CODE, acc_b_no, acc_date, acc_state from accident where acc_no = #{acc_no} 
 	</insert>
 	
 	<insert id="accidentInsert" parameterType="kr.kosta.bus.model.AccidentDTO">
-		insert into accident(acc_no, acc_b_no, acc_e_no, acc_e_licence, acc_state, acc_date, acc_located, acc_breakdown) 
-		values(#{acc_no}, #{acc_b_no}, #{acc_e_no}, #{acc_e_licence}, #{acc_state}, #{acc_date}, #{acc_located}, #{acc_breakdown})
+		insert into accident(acc_no, acc_b_no, acc_e_no, acc_e_license, acc_state, acc_date, acc_located, acc_breakdown) 
+		values(#{acc_no}, #{acc_b_no}, #{acc_e_no}, #{acc_e_license}, #{acc_state}, #{acc_date}, #{acc_located}, #{acc_breakdown})
 	</insert>
 
 	<select id="accidentList" parameterType="HashMap" resultType="kr.kosta.bus.model.AccidentDTO">
+		select * from (select A.*, rownum r from (select * from accident order by acc_date desc) A)
+		where r >= #{start} and r &lt;= #{end} 
+		
+		<!-- 
 		select d.* from ( select a.*, rownum rn from (
-		select a.acc_no, a.acc_e_licence, a.acc_state, a.acc_date, a.acc_located, a.acc_breakdown, b.b_no as "acc_b_no", e.e_no as "acc_e_no"
+		select a.acc_no, a.acc_e_license, a.acc_state, a.acc_date, a.acc_located, a.acc_breakdown, b.b_no as "acc_b_no", e.e_no as "acc_e_no"
 		from bus b, employer e, accident a
 		where b.b_no = a.acc_b_no and e.e_no = a.acc_e_no order by a.acc_no desc) a ) d
 		where rn between #{start} and #{end}
-	</select>
+		-->	
+		</select>
 	
 	<update id="accidentUpdate" parameterType="kr.kosta.bus.model.AccidentDTO">
 		update accident set acc_state = #{acc_state} where acc_no = #{acc_no}
 	</update>
 	
 	<update id="acc_stateUpdate" parameterType="kr.kosta.bus.model.AccidentDTO">
-		update accident set acc_state = '정비접수' where acc_no = #{acc_no}
+		update accident set acc_state ='정비접수' where acc_no = #{acc_no}
 	</update> 
 	
 	<delete id="accidentDelete" parameterType="Integer">
@@ -48,13 +51,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="accidentDetail" parameterType="Integer" resultType="kr.kosta.bus.model.AccidentDTO">
-		select a.acc_no, a.acc_e_licence, a.acc_state, a.acc_date, a.acc_located, a.acc_breakdown, b.b_no as "acc_b_no", e.e_no as "acc_e_no"
+		select * from accident where acc_no = #{acc_no}
+		
+		<!-- select a.acc_no, a.acc_e_license, a.acc_state, a.acc_date, a.acc_located, a.acc_breakdown, b.b_no as "acc_b_no", e.e_no as "acc_e_no"
 		from bus b, employer e, accident a
-		where b.b_no = a.acc_b_no and e.e_no = a.acc_e_no and acc_no = #{acc_no}
+		where b.b_no = a.acc_b_no and e.e_no = a.acc_e_no and acc_no = #{acc_no} -->
 	</select>
 
 	<select id="getaccidentCount" resultType="Integer">
 		select count(*) from accident
+	</select>
+	
+	<select id="getChart" resultType="kr.kosta.bus.model.AccidentDTO" >
+		select acc_e_license, count(acc_b_no) as "acc_b_no" from accident group by acc_e_license
 	</select>
 
 </mapper>

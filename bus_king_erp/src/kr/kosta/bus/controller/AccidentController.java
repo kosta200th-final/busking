@@ -10,14 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.kosta.bus.model.AccidentDTO;
-import kr.kosta.bus.model.AccountDTO;
 import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.ComplaintDTO;
 import kr.kosta.bus.model.EmployerDTO;
 import kr.kosta.bus.model.PenaltyDTO;
-import kr.kosta.bus.model.RepairDTO;
 import kr.kosta.bus.service.AccidentService;
 import kr.kosta.bus.service.AccountService;
 import kr.kosta.bus.service.ComplaintService;
@@ -35,13 +34,8 @@ public class AccidentController {
 	PenaltyService penaltyService;
 	
 	@Autowired
+	
 	AccidentService accidentService;
-	
-	@Autowired
-	RepairService repairService;
-	
-	@Autowired
-	AccountService accountService;
 	
 	// 민원관리
 	@RequestMapping(value = "comp-list.do")
@@ -53,7 +47,7 @@ public class AccidentController {
 			pg = Integer.parseInt(strPg);
 		}
 
-		int rowSize = 3;
+		int rowSize = 5;
 		int start = (pg * rowSize) - (rowSize - 1);
 		int end = pg * rowSize;
 
@@ -64,7 +58,7 @@ public class AccidentController {
 		int allPage = (int) Math.ceil(total / (double) rowSize);
 		System.out.println("page count : " + allPage);
 
-		int block = 3;
+		int block = 5;
 		int fromPage = ((pg - 1) / block * block) + 1;
 		int toPage = ((pg - 1) / block * block) + block;
 
@@ -96,6 +90,7 @@ public class AccidentController {
 
 		List<BusDTO> blist = complaintService.blist(map);
 		List<EmployerDTO> elist = complaintService.elist(map);
+
 
 		model.addAttribute("blist", blist);
 		model.addAttribute("elist", elist);
@@ -151,7 +146,7 @@ public class AccidentController {
 			pg = Integer.parseInt(strPg);
 		}
 
-		int rowSize = 3;
+		int rowSize = 5;
 		int start = (pg * rowSize) - (rowSize - 1);
 		int end = pg * rowSize;
 
@@ -162,7 +157,7 @@ public class AccidentController {
 		int allPage = (int) Math.ceil(total / (double) rowSize);
 		System.out.println("page count : " + allPage);
 
-		int block = 3;
+		int block = 5;
 		int fromPage = ((pg - 1) / block * block) + 1;
 		int toPage = ((pg - 1) / block * block) + block;
 
@@ -192,8 +187,8 @@ public class AccidentController {
 	public String penaltyinsertform(Model model) {
 		HashMap map = new HashMap();
 
-		List<BusDTO> blist = complaintService.blist(map);
-		List<EmployerDTO> elist = complaintService.elist(map);
+		List<BusDTO> blist = penaltyService.blist(map);
+		List<EmployerDTO> elist = penaltyService.elist(map);
 
 		model.addAttribute("blist", blist);
 		model.addAttribute("elist", elist);
@@ -203,9 +198,11 @@ public class AccidentController {
 	@RequestMapping(value = "p-insert.do", method = RequestMethod.POST)
 	public String penaltyinsert(HttpServletRequest request, PenaltyDTO dto) {
 
+		dto.setP_code(request.getParameter("p_code"));
 		dto.setP_b_no(request.getParameter("p_b_no"));
 		dto.setP_e_no(request.getParameter("p_e_no"));
-		dto.setP_e_licence(request.getParameter("p_e_licence"));
+		dto.setP_e_license(request.getParameter("p_e_license"));
+		dto.setP_e_name(request.getParameter("p_e_name"));
 		dto.setP_cost(Integer.parseInt(request.getParameter("p_cost")));
 		dto.setP_payment(request.getParameter("p_payment"));
 		dto.setP_date(request.getParameter("p_date"));
@@ -216,8 +213,6 @@ public class AccidentController {
 
 		penaltyService.penaltyInsert(dto);
 		
-		//accountService.accountInsesrt(dto);
-
 		return "redirect:p-list.do";
 	}
 
@@ -232,7 +227,7 @@ public class AccidentController {
 	}
 
 	@RequestMapping(value = "p-ac.do", method = RequestMethod.GET)
-	public String penaltyupdate(AccountDTO dto, String p_code, Model model) {
+	public String penaltyupdate(PenaltyDTO dto, String p_code, Model model) {
 		penaltyService.p_paymentUpdate(p_code);
 		
 		penaltyService.accountInsert(dto);
@@ -243,7 +238,6 @@ public class AccidentController {
 	@RequestMapping(value = "p-update.do", method = RequestMethod.POST)
 	public String penaltyupdate(PenaltyDTO dto, Model model) {
 
-		System.out.println(dto.getP_payment());
 		penaltyService.penaltyUpdate(dto);
 
 		return "redirect:p-list.do";
@@ -268,7 +262,7 @@ public class AccidentController {
 			pg = Integer.parseInt(strPg);
 		}
 
-		int rowSize = 3;
+		int rowSize = 5;
 		int start = (pg * rowSize) - (rowSize - 1);
 		int end = pg * rowSize;
 
@@ -279,7 +273,7 @@ public class AccidentController {
 		int allPage = (int) Math.ceil(total / (double) rowSize);
 		System.out.println("page count : " + allPage);
 
-		int block = 3;
+		int block = 5;
 		int fromPage = ((pg - 1) / block * block) + 1;
 		int toPage = ((pg - 1) / block * block) + block;
 
@@ -303,10 +297,39 @@ public class AccidentController {
 		System.out.println(dto.toString());
 
 		return "/ad/acc-list";
-
 	}
+	
+	// 차트
+	@RequestMapping(value = "acc-chart.do", method = RequestMethod.GET)
+	public ModelAndView getChart(ModelAndView mav) {
+		
+		List<AccidentDTO> list = accidentService.getChart();
 
-	// 차트 
+		mav.addObject("list", list);
+		mav.setViewName("ad/acc-chart");
+		
+		String str = "[";
+		str += "['면허번호', '사고횟수'],";
+		int num = 0;
+		for(AccidentDTO dto:list) {
+			str +="['";
+			str += dto.getAcc_e_license();
+			str +="',";
+			str += dto.getAcc_b_no();
+			str +="]";
+			
+			num ++;
+			if(num<list.size()) {
+				str += ",";
+			}
+		}
+		str += "]";
+		System.out.println("str " + str);
+		mav.addObject("str", str);
+		return mav;
+	}
+	
+
 	@RequestMapping(value = "acc-insertform.do", method = RequestMethod.GET)
 	public String accidentinsertform(Model model) {
 		HashMap map = new HashMap();
@@ -325,9 +348,7 @@ public class AccidentController {
 		dto.setAcc_no(Integer.parseInt(request.getParameter("acc_no")));
 		dto.setAcc_b_no(request.getParameter("acc_b_no"));
 		dto.setAcc_e_no(request.getParameter("acc_e_no"));
-		dto.setAcc_e_licence(request.getParameter("acc_e_licence"));
-		System.out.println("라이센스");
-		System.out.println(dto.getAcc_e_licence());
+		dto.setAcc_e_license(request.getParameter("acc_e_license"));
 		dto.setAcc_state(request.getParameter("acc_state"));
 		System.out.println("상태");
 		System.out.println(dto.getAcc_state());
@@ -351,7 +372,7 @@ public class AccidentController {
 	}
 
 	@RequestMapping(value = "acc-repair.do", method = RequestMethod.GET)
-	public String accidentupdate(RepairDTO dto, String acc_no, Model model) {
+	public String accidentupdate(AccidentDTO dto, String acc_no, Model model) {
 		accidentService.acc_stateUpdate(acc_no);
 		
 		accidentService.repairInsert(dto);

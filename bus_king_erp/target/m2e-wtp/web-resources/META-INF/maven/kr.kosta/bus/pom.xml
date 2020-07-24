@@ -19,6 +19,11 @@
 		<spring.security.version>3.2.10.RELEASE</spring.security.version>
 	</properties>
 	<dependencies>
+	       <dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.8</version>
+	</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

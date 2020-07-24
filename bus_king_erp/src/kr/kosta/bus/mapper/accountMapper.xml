@@ -18,9 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where r >= #{start} and r &lt;= #{end}
 	</select>
 	
-	<select id="getAccountCount" parameterType="String" resultType="Integer">
+	<select id="getAccountCount" parameterType="HashMap" resultType="Integer">
 		select count(*) from account
-			where ac_state = #{state}
+			where ac_state like #{state} and ac_code like #{ac_code}
 	</select>
 	
 	<select id="getAccount" parameterType="String" resultType="kr.kosta.bus.model.AccountDTO">
@@ -29,7 +29,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="accountUpdate" parameterType="kr.kosta.bus.model.AccountDTO">
 		update account set ac_bigo = #{ac_bigo} where ac_code = #{ac_code}
 	</update>
-	
-	
 	
 </mapper>

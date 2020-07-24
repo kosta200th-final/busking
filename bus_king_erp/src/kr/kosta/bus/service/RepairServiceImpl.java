@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.RepairDAO;
 import kr.kosta.bus.model.RepairDTO;
 
@@ -52,6 +53,29 @@ public class RepairServiceImpl implements RepairService{
 	@Override
 	public RepairDTO select(RepairDTO dto) {
 		return repairDAO.select(dto);
+	}
+
+
+
+	@Override
+	public void busUpdatestate(RepairDTO dto) {
+		repairDAO.busUpdatestate(dto);
+		
+	}
+
+
+
+	@Override
+	public void accUpdatestate(RepairDTO dto) {
+		repairDAO.accUpdatestate(dto);
+		
+	}
+
+
+
+	@Override
+	public List<BusDTO> buslist(HashMap map) {
+		return repairDAO.buslist(map);
 	}
 
 
