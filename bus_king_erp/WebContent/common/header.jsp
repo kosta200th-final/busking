@@ -10,6 +10,7 @@
     <title>ERP for Bus Operators</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/header.css" />" type="text/css">
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" type="text/css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Gothic+A1|Arimo" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" 
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -21,11 +22,21 @@
         <header>
               <h1><a href="#"><img src="../resources/img/buskingLogo.png" /></a></h1>
              <nav class="gnb">
-                 <a href="../bc/r-list.do">배차</a>
-                 <a href="../hc/e-list.do">인사</a>
-                 <a href="../ac/cal-list.do">회계</a>
-                 <a href="../rc/re-list.do">정비</a>
-                 <a href="../ad/acc-list.do">사고∙범칙금</a>
+                 <a href="../bc/r-list.do">
+                 	<span class="gnb-name">배차</span>
+               	 </a>
+                 <a href="../hc/e-list.do">
+                 	<span class="gnb-name">인사</span>
+                 </a>
+                 <a href="../ac/cal-list.do">
+                 	<span class="gnb-name">회계</span>
+                 </a>
+                 <a href="../rc/re-list.do">
+                 	<span class="gnb-name">정비</span>
+                 </a>
+                 <a href="../ad/acc-list.do">
+                 	<span class="gnb-name">사고∙범칙금</span>
+               	 </a>
              </nav>
         </header>
              

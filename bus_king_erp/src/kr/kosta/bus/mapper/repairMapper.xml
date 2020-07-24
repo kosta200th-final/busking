@@ -8,7 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select * from (select A.*, rownum r from (select * from repair order by re_code) A)
 				where r >= #{start} and r &lt;= #{end}
 			</select>
-			
+				<select id="buslist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
+					select b_no from bus
+						order by b_no
+				</select>
 			<select id="select" parameterType="HashMap" resultType="kr.kosta.bus.model.RepairDTO">
 				select * from repair where re_code = #{re_code}
 			</select>
@@ -19,9 +22,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</insert>
 	
 			<update id="repairUpdate" parameterType="kr.kosta.bus.model.RepairDTO">
-				update repair set re_state =#{re_state},re_date2=#{re_date2}, re_bigo=#{re_bigo} where re_code=#{re_code} 
+				update repair set re_state =#{re_state},re_date2=#{re_date2},re_cost=#{re_cost},re_breakdown=#{re_breakdown},re_bigo=#{re_bigo} where re_code=#{re_code} 
 			</update>
-	
+		
+			<update id="busUpdatestate" parameterType="String">
+				update bus set b_state = #{re_state} where b_no =#{re_b_no}
+			</update>
+			
+			<update id="accUpdatestate" parameterType="String">
+				update accident set acc_state=#{re_state} where acc_b_no =#{re_b_no}
+			</update>
+			
+			
 			<delete id="repairDelete" parameterType="String">
 				delete from repair where re_code = #{re_code}
 			</delete>

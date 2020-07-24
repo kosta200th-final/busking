@@ -11,12 +11,11 @@ function formSubmit(){
 }
 </script>
 <style type="text/css">
-#ma {
-border:1px;
+#ma{
 text-align: center;
 width: 350;
 line-height:1.5;
- }
+}
 </style>
 <head>
 <meta charset="UTF-8">

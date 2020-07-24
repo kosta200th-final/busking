@@ -41,7 +41,6 @@
 					<th>수정</th>
 					<th>삭제</th>
 					<th>상세보기</th>
-					<th style="background-color: #333; color:#333">.</th>
 				</tr>
 				<c:forEach items="${buslist}" var="list">
 					<tr align="center">
@@ -53,23 +52,31 @@
 						<td>${list.b_type}</td>
 						<td>${list.b_acc}</td>
 						<td>${list.b_state}</td>
-	
-		
-						<td><input type="button" value="정비접수" class="button modifyBtn editBtn"
-							onclick="location.href='b-repair.do?b_no=${list.b_no}&b_state=${list.b_state}'"></td>
-						<td><input type="button" value="EDIT" class="button modifyBtn editBtn"
+ 
+						<c:if test="${list.b_state == '대기중'}">
+							<td class="result" width="110">
+								<a href="b-repair.do?b_no=${list.b_no}&b_state=${list.b_state}" class="stateBtn" style="margin-left: 0%">정비접수 </a>	
+							</td>
+						</c:if>
+						<c:if test="${list.b_state == '운행중' || list.b_state == '정비접수' || list.b_state == '정비중'}">
+							<td class="result" width="110"><span> </span></td>
+						</c:if>
+						<td><input type="button" value="수정" class="button modifyBtn editBtn blue"
 							onclick="location.href='b-update.do?b_no=${list.b_no}'"></td>
-						<td><input type="button" value="DELETE" class="button modifyBtn editBtn"
+						<td><input type="button" value="삭제" class="button modifyBtn editBtn red"
 							onclick="location.href='b-delete.do?b_no=${list.b_no}'"></td>
-						<td><input type="button" value="DETAILED" class="button modifyBtn editBtn btn"></td>
-						
-				
-						<td colspan="6"><aside>
-							<ul>
-								<li>주행거리 : ${list.b_mile}</li>
-								<li>최근 정비 날짜 : ${list.b_recent}</li>
-							</ul>
-						</aside></td>
+						<td class="btn-width">
+							<span  class="btn-wrap" style="margin-left: 0%">
+								<input type="button" value="더보기"
+									class="button modifyBtn editBtn btn all">
+							</span>
+							<aside>
+								<ul>
+									<li>주행거리 : ${list.b_mile}</li>
+									<li>최근 정비 날짜 : ${list.b_recent}</li>
+								</ul>
+							</aside>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -108,5 +115,11 @@
 		</tr>
 	</table>
 	</main>
+
+<script type="text/javascript"> 
+
+$("input:contains('정비접수')").css({color:"#A72734"});
+
+</script>
 </body>
 </html>
