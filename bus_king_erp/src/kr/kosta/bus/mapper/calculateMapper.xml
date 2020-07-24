@@ -14,9 +14,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="calInsert" parameterType="kr.kosta.bus.model.CalculateDTO">
-		insert into calculate values(#{cal_code}, #{cal_date}, #{cal_b_no}, 
-			#{cal_hap_c}, #{cal_hap_m}, #{cal_total}, 
-			#{cal_nametag}, #{cal_bigo} )
+		insert into calculate (cal_code, cal_date, cal_b_no, cal_hap_c, 
+								cal_hap_m, cal_total, cal_nametag, cal_bigo)
+			values(NEXT_CAL_CODE, #{cal_date}, #{cal_b_no}, 
+										#{cal_hap_c}, #{cal_hap_m}, #{cal_total}, 
+											#{cal_nametag}, #{cal_bigo} )
 	</insert>
 	
 	<select id="getCalculate" parameterType="String" resultType="kr.kosta.bus.model.CalculateDTO">
@@ -27,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="calUpdate" parameterType="kr.kosta.bus.model.CalculateDTO">
-		update calculate set cal_date = #{ cal_date}, cal_bigo = #{cal_bigo} where cal_code = #{cal_code}
+		update calculate set cal_date = sysdate, cal_bigo = #{cal_bigo} where cal_code = #{cal_code}
 	</update>
 	
 	<select id="getCalCount" resultType="Integer">

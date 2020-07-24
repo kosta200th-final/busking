@@ -6,7 +6,6 @@ import java.util.List;
 import kr.kosta.bus.model.AccidentDTO;
 import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.EmployerDTO;
-import kr.kosta.bus.model.RepairDTO;
 
 public interface AccidentService {
 
@@ -30,5 +29,8 @@ public interface AccidentService {
 
 	public void acc_stateUpdate(String acc_no);
 	
-	public void repairInsert(RepairDTO dto);
+	public void repairInsert(AccidentDTO dto);
+	
+	public List<AccidentDTO> getChart();
+	
 }

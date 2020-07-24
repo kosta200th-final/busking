@@ -38,7 +38,6 @@
 					<th>수정</th>
 					<th>삭제</th>
 					<th>상세보기</th>
-					<th style="background-color: #333; color:#333">.</th>
 					
 				</tr>
 				<c:forEach items="${routelist}" var="list">
@@ -51,19 +50,22 @@
 						<td>${list.r_e_time}</td>
 						<td>${list.r_interval}</td>
 	
-						<td><input type="button" value="EDIT" class="button modifyBtn editBtn"
+						<td><input type="button" value="수정" class="button modifyBtn editBtn blue"
 							onclick="location.href='r-update.do?r_no=${list.r_no}'"></td>
-						<td><input type="button" value="DELETE" class="button modifyBtn editBtn"
+						<td><input type="button" value="삭제" class="button modifyBtn editBtn red"
 							onclick="location.href='r-delete.do?r_no=${list.r_no}'"></td>
-						<td><input type="button" value="DETAILED" class="button modifyBtn editBtn btn"></td>
-
-						<td colspan="6"><aside>
+						<td class="btn-width">
+							<span class="btn-wrap" style="margin-left: 0%">
+								<input type="button" value="더보기" class="button modifyBtn editBtn btn all">
+							</span>
+							<aside>
 							<ul>
 								<li>어른요금&nbsp;&nbsp;카드 : ${list.r_pay_adult} 현금 : ${list.r_pay_adult2}</li>
 								<li>청소년요금 &nbsp;&nbsp;카드 : ${list.r_pay_teen} 현금 : ${list.r_pay_teen2}</li>
 								<li>어린이요금 &nbsp;&nbsp;카드 : ${list.r_pay_kid} 현금 : ${list.r_pay_kid2}</li>
 							</ul>
-						</aside></td>
+						</aside>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

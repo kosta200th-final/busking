@@ -11,6 +11,7 @@
 <body>
 
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/hrSubMenu.jsp" %>
 
 <main>
 <form action="e-insert.do" method="post">

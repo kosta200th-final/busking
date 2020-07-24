@@ -10,5 +10,8 @@ public interface RepairDAO {
 	public void repairDelete(String re_code);
 	public RepairDTO select(RepairDTO dto);
 	public int getRepairCount();
-	
+	public void busUpdatestate(RepairDTO dto);
+	//버스번호 
+	public List<BusDTO> buslist(HashMap map);
+	public void accUpdatestate(RepairDTO dto);
 }

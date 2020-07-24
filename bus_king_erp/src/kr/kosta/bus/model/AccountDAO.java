@@ -10,6 +10,6 @@ public interface AccountDAO {
 	public List<AccountDTO> accountList(HashMap map);
 	public void accountUpdate(AccountDTO dto);
 	public AccountDTO getAccount(String ac_code);
-	public int getAccountCount(String state);
+	public int getAccountCount(HashMap map);
 	
 }
