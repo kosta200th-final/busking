@@ -24,6 +24,9 @@ public interface AccidentDAO {
 	
 	public void acc_stateUpdate(String acc_no);
 	
-	public void repairInsert(RepairDTO dto);
+	public void repairInsert(AccidentDTO dto);
+	
+	public List<AccidentDTO> getChart();
+	
 	
 }

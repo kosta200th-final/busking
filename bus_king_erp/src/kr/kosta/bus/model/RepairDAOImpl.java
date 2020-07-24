@@ -48,6 +48,23 @@ public class RepairDAOImpl implements RepairDAO{
 			return sqlSession.selectOne("RepairDAO.select",dto);
 		}
 
+		@Override
+		public void busUpdatestate(RepairDTO dto) {
+			sqlSession.update("RepairDAO.busUpdatestate",dto);
+			
+		}
+
+		@Override
+		public List<BusDTO> buslist(HashMap map) {
+			 return sqlSession.selectList("RepairDAO.buslist", map);
+		}
+
+		@Override
+		public void accUpdatestate(RepairDTO dto) {
+			sqlSession.update("RepairDAO.accUpdatestate",dto);
+			
+		}
+
 
 
 	

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <body>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/accountSubMenu.jsp" %>
 
 	<main>
 		<form action="ac-update.do" method="post" style="width:'80%'">

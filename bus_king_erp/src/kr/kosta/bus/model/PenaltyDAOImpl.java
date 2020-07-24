@@ -59,7 +59,7 @@ public class PenaltyDAOImpl implements PenaltyDAO {
 	}
 	
 	@Override
-	public void accountInsert(AccountDTO dto) {
+	public void accountInsert(PenaltyDTO dto) {
 		sqlSession.insert("PenaltyDAO.accountInsert", dto);
 	}
 

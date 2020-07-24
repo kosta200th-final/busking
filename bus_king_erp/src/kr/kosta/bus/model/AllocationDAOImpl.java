@@ -67,5 +67,15 @@ public class AllocationDAOImpl implements AllocationDAO {
 	public String bstate(String b_no) {
 		return sqlSession.selectOne("AllocationDAO.bstate", b_no);
 	}
+
+	@Override
+	public void employerUpdateBno(AllocationDTO dto) {
+		sqlSession.update("AllocationDAO.employerUpdateBno", dto);
+	}
+
+	@Override
+	public void employerUpdateBnull(AllocationDTO dto) {
+		sqlSession.update("AllocationDAO.employerUpdateBnull", dto);
+	}
 	
 }

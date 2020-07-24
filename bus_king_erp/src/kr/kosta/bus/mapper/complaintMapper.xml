@@ -7,22 +7,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="blist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
 		select b_no from bus
-		where b_no not in (select c_b_no from complaint)
 		order by b_no
 	</select>
 
 	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.EmployerDTO">
 		select e_no, e_name from employer
-		where e_no not in (select c_e_no from complaint)
 		order by e_no
 	</select>
 
 	<select id="complaintList" parameterType="HashMap" resultType="kr.kosta.bus.model.ComplaintDTO">
-		select d.* from ( select a.*, rownum rn from (
+		select * from (select A.*, rownum r from (select * from complaint order by c_date desc) A)
+		where r >= #{start} and r &lt;= #{end} 
+		<!-- select d.* from ( select a.*, rownum rn from (
 		select c.c_no, c.c_title, c.c_type , c_content, c_date, b.b_no as "c_b_no", e.e_no as "c_e_no", e.e_name as "c_e_name"
 		from bus b, employer e, complaint c
 		where b.b_no = c.c_b_no and e.e_no = c.c_e_no order by c.c_no desc) a ) d
-		where rn between #{start} and #{end}
+		where rn between #{start} and #{end} -->
   	</select>
 	
 	<insert id="complaintInsert" parameterType="kr.kosta.bus.model.ComplaintDTO">
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="complaintUpdate" parameterType="kr.kosta.bus.model.ComplaintDTO">
-		update complaint set c_no = #{c_no}, c_title = #{c_title}, c_type = #{c_type}, c_content = #{c_content} where c_no = #{c_no}
+		update complaint set c_title = #{c_title}, c_type = #{c_type}, c_content = #{c_content} where c_no = #{c_no}
 	</update>
 	
 	<delete id="complaintDelete" parameterType="Integer">
@@ -39,9 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="complaintDetail" parameterType="Integer" resultType="kr.kosta.bus.model.ComplaintDTO">
-		select b.b_no as "c_b_no", e.e_no as "c_e_no", e.e_name as "c_e_name", c.c_no, c.c_title, c.c_type, c.c_date, c_content 
+		select * from complaint where c_no = #{c_no}
+		
+		<!-- select b.b_no as "c_b_no", e.e_no as "c_e_no", e.e_name as "c_e_name", c.c_no, c.c_title, c.c_type, c.c_date, c_content 
 		from bus b, employer e, complaint c
-		where  b.b_no = c.c_b_no and e.e_no = c.c_e_no and e.e_name = c.c_e_name and c_no = #{c_no}
+		where  b.b_no = c.c_b_no and e.e_no = c.c_e_no and e.e_name = c.c_e_name and c_no = #{c_no} -->
 	</select>
 
 	<select id="getcomplaintCount" resultType="Integer">

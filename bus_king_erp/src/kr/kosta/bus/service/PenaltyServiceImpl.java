@@ -65,7 +65,7 @@ public class PenaltyServiceImpl implements PenaltyService {
 	}
 	
 	@Override
-	public void accountInsert(AccountDTO dto) {
+	public void accountInsert(PenaltyDTO dto) {
 		penaltyDAO.accountInsert(dto);
 	}
 }

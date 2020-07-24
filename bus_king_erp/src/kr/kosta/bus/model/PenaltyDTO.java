@@ -3,7 +3,7 @@ package kr.kosta.bus.model;
 public class PenaltyDTO {
 
 	private int p_cost;
-	private String p_code, p_b_no, p_e_no, p_e_licence, p_payment, p_located, p_police, p_history, p_bigo;
+	private String p_code, p_b_no, p_e_no, p_e_license, p_e_name, p_payment, p_located, p_police, p_history, p_bigo;
 	private String p_date;
 
 	public int getP_cost() {
@@ -38,12 +38,20 @@ public class PenaltyDTO {
 		this.p_e_no = p_e_no;
 	}
 
-	public String getP_e_licence() {
-		return p_e_licence;
+	public String getP_e_license() {
+		return p_e_license;
 	}
 
-	public void setP_e_licence(String p_e_licence) {
-		this.p_e_licence = p_e_licence;
+	public void setP_e_license(String p_e_license) {
+		this.p_e_license = p_e_license;
+	}
+
+	public String getP_e_name() {
+		return p_e_name;
+	}
+
+	public void setP_e_name(String p_e_name) {
+		this.p_e_name = p_e_name;
 	}
 
 	public String getP_payment() {
@@ -97,9 +105,9 @@ public class PenaltyDTO {
 	@Override
 	public String toString() {
 		return "PenaltyDTO [p_cost=" + p_cost + ", p_code=" + p_code + ", p_b_no=" + p_b_no + ", p_e_no=" + p_e_no
-				+ ", p_e_licence=" + p_e_licence + ", p_payment=" + p_payment + ", p_located=" + p_located
-				+ ", p_police=" + p_police + ", p_history=" + p_history + ", p_bigo=" + p_bigo + ", p_date=" + p_date
-				+ "]";
+				+ ", p_e_license=" + p_e_license + ", p_e_name=" + p_e_name + ", p_payment=" + p_payment
+				+ ", p_located=" + p_located + ", p_police=" + p_police + ", p_history=" + p_history + ", p_bigo="
+				+ p_bigo + ", p_date=" + p_date + "]";
 	}
 
 }

@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="busRepairInsert" parameterType="String">
-		insert into repair (re_code, re_b_no) values(NEXT_RE_CODE, #{b_no})
+		insert into repair (re_code, re_b_no, re_date, re_state) values(NEXT_RE_CODE, #{b_no}, sysdate, '정비접수')
 	</insert>
 	
 	<update id="stateUpdateRrepair" parameterType="String">

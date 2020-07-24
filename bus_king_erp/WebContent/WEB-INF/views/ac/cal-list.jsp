@@ -11,7 +11,7 @@ function formSubmit(){
 }
 </script>
 <main>
-	<form action="" method="post" id="frm">
+	<form action="cal-insertform.do" method="post" id="frm">
 		<div class="table100 ver2 m-b-110">
 			<table data-vertable="ver2">
 				<thead>
@@ -28,7 +28,7 @@ function formSubmit(){
 							<!-- <input	type="button" value="추가" class="addBtn"
 							onclick="location.href='cal-insertform.do'"> -->
 							<a class="okBtn" href="cal-insertform.do" 
-							onclick="formSubmit(); return false;">추가</a>
+							>추가</a>
 						</th>
 					</tr>
 				</thead>
