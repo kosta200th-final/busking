@@ -18,6 +18,9 @@ function formSubmit(){
 		<input type="text" name="search" >
 		<input type="submit" value="검색">
 		<input type="button" onclick="location.href='e-list.do'" value="전체보기">
+		
+		<input type="button" value="사원등록"
+					onclick="location.href='e-insertform.do'">
 	
 			<tr class="row100 head">
 						<th class="column100 column1" data-column="column1">사원번호</th>
@@ -32,8 +35,6 @@ function formSubmit(){
 						<th class="column100 column10" data-column="column10">남은 휴가일</th>
 						
 				
-				<td><input type="button" value="사원등록"
-					onclick="location.href='e-insertform.do'"></td>
 			</tr>
 			</thead>
 			<c:forEach items="${employerlist}" var="list">
@@ -72,7 +73,7 @@ function formSubmit(){
 					var="i">
 					<c:if test="${i==pg}">[${i}]</c:if>
 					<c:if test="${i!=pg}">
-				[<a href="home.do?pg=${i}">${i}</a>]
+				[<a href="e-list.do?pg=${i}">${i}</a>]
 			</c:if>
 				</c:forEach> <!-- 다음, 이후 --> <c:if test="${toPage<allPage}">
 					<!-- 20<21 : true -->

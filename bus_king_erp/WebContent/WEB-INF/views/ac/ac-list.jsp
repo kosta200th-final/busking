@@ -11,7 +11,7 @@ function formSubmit(){
 }
 </script>
 <main>
-	<form action="ac-list.do" method="post" id="frm">
+	<form action="" method="post" id="frm">
 		<div class="table100 ver2 m-b-110">
 			<table data-vertable="ver2">
 				<thead>

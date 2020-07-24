@@ -46,7 +46,7 @@
 							<option>A조</option>
 							<option>B조</option>
 					</select></th>
-					<th><input class="button modifyBtn editBtn" type="submit"
+					<th><input class="button modifyBtn editBtn all" type="submit"
 						value="배차하기"></th>
 
 					</form>
@@ -57,24 +57,19 @@
 			<table class="allocselect">
 				<tr>
 					<form action="a-list.do" method="post">
-						<td>&nbsp;근무조 : <select name="time" id="time">
-								<option>전체</option>
-								<option>A조</option>
-								<option>B조</option>
-						</select></td>
-						<td><input type="submit" value="보기"
-							class="button modifyBtn editBtn"></td>
-					</form>
-					<td>&nbsp;&nbsp;</td>
-					<form action="a-list.do" method="post">
 						<td>노선 : <select name="a_r">
 							<option>전체</option>
 							<c:forEach items="${rlist}" var="rlist">
 								<option>${rlist.r_no}</option>
 							</c:forEach>
-						</select></td>
+						</select>&nbsp;</td>
+						<td>근무조 : <select name="time" id="time">
+								<option>전체</option>
+								<option>A조</option>
+								<option>B조</option>
+						</select>&nbsp;</td>
 						<td><input type="submit" value="보기"
-							class="button modifyBtn editBtn"></td>
+							class="button modifyBtn editBtn all"></td>
 					</form>
 				</tr>
 				
@@ -92,15 +87,15 @@
 						<tr align="center">
 							<td>${list.a_b_no}</td>
 							<td>${list.a_r_no}</td>
-							<td>${list.a_e_no}</td>
+							<td>${list.a_e_no} : ${list.a_e_name}</td>
 
 							<td>${list.a_time}</td>
 
-							<td><input type="button" value="EDIT"
-								class="button modifyBtn editBtn"
-								onclick="location.href='a-update.do?a_b_no=${list.a_b_no}&a_r_no=${list.a_r_no}&a_e_no=${list.a_e_no}'"></td>
-							<td><input type="button" value="DELETE"
-								class="button modifyBtn editBtn"
+							<td><input type="button" value="수정"
+								class="button modifyBtn editBtn blue"
+								onclick="location.href='a-update.do?a_b_no=${list.a_b_no}&a_r_no=${list.a_r_no}&a_e_no=${list.a_e_no}&a_e_name=${list.a_e_name}'"></td>
+							<td><input type="button" value="삭제"
+								class="button modifyBtn editBtn red"
 								onclick="location.href='a-delete.do?a_b_no=${list.a_b_no}&a_r_no=${list.a_r_no}&a_e_no=${list.a_e_no}'"></td>
 						</tr>
 					</c:forEach>

@@ -1,7 +1,6 @@
 package kr.kosta.bus.model;
 
 import java.util.HashMap;
-
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -60,8 +59,13 @@ public class AccidentDAOImpl implements AccidentDAO {
 	}
 	
 	@Override
-	public void repairInsert(RepairDTO dto) {
-		sqlSession.insert("AccidentDAO.repairInsert", dto);		
+	public void repairInsert(AccidentDTO dto) {
+		sqlSession.insert("AccidentDAO.repairInsert", dto);
 	}
-
+	
+	@Override
+	public List<AccidentDTO> getChart() {
+		return sqlSession.selectList("AccidentDAO.getChart");
+	}
+	
 }

@@ -37,8 +37,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public int getAccountCount(String state) {
-		return accountDAO.getAccountCount(state);
+	public int getAccountCount(HashMap map) {
+		return accountDAO.getAccountCount(map);
 	}
 
 

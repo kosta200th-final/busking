@@ -403,9 +403,11 @@ public class BaechaController {
 		else {
 			String[] sp = dto.getA_e_no().split(":", 2);
 			dto.setA_e_no(sp[0]);
+			dto.setA_e_name(sp[1]);
 			System.out.println(dto);
 			aservice.allocationInsert(dto);
 			aservice.stateUpdateRun(dto);
+			aservice.employerUpdateBno(dto);
 		}
 		return "redirect:a-list.do";
 	}
@@ -419,6 +421,8 @@ public class BaechaController {
 
 	@RequestMapping(value = "a-update.do", method = RequestMethod.POST)
 	public String allocationupdate(AllocationDTO dto, Model model) {
+		String[] sp = dto.getA_e_no().split(":", 2);
+		dto.setA_e_no(sp[0]);
 		aservice.allocationUpdate(dto);
 		return "redirect:a-list.do";
 	}
@@ -428,6 +432,7 @@ public class BaechaController {
 	public String allocationdelete(AllocationDTO dto) {
 		aservice.allocationDelete(dto);
 		aservice.stateUpdateStop(dto);
+		aservice.employerUpdateBnull(dto);
 		return "redirect:a-list.do";
 	}
 	
@@ -500,7 +505,7 @@ public class BaechaController {
 			e.printStackTrace();
 		} // try~catch end
 		
-		return "/bc/bri";
+		return "/bc/bri2";
 	} // main end
 	
 	
