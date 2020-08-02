@@ -5,7 +5,14 @@ import java.util.List;
 
 public interface PayDAO {
 	
-	public List<PayDTO> payList(HashMap map);	// ¸®½ºÆ®... 
-	public void payInsert(PayDTO dto);	// ÀÎ¼­Æ®
+	public List<PayDTO> payList(HashMap map);	// ï¿½ï¿½ï¿½ï¿½Æ®... 
+	public void payInsert(PayDTO dto);	// ï¿½Î¼ï¿½Æ®
+	
+	//ë…„ë„
+	public List<PayDTO> ylist(HashMap map);
+	//ì›”
+	public List<PayDTO> mlist(HashMap map);
+	//ì‚¬ë²ˆ
+	public List<PayDTO> elist(HashMap map);
 	
 }

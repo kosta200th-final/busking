@@ -39,6 +39,22 @@ public class CalculateDAOImpl implements CalcuateDAO {
 	public int getCalCount() {
 		return sqlsession.selectOne("CalculateDAO.getCalCount");
 	}
+	
+	// 어카운트 인서트...
+	@Override
+	public void accountInsert(CalculateDTO dto) {
+		sqlsession.insert("CalculateDAO.accountInsert", dto);
+	}
+
+	// 칼코드 가져오기
+	@Override
+	public String calCode() {
+		return sqlsession.selectOne("CalculateDAO.calCode");
+	}
+	
+	
+	
+	
 
 
 }

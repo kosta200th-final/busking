@@ -79,4 +79,26 @@ public class RepairServiceImpl implements RepairService{
 	}
 
 
+
+	@Override
+	public void accoInsert(RepairDTO dto) {
+		repairDAO.accoInsert(dto);
+	}
+
+
+
+	@Override
+	public void repairUpdateState(RepairDTO dto) {
+		repairDAO.repairUpdateState(dto);
+		
+	}
+
+
+	@Override
+	public void state(RepairDTO dto) {
+		repairDAO.state(dto);
+		
+	}
+	
+
 }

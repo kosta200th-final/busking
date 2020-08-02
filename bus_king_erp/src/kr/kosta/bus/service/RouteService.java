@@ -13,4 +13,5 @@ public interface RouteService {
 	public int getRouteCount();
 	public RouteDTO routeSelect(RouteDTO dto);
 	public int routealloc(String r_no);
+	public int rnoCheck(String r_no);
 }

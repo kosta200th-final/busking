@@ -22,12 +22,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="accidentInsert" parameterType="kr.kosta.bus.model.AccidentDTO">
 		insert into accident(acc_no, acc_b_no, acc_e_no, acc_e_license, acc_state, acc_date, acc_located, acc_breakdown) 
-		values(#{acc_no}, #{acc_b_no}, #{acc_e_no}, #{acc_e_license}, #{acc_state}, #{acc_date}, #{acc_located}, #{acc_breakdown})
+		values((select NVL(max(acc_no), 0)+1 from accident), #{acc_b_no}, #{acc_e_no}, #{acc_e_license}, #{acc_state}, to_date(#{acc_date}, 'YYYY-MM-DD"T"HH24:MI:SS'), #{acc_located}, #{acc_breakdown})
 	</insert>
 
 	<select id="accidentList" parameterType="HashMap" resultType="kr.kosta.bus.model.AccidentDTO">
-		select * from (select A.*, rownum r from (select * from accident order by acc_date desc) A)
-		where r >= #{start} and r &lt;= #{end} 
+		select * from (select A.*, rownum r from (select * from accident order by acc_no desc) A)
+		where r >= #{start} and r &lt;= #{end}
 		
 		<!-- 
 		select d.* from ( select a.*, rownum rn from (
@@ -63,7 +63,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getChart" resultType="kr.kosta.bus.model.AccidentDTO" >
-		select acc_e_license, count(acc_b_no) as "acc_b_no" from accident group by acc_e_license
+		<!-- select acc_date, count(acc_b_no) as "acc_b_no" from accident group by acc_date -->
+		<!-- select to_char(acc_date, 'MM') as acc_date, count(acc_b_no) as acc_b_no from accident group by acc_date -->
+		<!-- select acc_e_license, count(acc_b_no) as "acc_b_no" from accident group by acc_e_license -->
+		select substr(acc_date,4,2) as acc_date, count(acc_b_no) as acc_b_no
+from 	accident where acc_date between '2020-01-01' and '2020-12-31'group by substr(acc_date,4,2) order by acc_date
 	</select>
 
 </mapper>

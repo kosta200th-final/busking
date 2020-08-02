@@ -21,7 +21,7 @@ public interface AllocationService {
 	public void allocationInsert(AllocationDTO dto);
 	public void allocationUpdate(AllocationDTO dto);
 	public void allocationDelete(AllocationDTO dto);
-	public int getAllocationCount(String zo);
+	public int getAllocationCount(HashMap map);
 	public void stateUpdateRun(AllocationDTO dto);
 	public void stateUpdateStop(AllocationDTO dto);
 	public String bstate(String b_no);

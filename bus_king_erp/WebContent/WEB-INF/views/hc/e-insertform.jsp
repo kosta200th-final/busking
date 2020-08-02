@@ -1,72 +1,194 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@include file="/common/header.jsp" %>
+<style type="text/css">
+	.form {
+		width: 50%;
+		margin: 5% 25%;
+	}
+	.form-con {
+		width: 100%;
+		margin-top: 50px;
+	}
+	
+	.form-con select {
+    width: 170px;
+    margin: 5px 0;
+}
 
-</head>
+	.form-con .btn-wrap {
+	    position: relative;
+		left: 50%;
+		margin-left: -100px;
+	}
+	.left-side {
+		float: left;
+		margin-left: 60px;
+	}
+	.right-side {
+		position: relative;
+		float: right;
+		margin-right: 60px;
+	}
+	.right-side input {
+		width: 170px;
+	}
+	
+	.form-con textarea {
+		height: 150px;
+	}
+	
+	.form-con input {
+    width: 170px;
+}
+
+	.form-con .btn-wrap {
+		width: 100%;
+		position: relative;
+		left: 0;
+		margin-left: 0;
+		bottom: 0;
+		background: green;
+	}
+	.form-con .formBtn {
+		position: absolute;
+		margin-left: 0;
+		margin-top: 5px;
+		width: 170px;
+		left: 0;
+		box-shadow: 0px 0px 10px 0px rgba(96, 173, 94, 0.15);
+	}
+	.form-con .add {
+		margin: 22px 0;
+		letter-spacing: 1.3px;
+	}
+</style>
 
 <body>
-
-<%@include file="/common/header.jsp" %>
-<%@include file="/common/hrSubMenu.jsp" %>
-
 <main>
-<form action="e-insert.do" method="post">
-			사원번호 : <input type="text" name="e_no" id="e_no" placeholder="e_no"><br> <!-- 사원번호 -->
-			이름 : <input type="text" name="e_name" id="e_name" placeholder="e_name"><br> <!-- 이름 -->
-			주민등록번호 : <input type="text" name="e_jumin" id="e_jumin" placeholder="e_jumin"><br> <!-- 주민등록번호 -->
-			부서 : <select name="e_dname">
+<form action="e-insert.do" method="post" class="form">
+	<fieldset>
+	<legend style="text-align: center">사원등록</legend>
+	<div class="form-con">
+		<ul class="left-side">
+		<li>
+			<span>이름</span>
+			<input type="text" name="e_name" id="e_name" >
+		</li>
+		<li>
+			<span>주민등록번호</span>
+			<input type="text" name="e_jumin" id="e_jumin" placeholder="ex)000000-0000000">
+		</li>
+		<li>
+		<span>부서</span><br>
+			<select name="e_dname">
 								<option>선택하세요</option>
 								<option>인사부</option>
 								<option>총무부</option>
 								<option>운송팀</option>
 								<option>정비과</option>
-							</select><br>
-			직급 : <select name="e_position">
+							</select>
+			</li>
+			<li>
+			<span>권한</span><br>			
+			<select name="authority">
+								<option>선택하세요</option>
+								<option value="ROLE_ADMIN">관리자</option>
+								<option value="ROLE_HC">인사부</option>
+								<option value="ROLE_ACD">총무부</option>
+								<option value="ROLE_BC">운송팀</option>
+								<option value="ROLE_RC">정비과</option>
+							</select>
+			</li>
+			<li>
+			<span>직급</span><br>			
+			<select name="e_position">
 								<option>선택하세요</option>
 								<option>사원</option>
 								<option>대리</option>
 								<option>과장</option>
 								<option>차장</option>
 								<option>부장</option>
-							</select><br>
-			운전면허 : <select name="e_license">
-								<option>선택하세요</option>
-								<option>있음</option>
-								<option>없음</option>
-							</select><br>
-			근로계약서 : <select name="e_contract">
+							</select>
+			</li>
+			<li>
+			<span>근로계약서</span><br>
+			<select name="e_contract">
 								<option>선택하세요</option>
 								<option>작성</option>
 								<option>미작성</option>
-							</select><br>
-			결혼여부 : <select name="e_marriage">
+							</select>
+			</li>
+			<li>
+			<span>결혼여부</span><br>
+			<select name="e_marriage">
 								<option>선택하세요</option>
 								<option>미혼</option>
 								<option>기혼</option>
-							</select><br>
-			장애여부 : <select name="e_disabled">
+							</select>
+			</li>
+			<li>
+			<span>장애여부</span><br>
+			<select name="e_disabled">
 								<option>선택하세요</option>
 								<option>비장애</option>
 								<option>장애</option>
-							</select><br>
-			비밀번호 : <input type="text" name="e_pwd" id="e_pwd" placeholder="e_pwd"><br>  <!-- 비밀번호 -->			
-			취미 : <input type="text" name="e_hobby" id="e_hobby" placeholder="e_hobby"><br>  <!-- 취미 -->
-			특기 : <input type="text" name="e_speciality" id="e_speciality" placeholder="e_speciality"><br>  <!-- 특기 -->
-			연락처 : <input type="text" name="e_phone" id="e_phone" placeholder="e_phone"><br>  <!-- 연락처 -->
-			이메일 : <input type="text" name="e_mail" id="e_mail" placeholder="e_mail"><br>  <!-- 이메일 -->
-			주소 : <input type="text" name="e_add" id="e_add" placeholder="e_add"><br>  <!-- 주소 -->
-			운전경력 : <input type="text" name="e_career" id="e_career" placeholder="e_career"><br>  <!-- 운전경력 -->
-			남은 휴가일 : <input type="text" name="e_break" id="e_break" placeholder="e_break"><br>  <!-- 남은 휴가일 수 -->
-			입사일 : <input type="date" name="e_start" id="e_start" placeholder="e_start"><br>  <!-- 입사일 -->
-			퇴사일 : <input type="date" name="e_end" id="e_end" placeholder="e_end"><br>  <!-- 퇴사일 -->
-			
-			<input type="submit" value="등록">
+							</select>
+			</li>
+			<li>
+			<span>면허번호</span>
+			<input type="text" name="e_license" id="e_license" >
+			</li>
+			<li>
+			<span>비밀번호</span>
+			<input type="text" name="e_pwd" id="e_pwd" >
+			</li>
+		    </ul>
+		    <ul class="right-side">
+			<li>
+			<span>취미</span>
+			<input type="text" name="e_hobby" id="e_hobby" >
+			</li>
+			<li>
+			<span>특기</span>
+			<input type="text" name="e_speciality" id="e_speciality" >
+			</li>
+			<li>
+			<span>연락처</span>
+			<input type="text" name="e_phone" id="e_phone" placeholder="ex)000-0000-0000">
+			</li>
+			<li>
+			<span>이메일</span>
+			<input type="text" name="e_mail" id="e_mail" >
+			</li>
+			<li>
+			<span>주소</span>
+			<input type="text" name="e_add" id="e_add" >
+			</li>
+			<li>
+			<span>운전경력</span>
+			<input type="text" name="e_career" id="e_career" >
+			</li>
+			<li>
+			<span>남은 휴가일</span>
+			<input type="text" name="e_break" id="e_break" >
+			</li>
+			<li>
+			<span>입사일</span>
+			<input type="date" name="e_start" id="e_start" >
+			</li>
+			<li>
+				<span style="color: rgb(219, 225, 226)">hidden</span>
+				<input type="submit" value="등록" class="editBtn formBtn add">
+			</li>
+			<li>
+				<span style="color: rgb(219, 225, 226)">hidden</span>
+				<input type="reset" value="취소" class="editBtn formBtn add" onclick="location.href='e-list.do'">
+			</li>
+			</ul>
+			</div>
+			</fieldset>
 			</form>
-</main>	
-
+</main>
 </body>
 </html>
