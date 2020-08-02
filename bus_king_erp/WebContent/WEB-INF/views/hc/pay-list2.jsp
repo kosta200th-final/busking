@@ -6,6 +6,31 @@
 <%@include file="/common/hrSubMenu.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+
+.paysub {
+	float: right;
+	margin-right: 2.5%;
+	
+	/* margin-left: 2.5%; */
+    padding-left: 0px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: solid .5px #60ad5e;
+    color: #4c8c4a;
+    /* background: transparent; */
+    cursor: pointer;
+}
+
+</style>
+
+
+<script>
+	function formSubmit() {
+		document.getElementById("frm").submit();
+	}
+</script>
+
 <meta charset="UTF-8">
 <style type="text/css">
 #tb1 {
@@ -28,124 +53,110 @@ style
 
 <main>
 
-	<h1>월별 사원별 급여정보</h1>
-	<form action="pay-list.do" method="get">
-		<select name="pay_year" id="pay_year">
+	<h2>월별 사원별 급여정보</h2><br>
+	<form action="pay-list.do" method="get"  id="frm">
+		<select name="pay_year" id="pay_year" style="width: 100px;">
 			<option>==연도==</option>
-			<!-- 		<option value="2018">2018년도</option>
-		<option value="2019">2019년도</option> -->
-			<option value="2020">2020년도</option>
-		</select>&nbsp;&nbsp; <select name="pay_month">
+				<c:forEach items="${ylist}" var="ylist">
+					<option value="${ylist.pay_year}">${ylist.pay_year}년도</option>
+				</c:forEach>
+		</select>&nbsp;&nbsp; <select name="pay_month" style="width: 80px;">
 			<option>==월==</option>
-			<!-- 		<option value="1">1월</option>
-		<option value="2">2월</option>
-		<option value="3">3월</option>
-		<option value="4">4월</option>
-		<option value="5">5월</option> -->
-			<option value="6">6월</option>
-			<option value="7">7월</option>
-			<!-- 		<option value="8">8월</option>
-		<option value="9">9월</option>
-		<option value="10">10월</option>
-		<option value="11">11월</option>
-		<option value="12">12월</option> -->
-		</select>&nbsp;&nbsp; <select name="pay_e_no">
+				<c:forEach items="${mlist}" var="mlist">
+					<option value="${mlist.pay_month}">${mlist.pay_month}월</option>
+				</c:forEach>
+		</select>&nbsp;&nbsp; <select name="pay_e_no" style="width: 100px;">
 			<option>==사번==</option>
-			<option value="E0001">1번사원</option>
-			<option value="E0002">2번사원</option>
-			<option value="E0003">3번사원</option>
-			<option value="E0004">4번사원</option>
-			<option value="E0005">5번사원</option>
-			<option value="E0006">6번사원</option>
-			<option value="E0007">7번사원</option>
-			<option value="E0008">8번사원</option>
-			<option value="E0009">9번사원</option>
-			<option value="E0010">10번사원</option>
-			<option value="E0011">11번사원</option>
-			<option value="E0012">12번사원</option>
-			<option value="E0013">13번사원</option>
-			<option value="E0014">14번사원</option>
-			<option value="E0015">15번사원</option>
-			<option value="E0016">16번사원</option>
-			<option value="E0017">17번사원</option>
-			<option value="E0018">18번사원</option>
-			<option value="E0019">19번사원</option>
-		</select>&nbsp;&nbsp; <input type="submit" value="검색">
-		
-				<input type="button" value="추가하기"
-					onclick="location.href='pay-insertform.do'">
+				<c:forEach items="${elist}" var="elist">
+					<option>${elist.pay_e_no}</option>
+				</c:forEach>
+		</select>&nbsp; <!-- <input type="submit" value="검색"> -->
+		<a class="okBtn" onclick="formSubmit(); return false;">검색</a>
+<!-- 		<input type="button" value="추가하기" onclick="location.href='pay-insertform.do'"> -->
 
 <div class="table100 ver2 m-b-110">
+	<input type="button" value="추가하기" class="button modifyBtn paysub" onclick="location.href='pay-insertform.do'">
 	<table data-vertable="ver2">
-		<c:forEach items="${paylist}" var="list">
-				<tr class="row100 head">
+		
+				<tr class="">
 					<th class="column100 column1">사번</th>
-					<td style="text-align: center;">${list.pay_e_no}</td>
 					<th class="column100 column2">성함</th>
-					<td style="text-align: center;">${list.pay_e_name}</td>
 					<th class="column100 column3">해당년도</th>
-					<td style="text-align: center;">${list.pay_year}</td>
+				</tr>
+				<tr class="">
+					<td style="text-align: center;"><c:forEach items="${paylist}" var="list">${list.pay_e_no}</c:forEach></td>
+					<td style="text-align: center;"><c:forEach items="${paylist}" var="list">${list.pay_e_name}</c:forEach></td>
+					<td style="text-align: center;"><c:forEach items="${paylist}" var="list">${list.pay_year}</c:forEach> 연도</td>
 				</tr>
 
-				<tr>
-					<th class="column100 column4">부서(팀)명</th>
-					<td style="text-align: center;">${list.pay_e_dname}</td>
-					<th class="column100 column5">직급</th>
-					<td style="text-align: center;">${list.pay_e_position}</td>
-					<th class="column100 column6">해당월</th>
-					<td style="text-align: center;">${list.pay_month}</td>
+				<tr class="">
+					<th class="column100 column1">부서(팀)명</th>
+					<th class="column100 column2">직급</th>
+					<th class="column100 column3">해당월</th>
 				</tr>
-		</c:forEach>
+				<tr class="">
+					<td style="text-align: center;"><c:forEach items="${paylist}" var="list">${list.pay_e_dname}</c:forEach></td>		
+					<td style="text-align: center;"><c:forEach items="${paylist}" var="list">${list.pay_e_position}</c:forEach></td>
+					<td style="text-align: center;"><c:forEach items="${paylist}" var="list">${list.pay_month}</c:forEach> 월</td>
+				</tr>
 	</table></div><br><br>
 	
 <div class="table100 ver2 m-b-110">	
    <table id="tb1" border="1">
-   	<c:forEach items="${paylist}" var="list">
       <tr>
          <th rowspan="2" class="column100 column1">근태내역</th>
-         <td>출근일수</td>
-         <td>근무시간</td>
-         <td>특근시간</td>
+         <th>출근일수</th>
+         <th>근무시간</th>
+         <th>특근시간</th>
+      </tr>
+      <tr class="">
+      	
+         <td><c:forEach items="${paylist}" var="list">${list.pay_chul}</c:forEach> 일</td>
+         <td><c:forEach items="${paylist}" var="list">${list.pay_work}</c:forEach> 시간</td>
+         <td><c:forEach items="${paylist}" var="list">${list.pay_work_t}</c:forEach> 시간</td>
       </tr>
       <tr>
-         <td>${list.pay_chul} 일</td>
-         <td>${list.pay_work} 시간</td>
-         <td>${list.pay_work_t} 시간</td>
+         <th rowspan="4" class="column100 column2">지급내역</th>
+         <th>기본급</th>
+         <th>특근수당</th>
+         <th>식대</th>
+      </tr>
+      <tr class="">
+         <td><c:forEach items="${paylist}" var="list">\ ${list.pay_p}</c:forEach> 원</td>
+         <td><c:forEach items="${paylist}" var="list">\ ${list.pay_p_t}</c:forEach> 원</td>
+         <td><c:forEach items="${paylist}" var="list">\ ${list.pay_bob}</c:forEach> 원</td>
       </tr>
       <tr>
-         <th rowspan="4" class="column100 column1">지급내역</th>
-         <td>기본급</td>
-         <td>특근수당</td>
-         <td>식대</td>
-      </tr>
-      <tr>
-         <td>${list.pay_p} 원</td>
-         <td>${list.pay_p_t} 원</td>
-         <td>${list.pay_bob} 원</td>
-      </tr>
-      <tr>
-         <td>차량지원비</td>
-         <td>만근수당</td>
+         <th>차량지원비</th>
+         <th>만근수당</th>
          <td rowspan="2"></td>
       </tr>
-      <tr>
-         <td>${list.pay_car} 원</td>
-         <td>${list.pay_m} 원</td>
+      <tr class="">
+         <td><c:forEach items="${paylist}" var="list">\ ${list.pay_car}</c:forEach> 원</td>
+         <td><c:forEach items="${paylist}" var="list">\ ${list.pay_m}</c:forEach> 원</td>
       </tr>
       <tr>
-         <th rowspan="2" class="column100 column1">공제내역</th>
-         <td>세금공제</td>
+         <th rowspan="2" class="column100 column3">공제내역</th>
+         <th>세금공제</th>
          <td rowspan="2" colspan="2"></td>
       </tr>
-      <tr>
-         <td>${list.pay_tax} 원</td>        
+      <tr class="">
+      	
+         <td><font color="red"><c:forEach items="${paylist}" var="list">\ ${list.pay_tax}</c:forEach></font> 원</td> 
       </tr>
       <tr>
-         <th colspan="2" class="column100 column1">월급합계</th>
-         <td colspan="2">\ ${list.pay_total} 원</td>
+         <th colspan="4" rowspan="2" class="column100 column4">월급합계</th>
+         <td></td>
+         <td></td>
+         <td></td>
       </tr>
-      </c:forEach>
+      <tr>
+      </tr>
+      <tr class="row100 head">
+      	<td colspan="4"><font color="blue"><c:forEach items="${paylist}" var="list">\ ${list.pay_total}</c:forEach></font> 원</td>
+      </tr>
    </table></div>
+    
    </form>
    </main>
 </body>

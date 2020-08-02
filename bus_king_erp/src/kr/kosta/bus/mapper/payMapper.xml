@@ -18,9 +18,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="payInsert" parameterType="kr.kosta.bus.model.PayDTO">
-		insert into pay values (next_pay_num, #{pay_year}, #{pay_month}, #{pay_day},
+		insert into pay values (next_pay_code, #{pay_year}, #{pay_month}, #{pay_day},
 			#{pay_e_no}, #{pay_e_name}, #{pay_e_dname}, #{pay_e_position},
 			#{pay_chul}, #{pay_work}, #{pay_work_t}, #{pay_p}, #{pay_p_t}, #{pay_bob}, #{pay_car}, #{pay_m},
 			#{pay_tax}, #{pay_total}, #{pay_nametag}, #{pay_bigo})
 	</insert>
+	
+	<select id="ylist" parameterType="HashMap" resultType="kr.kosta.bus.model.PayDTO">
+		select distinct pay_year from pay order by pay_year desc
+	</select>
+	
+	<select id="mlist" parameterType="HashMap" resultType="kr.kosta.bus.model.PayDTO">
+		select distinct pay_month from pay order by pay_month desc
+	</select>
+	
+	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.PayDTO">
+		select distinct pay_e_no from pay order by pay_e_no
+	</select>
 </mapper>

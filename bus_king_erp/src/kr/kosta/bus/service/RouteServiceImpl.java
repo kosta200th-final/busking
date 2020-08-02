@@ -51,4 +51,9 @@ public class RouteServiceImpl implements RouteService {
 		return routeDAO.routealloc(r_no);
 	}
 	
+	@Override
+	public int rnoCheck(String r_no) {
+		return routeDAO.rnoCheck(r_no);
+	}
+	
 }

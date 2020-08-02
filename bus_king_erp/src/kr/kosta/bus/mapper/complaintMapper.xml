@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="complaintList" parameterType="HashMap" resultType="kr.kosta.bus.model.ComplaintDTO">
-		select * from (select A.*, rownum r from (select * from complaint order by c_date desc) A)
+		select * from (select A.*, rownum r from (select * from complaint order by c_no desc) A)
 		where r >= #{start} and r &lt;= #{end} 
 		<!-- select d.* from ( select a.*, rownum rn from (
 		select c.c_no, c.c_title, c.c_type , c_content, c_date, b.b_no as "c_b_no", e.e_no as "c_e_no", e.e_name as "c_e_name"

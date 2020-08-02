@@ -1280,29 +1280,11 @@ INSERT INTO PAY VALUES(NEXT_PAY_CODE, 2020, 7, '20/08/25', 'E0018', '권유진', '�
 INSERT INTO PAY VALUES(NEXT_PAY_CODE, 2020, 6, '20/07/25', 'E0019', '이도연', '인사팀', '부장', 1, 1, 1, 1, 1, 200000, 300000, 1, 1, 7000000, '이도연의 2020년도 06월분 급여', NULL);
 INSERT INTO PAY VALUES(NEXT_PAY_CODE, 2020, 7, '20/08/25', 'E0019', '이도연', '인사팀', '부장', 1, 1, 1, 1, 1, 200000, 300000, 1, 1, 7000000, '이도연의 2020년도 07월분 급여', NULL);
 
-SELECT * FROM COMMUTE ORDER BY COMM_NO;
-SELECT * FROM PAY ORDER BY PAY_CODE;
+COMMIT;
 
-commit;
-
+-- 근태/급여 인서트 끝
 
 
 
-		select p.pay_code, p.pay_year, p.pay_month, p.pay_day, p.pay_e_no,
-		e.e_name as "pay_e_name", e.e_dname as "pay_e_dname", e.e_position as "pay_e_position", p.pay_chul, p.pay_work, p.pay_work_t,
-		p.pay_p, p.pay_p_t, p.pay_bob, p.pay_car, p.pay_m, p.pay_tax, p.pay_total,
-		p.pay_nametag, p.pay_bigo
-		from pay p join employer e on
-		p.pay_e_no = e.e_no
-		where p.pay_year=2020 and p.pay_month=7 and p.pay_e_no='E0001';
-        
-        COMMIT;
-        
-        select count(*) from employer
-        
-        
-        select count(*) from employer;
-        
-        commit;
-        
-        select * from pay;
+
+

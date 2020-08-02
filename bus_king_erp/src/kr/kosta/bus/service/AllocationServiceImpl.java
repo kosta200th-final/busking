@@ -55,8 +55,8 @@ public class AllocationServiceImpl implements AllocationService {
 	}
 
 	@Override
-	public int getAllocationCount(String zo) {
-		return allocationDAO.getAllocationCount(zo);
+	public int getAllocationCount(HashMap map) {
+		return allocationDAO.getAllocationCount(map);
 	}
 
 	@Override

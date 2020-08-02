@@ -55,7 +55,7 @@
 				</c:if>
 			</li>
 			<li>
-				<span>사고난 시각</span>
+				<span>사고난 일자</span>
 				<fmt:parseDate value='${accidentupdate.acc_date}' var='trading_day' pattern='yyyy-MM-dd HH:mm'/>
 				<fmt:formatDate value="${trading_day}" pattern="yyyy.MM.dd HH:mm"/>			
 			</li>

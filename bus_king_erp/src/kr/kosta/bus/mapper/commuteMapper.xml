@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM commute
 		WHERE comm_year=#{comm_year_d} 
 		AND comm_month=#{comm_month_d} 
-		AND comm_day=#{comm_day_d} 
+		AND comm_day=#{comm_day_d}
 		GROUP BY comm_e_dname
 		ORDER BY comm_e_dname
 	</select>
@@ -34,7 +34,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="commuteInsert" parameterType="kr.kosta.bus.model.CommuteDTO">
-		insert into commute values(comm_seq.nextval, #{comm_year}, #{comm_month}, #{comm_day}, #{comm_type_d}, 
+		insert into commute values(comm_seq.nextval, #{comm_year, jdbcType=VARCHAR}, #{comm_month, jdbcType=VARCHAR}, #{comm_day, jdbcType=VARCHAR}, #{comm_type_d}, 
 		#{comm_e_no, jdbcType=VARCHAR}, #{comm_e_name}, #{comm_e_dname}, #{comm_e_position}, #{comm_work}, #{comm_time})
 	</insert>
+	
+	<select id="ylist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_YEAR FROM COMMUTE ORDER BY COMM_YEAR DESC
+	</select>
+	
+	<select id="mlist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_MONTH FROM COMMUTE ORDER BY COMM_MONTH DESC
+	</select>
+	
+	<select id="dlist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_DAY FROM COMMUTE ORDER BY COMM_DAY
+	</select>
+	
+	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_E_NO FROM COMMUTE ORDER BY COMM_E_NO
+	</select>
 </mapper>

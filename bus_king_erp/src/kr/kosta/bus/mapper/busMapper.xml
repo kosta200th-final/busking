@@ -41,5 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="stateUpdateRrepair" parameterType="String">
 		update bus set b_state = '정비접수' where b_no = #{a_b_no}
 	</update>
+	
+	<select id="bnoCheck" parameterType="String" resultType="Integer">
+		select count(*) from bus where b_no = #{b_no}
+	</select>
 
 </mapper>

@@ -14,4 +14,8 @@ public interface RepairDAO {
 	//버스번호 
 	public List<BusDTO> buslist(HashMap map);
 	public void accUpdatestate(RepairDTO dto);
+	public void accoInsert(RepairDTO dto);
+	public void repairUpdateState(RepairDTO dto);
+	//완료
+	public void state(RepairDTO dto);
 }

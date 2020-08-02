@@ -29,10 +29,10 @@
 					<div class="miniform"> <span>노선번호</span><br><input type="text" value="${ dto.a_r_no }" name="a_r_no" id="b_no" readonly="readonly"  style="display: inline; width: 80px"></div>
 				</li> 
 				<li>
-					<span>기사</span><br><input type="text" value="${ dto.a_e_no }:${ dto.a_e_name }" name="a_e_no" id="b_no" readonly="readonly"> 
+					<span>기사</span><br><input type="text" value="${ dto.a_e_no }:${ dto.a_e_name }" name="a_e_no" id="b_no" readonly="readonly" style="display: inline; width: 130px"> 
 				</li>
 				<li>
-					<span>* 근무조</span><select name="a_time">
+					<span>* 근무조 </span><select name="a_time" style="display: inline; width: 70px">
 						<option>A조</option>
 						<option>B조</option>
 					</select>

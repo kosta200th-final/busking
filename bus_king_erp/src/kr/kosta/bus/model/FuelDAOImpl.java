@@ -24,8 +24,8 @@ public class FuelDAOImpl implements FuelDAO{
 	}
 
 	@Override
-	public void fuelUpdate(String f_code) {
-		sqlSession.update("FuelDAO.fuelUpdate",f_code);
+	public void fuelUpdate(FuelDTO dto) {
+		sqlSession.update("FuelDAO.fuelUpdate",dto);
 		
 	}
 
@@ -40,4 +40,19 @@ public class FuelDAOImpl implements FuelDAO{
 		return sqlSession.selectOne("FuelDAO.getfuelCount");
 	}
 
+	@Override
+	public List<BusDTO> bflist(HashMap map) {
+		return sqlSession.selectList("FuelDAO.bflist",map);
+	}
+
+	@Override
+	public void faccInsert(FuelDTO dto) {
+		sqlSession.insert("FuelDAO.faccInsert",dto);
+	}
+
+	@Override
+	public FuelDTO fselect(FuelDTO dto) {
+		return sqlSession.selectOne("FuelDTO.fselect",dto);
+	}	
+	
 }
