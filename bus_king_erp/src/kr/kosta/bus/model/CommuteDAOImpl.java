@@ -29,4 +29,24 @@ public class CommuteDAOImpl implements CommuteDAO {
 
 	}
 
+	@Override
+	public List<CommuteDTO> ylist(HashMap map) {
+		return sqlSession.selectList("CommuteDAO.ylist", map);
+	}
+
+	@Override
+	public List<CommuteDTO> mlist(HashMap map) {
+		return sqlSession.selectList("CommuteDAO.mlist", map);
+	}
+
+	@Override
+	public List<CommuteDTO> dlist(HashMap map) {
+		return sqlSession.selectList("CommuteDAO.dlist", map);
+	}
+
+	@Override
+	public List<CommuteDTO> elist(HashMap map) {
+		return sqlSession.selectList("CommuteDAO.elist", map);
+	}
+	
 }

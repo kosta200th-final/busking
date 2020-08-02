@@ -26,8 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</select>
 	
 	<insert id="accountInsert" parameterType="kr.kosta.bus.model.PenaltyDTO">
-		insert into account(ac_code, ac_cost, ac_date, ac_bigo, ac_name)   
-		select NEXT_PEN_CODE, p_cost, p_date, p_bigo, p_history from penalty where p_code = #{p_code}
+		insert into account(ac_code, ac_cost, ac_date, ac_bigo, ac_name, ac_state)   
+		select p_code, p_cost, p_date, p_bigo, p_history, '매입' from penalty where p_code = #{p_code}
 	</insert>
 	
 	<insert id="penaltyInsert" parameterType="kr.kosta.bus.model.PenaltyDTO">

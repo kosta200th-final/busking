@@ -10,10 +10,6 @@
 	<div class="form-con">
 		<ul>
 			<li>
-				<span>접수번호</span>		
-				<input type="text" name="acc_no" id="acc_no" placeholder="사고접수번호">
-			</li>
-			<li>
 				<span>버스번호</span>
 				<select name="acc_b_no">
 					<option>버스번호</option>
@@ -50,8 +46,8 @@
 				운행가능
 			</li>
 			<li>
-				<span>사고난 시각</span>
-				<input type="date" name="acc_date" id="acc_date" class="resized-input" placeholder="사고난 시각">
+				<span>사고난 일자</span>
+				<input type="datetime-local" name="acc_date" id="acc_date" class="resized-input" placeholder="사고난 일자">
 			</li>
 			<li>
 				<span>사고난 장소</span>

@@ -23,8 +23,13 @@ public class AccountServiceImpl implements AccountService {
 //	}
 	
 	@Override
-	public List<AccountDTO> accountList(HashMap map) {
-		return accountDAO.accountList(map);
+	public List<AccountDTO> accountListState(HashMap map) {
+		return accountDAO.accountListState(map);
+	}
+	
+	@Override
+	public List<AccountDTO> accountListCode(HashMap map) {
+		return accountDAO.accountListCode(map);
 	}
 	
 	@Override
@@ -37,8 +42,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public int getAccountCount(HashMap map) {
-		return accountDAO.getAccountCount(map);
+	public int getAccountCountState(String cnt_state) {
+		return accountDAO.getAccountCountState(cnt_state);
+	}
+	
+	@Override
+	public int getAccountCountCode(String cnt_code) {
+		return accountDAO.getAccountCountCode(cnt_code);
 	}
 
 

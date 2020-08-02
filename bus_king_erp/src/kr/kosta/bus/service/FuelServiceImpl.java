@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.FuelDAO;
 import kr.kosta.bus.model.FuelDTO;
 
@@ -27,8 +28,8 @@ public class FuelServiceImpl implements FuelService {
 	}
 
 	@Override
-	public void fuelUpdate(String f_code) {
-		fuelDAO.fuelUpdate(f_code);
+	public void fuelUpdate(FuelDTO dto) {
+		fuelDAO.fuelUpdate(dto);
 		
 	}
 
@@ -40,8 +41,22 @@ public class FuelServiceImpl implements FuelService {
 
 	@Override
 	public int getfuelCount() {
-		fuelDAO.getfuelCount();
-		return 0;
+		return fuelDAO.getfuelCount();
+	}
+
+	@Override
+	public List<BusDTO> bflist(HashMap map) {
+		return fuelDAO.bflist(map);
+	}
+
+	@Override
+	public void faccInsert(FuelDTO dto) {
+		fuelDAO.faccInsert(dto);
+	}
+
+	@Override
+	public FuelDTO fselect(FuelDTO dto) {
+		return fuelDAO.fselect(dto);
 	}
 
 }

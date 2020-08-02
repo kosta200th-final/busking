@@ -2,9 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accidentSubMenu.jsp" %>
+
+<style type="text/css">
+	#chart_button {
+		margin: auto;
+		margin-left: 2.5%;
+		float: left;
+		margin-top: 2.5%;
+		background: #eee;
+	}
+	#chart_button:hover {
+		color: #eee;
+		background: #333;
+}
+</style>
 <main>
-<div id="chart_div" style="height: 500px;"></div>
+<button id="chart_button" type="button" class="button type all btn" onclick="location.href='acc-list.do'" >뒤로</button>
 <!-- google charts -->
+<div id="chart_div" style="width: 95%; height:350px; margin: auto; margin-top: 5.5%"  ></div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -20,7 +35,8 @@
 		        
 			// 옵션
 			var options = {
-				title: '면허번호별 교통사고 횟수',
+				title: '월별 교통사고 차트',
+				vAxis: {maxValue:5, minValue:0}, 
 			}
 			
 			// 차트 그리기
@@ -30,7 +46,6 @@
        	}
 </script>
 
-<button type="button" onclick="location.href='acc-list.do'" >뒤로</button>
 
 </main>
 </html>

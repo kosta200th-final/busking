@@ -55,4 +55,9 @@ public class BusServiceImpl implements BusService {
 	public void stateUpdateRrepair(String b_no) {
 		busDAO.stateUpdateRrepair(b_no);
 	}
+	
+	@Override
+	public int bnoCheck(String b_no) {
+		return busDAO.bnoCheck(b_no);
+	}
 }

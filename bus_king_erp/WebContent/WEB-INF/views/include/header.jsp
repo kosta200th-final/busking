@@ -13,20 +13,3 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js">
 </script>
 <link rel="stylesheet" href="${path}/include/css/main.css">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

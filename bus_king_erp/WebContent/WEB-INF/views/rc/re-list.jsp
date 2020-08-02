@@ -5,43 +5,48 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="/common/header.jsp"%>
 <%@include file="/common/repairSubMenu.jsp"%>
-<script>
-	function formSubmit() {
-		document.getElementById("frm").submit();
-	}
-</script>
-<style type="text/css">
-#ma {
-	text-align: center;
-	width: 350;
-	line-height: 1.5;
+<style>
+.bussub {
+	float: right;
+	margin-right: 2.5%;
+	
+	/* margin-left: 2.5%; */
+    padding-left: 0px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: solid .5px #60ad5e;
+    color: #4c8c4a;
+    /* background: transparent; */
+    cursor: pointer;
 }
 </style>
-<meta charset="UTF-8">
 <title>차량점검리스트</title>
 
 </head>
 <body>
 	<main>
-		<form action="" method="post" id="frm">
+		<form action="" method="post" >
 			<div class="table100 ver2 m-b-110">
-				<table data-vertable="ver2" id=ma>
-					<thead>
+			<br>
+				<input type="button" value="추가하기" class="bussub button modifyBtn"
+				onclick="location.href='re-insertform.do'"><br>
+				<table data-vertable="ver2">
 						<tr class="row100 head">
-							<th class="column100 column1" data-column="column1">정비코드</th>
-							<th class="column100 column2" data-column="column2">버스 차량번호</th>
-							<th class="column100 column3" data-column="column3">정비 접수일</th>
-							<th class="column100 column4" data-column="column4">정비 완료일</th>
-							<th class="column100 column5" data-column="column5">정비 내역</th>
-							<th class="column100 column6" data-column="column6">가격</th>
-							<th class="column100 column7" data-column="column7">정비 상태</th>
-							<th class="column100 column8" data-column="column8">비고</th>
-							<th class="column100 column9" data-column="column9"></th>
-							<th class="column100 column10" data-column="column10"></th>
+						<th>정비코드</th>
+						<th>버스 차량번호</th>
+						<th>정비 접수일</th>
+						<th>정비 완료일</th>
+						<th>정비 내역</th>
+						<th>가격</th>
+						<th>정비 상태</th>
+						<th>비고</th>
+						<th></th>
+						<th></th>
+						<th></th>
 						</tr>
 
 						<c:forEach items="${repairlist}" var="repairlist">
-							<tr>
+							<tr align="center">
 								<td>${repairlist.re_code}</td>
 								<td>${repairlist.re_b_no}번버스</td>
 								<td><fmt:parseDate value='${repairlist.re_date}'
@@ -54,18 +59,20 @@
 								<td>${repairlist.re_cost}원</td>
 								<td>${repairlist.re_state}</td>
 								<td>${repairlist.re_bigo}</td>
-								<td><input type="button" value="수정" class="editBtn formBtn" style="background: #1FD0F3; color: white;" 
-									onclick="location.href='re-updateform.do?re_code=${repairlist.re_code}'"></td>
-								<td><input type="button" value="삭제"
-									class="editBtn formBtn red" style="background: #F84B4B; color: white;" 
-									onclick="location.href='re-delete.do?re_code=${repairlist.re_code}'"></td>
+								<td class="last" colspan="7" style="background: transparent">
+								<input type="button"  value="정비완료" class="type button all"
+									onclick="location.href='re-ac.do?re_code=${repairlist.re_code}&re_b_no=${repairlist.re_b_no}&re_state=정비완료'">
+								<input type="button"  value="수정" class="type button blue"
+									onclick="location.href='re-updateform.do?re_code=${repairlist.re_code}'">
+							<input type="button"  value="삭제" class="type button red"
+									onclick="location.href='re-delete.do?re_code=${repairlist.re_code}'"> 
+								</td>
 							</tr>
 						</c:forEach>
 					</thead>
 				</table>
 			</div>
-			<input type="button" class="editBtn formBtn" style="background: yellow"   value="추가하기"
-				onclick="location.href='re-insertform.do'">
+
 		</form>
 		<table width="600" class="pgTable">
 			<tr>

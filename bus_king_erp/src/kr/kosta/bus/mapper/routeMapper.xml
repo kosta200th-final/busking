@@ -38,4 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from allocation where a_r_no = #{r_no}
 	</select>
 	
+	<select id="rnoCheck" parameterType="String" resultType="Integer">
+		select count(*) from route where r_no = #{r_no}
+	</select>
+	
 </mapper>
