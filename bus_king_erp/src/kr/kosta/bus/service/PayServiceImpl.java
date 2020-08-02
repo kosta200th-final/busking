@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.kosta.bus.model.CommuteDTO;
 import kr.kosta.bus.model.PayDAO;
 import kr.kosta.bus.model.PayDTO;
 
@@ -27,4 +28,19 @@ public class PayServiceImpl implements PayService {
 
 	}
 
+	@Override
+	public List<PayDTO> ylist(HashMap map) {
+		return payDAO.ylist(map);
+	}
+
+	@Override
+	public List<PayDTO> mlist(HashMap map) {
+		return payDAO.mlist(map);
+	}
+
+	@Override
+	public List<PayDTO> elist(HashMap map) {
+		return payDAO.elist(map);
+	}
+	
 }

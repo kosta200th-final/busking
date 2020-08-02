@@ -2,6 +2,7 @@ package kr.kosta.bus.model;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface EmployerDAO {
 	
@@ -12,5 +13,8 @@ public interface EmployerDAO {
 	public EmployerDTO employerUpdate2(EmployerDTO dto);
 	public int getEmployerCount();
 	public List<EmployerDTO> employerSearch(HashMap map);
+	public String employerSelect(String e_jumin);
+	public void employerUpdate3(HashMap map);
+	public void employerUpdateNopwd(EmployerDTO dto);
 
 }

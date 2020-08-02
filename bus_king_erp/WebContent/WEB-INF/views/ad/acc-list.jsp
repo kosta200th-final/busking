@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accidentSubMenu.jsp" %>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <main>
    <div class="table100 ver2 m-b-110">
       <table data-vertable="ver2" class="accTable">
@@ -18,7 +18,7 @@
                <th class="column100 column6" data-column="column6">확인</th>
                <th class="column100 column7" data-column="column7">
                   <a class="okBtn" onclick="location.href='acc-insertform.do'">추가</a>&nbsp;&nbsp;
-                  <a id="addBtn" class="okBtn" onclick="location.href='acc-chart.do'">교통사고차트</a>
+                  <a id="addBtn" class="okBtn" onclick="location.href='acc-chart.do'">월별 교통사고 차트</a>
                </th>
 <!--                <th style="color:#333">.</th> -->
             </tr>
@@ -50,8 +50,7 @@
                            class="button type green"
                            onclick="location.href='acc-updateform.do?acc_no=${list.acc_no}'">
                         <input type="button" value="삭제"
-                           class="button type red"
-                           onclick="location.href='acc-delete.do?acc_no=${list.acc_no}'">
+                           class="button type red" onclick="delete_btn(${list.acc_no})">
                         <input type="button" value="더보기"
                            class="button type all btn">
                      </span>
@@ -80,44 +79,120 @@
       </table>
    </div>
       
-     <table width="600" class="pgTable">
-		<tr>
-			<td align="center">
-				<!-- 처음 이전 링크 --> <c:if test="${pg>block}">
-					<!-- 5>10 : false / 15>10 : true -->
-			[<a href="acc-list.do?pg=1">◀◀</a>]
-			[<a href="acc-list.do?pg=${fromPage-1}">◀</a>]		
-		</c:if> <c:if test="${pg<=block}">
-					<!-- 5<=10 :true / 15<=10:false -->
-			[<span style="color: gray">◀◀</span>]	
-			[<span style="color: gray">◀</span>]
-		</c:if> <!-- 블록 범위 찍기 --> <c:forEach begin="${fromPage}" end="${toPage}"
-					var="i">
-					<c:if test="${i==pg}">[${i}]</c:if>
-					<c:if test="${i!=pg}">
-				[<a href="acc-list.do?pg=${i}">${i}</a>]
+    <div class="page">
+     	<ul class="pagination modal">
+	        <li> 
+        	<c:if test="${pg>block}">
+				<a class="first" href="acc-list.do?pg=1">처음 페이지</a>
+				<a class="arrow left" href="acc-list.do?pg=${fromPage-1}"><<</a>	
 			</c:if>
-				</c:forEach> <!-- 다음, 이후 --> <c:if test="${toPage<allPage}">
-					<!-- 20<21 : true -->
-				[<a href="acc-list.do?pg=${toPage+1}">▶</a>]
-				[<a href="acc-list.do?pg=${allPage}">▶▶</a>]
-		
-		</c:if> <c:if test="${toPage>=allPage}">
-					<!-- 21>=21 :true -->
-				[<span style="color: gray">▶</span>]
-				[<span style="color: gray">▶▶</span>]
-		
-		</c:if>
-			</td>
-		</tr>
-	</table>
+			<c:if test="${pg<=block}">
+				<a class="first" style="color: gray" href="acc-list.do?pg=1">처음 페이지</a>
+				<a class="arrow left" style="color: gray"><<</a>
+			</c:if>
+        	</li>
+        	
+	        <li>
+        	<c:forEach begin="${fromPage}" end="${toPage}" var="i">
+				<c:if test="${i==pg}"><a class="active num">${i}</a></c:if>
+				<c:if test="${i!=pg}"><a href="acc-list.do?pg=${i}">${i}</a></c:if>
+			</c:forEach>  
+	        </li>
+	        
+	        <li> 
+	        <c:if test="${toPage<allPage}">
+				<a class="arrow right" href="acc-list.do?pg=${toPage+1}">>></a>
+				<a class="last" href="acc-list.do?pg=${allPage}">끝 페이지</a>
+			</c:if>
+			<c:if test="${toPage>=allPage}">
+				<a class="arrow right" style="color: gray">>></a>
+				<a class="last" style="color: gray" href="acc-list.do?pg=${allPage}">끝 페이지</a>
+			</c:if>
+	        </li>
+	    </ul>
+	</div>	
 </main>
+<style type="text/css">
+	.page{
+	  text-align: center;  // div 사이즈 영역 안에서의 center
+	  width: 50%;}
+	
+	.pagination {
+	  list-style: none;
+	  display: inline-block;
+	  padding: 0;
+	  margin-top: 20px;}
+	
+	.pagination li {
+	  display: inline;
+	  text-align: center;}
+	
+	// 숫자들에 대한 스타일 지정
+	.pagination a {
+	  float: left;
+	  display: block;
+	  font-size: 14px;
+	  text-decoration: none;
+	  padding: 5px 12px;
+	  color: #96a0ad;
+	  line-height: 1.5;}
+	
+	.first{
+	  margin-right: 15px;}
+	
+	.last{
+	  margin-left: 15px;}
+	
+	.first:hover, .last:hover, .left:hover, .right:hover{
+	  color: #2e9cdf;}
+	
+	.pagination a.active {
+	  cursor: default;
+	  color: #ffffff;}
+	
+	.pagination a:active {
+	  outline: none;}
+	
+	.modal .num {
+	 	margin-left: 3px;
+	    padding: 5px 11px;
+	    width: 20px;
+	    height: 20px;
+	    line-height: 20px;
+	    -moz-border-radius: 100%;
+	    -webkit-border-radius: 100%;
+	    border-radius: 0%;
+  	}
+	
+	.modal .num:hover {
+	  background-color: #2e9cdf;
+	  color: #ffffff;}
+	
+	.modal .num.active, .modal .num:active {
+	  background-color: rgba(25, 103, 46, 0.83);
+	  cursor: pointer;}
+	
+	.arrow-left {
+	  width: 0;
+	  height: 0;
+	  border-top: 10px solid transparent;
+	  border-bottom: 10px solid transparent;
+	  border-right:10px solid blue; }
 
+</style>
 <script type="text/javascript"> 
 
-$("span:contains('수리요함')").css({color:"#A72734"});
-$("span:contains('정비접수')").css({color:"green"});
-$("span:contains('운행가능')").css({color:"#0062C1"});
+	$("span:contains('수리요함')").css({color:"#A72734"});
+	$("span:contains('정비접수')").css({color:"green"});
+	$("span:contains('운행가능')").css({color:"#0062C1"});
 
+	function delete_btn(acc_no) {
+		//alert(acc_no);
+		if(confirm("삭제하시겠습니까?") == true) {
+			location.href="acc-delete.do?acc_no="+acc_no;
+		}else{
+			return;
+		}
+	}
 </script>
 </html>

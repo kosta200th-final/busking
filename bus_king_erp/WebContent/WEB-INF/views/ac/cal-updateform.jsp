@@ -1,18 +1,17 @@
+<style type="text/css">
+	input:nth-child(-n+7) {
+		display: block;
+		width: 100%; 
+	}
+	input.editBtn {
+		width: auto
+	}
+</style>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
-<body>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accountSubMenu.jsp" %>
-
-<style type="text/css">
-
-.btn-width {
-	width: 130px
-}
-
-</style>
-
 	<main>
 	<form action="cal-update.do" method="post" style="width:'80%'">
 		<div class="table100 ver2 m-b-110">
@@ -31,21 +30,28 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><input type="text"  value="${dto.cal_code}" readonly="readonly" class="code" name="cal_code" id="cal_code"></td>
+						<td style="width: 120px"><input type="text"  value="${dto.cal_code}" readonly="readonly" class="code" name="cal_code" id="cal_code"></td>
 						<td class="date">
 							<fmt:parseDate value='${dto.cal_date}'
 								var='trading_day' pattern='yyyy-mm-dd' />
 							<fmt:formatDate value="${trading_day}"
 								pattern="yyyy.mm.dd" />
 						</td>
-						<td><input type="text" class="price" name="cal_hap_c" id="cal_hap_c" value="${dto.cal_hap_c}"></td>
-						<td><input type="text" class="price" name="cal_hap_m" id="cal_hap_m" value="${dto.cal_hap_m}"></td>
-						<td><input type="text" class="price" name="cal_total" id="cal_total" value="${dto.cal_total}"></td>
+						<td class="price">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.cal_hap_c}" />
+						</td>
+						<td class="price">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.cal_hap_m}" />
+						</td>
+						<td class="price">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.cal_total}" />
+						</td>
 						<td><input type="text" class="note" name="cal_nametag" id="cal_nametag" value="${dto.cal_nametag}"></td>
 						<td><input type="text" class="note" name="cal_bigo" id="cal_bigo" value="${dto.cal_bigo}"></td>
-						<td class="btn-width"><input type="submit" value="EDIT" class="button" style="background: #83d160">
-							<input type="reset" value="CANCLE" onclick="location.href='cal-list.do'" class="button" 
-							style="background:#999; margin-left: 5px">
+						<td class="btn-width" style="width: 12%">
+							<input type="submit" value="EDIT" class="button editBtn">
+							<input type="reset" value="CANCLE" onclick="location.href='cal-list.do'" class="button editBtn red" 
+							style="margin-left: 5px">
 						</td>
 					</tr>
 				</tbody>

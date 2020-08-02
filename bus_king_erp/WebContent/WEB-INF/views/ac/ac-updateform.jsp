@@ -1,10 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
-<body>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accountSubMenu.jsp" %>
 
+<style type="text/css">
+	input {
+		display: inline-block !important;
+		margin-right: 0;
+	}
+	.code {
+		width: 120px;
+	}
+	.code, .date {
+		padding-left: 0
+	}
+	.state {
+		width: 50px;
+		text-align: center
+	}
+</style>
+
+<body>
 	<main>
 		<form action="ac-update.do" method="post" style="width:'80%'">
 		<div class="table100 ver2 m-b-110">
@@ -17,25 +34,34 @@
 						<th class="column100 column5" data-column="column5">날짜</th>
 						<th class="column100 column6" data-column="column6">매입∙매출</th>
 						<th class="column100 column7" data-column="column7">비고</th>
-						<th colspan="2" class="column100 column9" data-column="column9"><input type="button" 
-						value="BACK" onclick="location.href='ac-list.do'"></th>
+						<th colspan="2" class="column100 column9" data-column="column9">
+						 <!-- <input type="button" value="BACK" onclick="location.href='ac-list.do'"> -->
+						 <a class="okBtn" href="ac-list.do">추가</a>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><input type="text"  value="${dto.ac_code}" readonly="readonly" name="ac_code" id="ac_code"></td>
+						<td style="text-align:center"><input type="text"  value="${dto.ac_code}" readonly="readonly" 
+							name="ac_code" id="ac_code" class="code"></td>
+						<td style="text-align:center">
+							<input type="text" name="ac_name" id="ac_name" value="${dto.ac_name}" class="date">
+						</td>
 						<td>
+							<input type="text" name="ac_cost" id="ac_cost" value="${dto.ac_cost}" class="price">
+						</td>
+						<td style="width:130px">
 							<fmt:parseDate value='${dto.ac_date}'
 								var='trading_day' pattern='yyyy-mm-dd' />
 							<fmt:formatDate value="${trading_day}"
 								pattern="yyyy.mm.dd" />
 						</td>
-						<td><input type="text" name="ac_name" id="ac_name" value="${dto.ac_name}"></td>
-						<td><input type="text" name="ac_cost" id="ac_cost" value="${dto.ac_cost}"></td>
-						<td><input type="text" name="ac_state" id="ac_state" value="${dto.ac_state}"></td>
+						<td class="state" style="width: 130px">
+							<span name="ac_state" id="ac_state" style="text-align:center">${dto.ac_state}</span>
+						</td>
 						<td><input type="text" name="ac_bigo" id="ac_bigo" value="${dto.ac_bigo}"></td>
-						<td><input type="submit" value="EDIT">
-							<input type="reset" value="CANCLE" onclick="location.href='ac-list.do'">
+						<td><input type="submit" value="EDIT" class="button editBtn" style="margin: 0 5px 0 20px">
+							<input type="reset" value="CANCLE" onclick="location.href='ac-list.do'" class="button editBtn red">
 						</td>
 					</tr>
 				</tbody>
@@ -43,6 +69,11 @@
 		</div>
 		</form>
 	</main>
+<script type="text/javascript"> 
 
+$("span:contains('매입')").css({color:"#A72734"});
+$("span:contains('매출')").css({color:"#0062C1"});
+
+</script>
 </body>
 </html>

@@ -10,5 +10,8 @@ public interface CalcuateDAO {
 	public void calUpdate(CalculateDTO dto);
 	public int getCalCount();
 	public CalculateDTO getCalculate(String cal_code);
+	// 아하... 어카운트 인서트
+	public void accountInsert(CalculateDTO dto);
+	public String calCode(); // 가장 마지막에 입력된 레코드의 cal_code 가져오기
 	
 }

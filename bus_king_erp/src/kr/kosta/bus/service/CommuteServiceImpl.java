@@ -34,4 +34,24 @@ public class CommuteServiceImpl implements CommuteService {
 
 	}
 
+	@Override
+	public List<CommuteDTO> ylist(HashMap map) {
+		return commuteDAO.ylist(map);
+	}
+
+	@Override
+	public List<CommuteDTO> mlist(HashMap map) {
+		return commuteDAO.mlist(map);
+	}
+
+	@Override
+	public List<CommuteDTO> dlist(HashMap map) {
+		return commuteDAO.dlist(map);
+	}
+
+	@Override
+	public List<CommuteDTO> elist(HashMap map) {
+		return commuteDAO.elist(map);
+	}
+	
 }

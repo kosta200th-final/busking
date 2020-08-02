@@ -22,5 +22,20 @@ public class PayDAOImpl implements PayDAO {
 	public void payInsert(PayDTO dto) {
 		sqlSession.insert("PayDAO.payInsert", dto);
 	}
+
+	@Override
+	public List<PayDTO> ylist(HashMap map) {
+		return sqlSession.selectList("PayDAO.ylist", map);
+	}
+
+	@Override
+	public List<PayDTO> mlist(HashMap map) {
+		return sqlSession.selectList("PayDAO.mlist", map);
+	}
+
+	@Override
+	public List<PayDTO> elist(HashMap map) {
+		return sqlSession.selectList("PayDAO.elist", map);
+	}
 	
 }

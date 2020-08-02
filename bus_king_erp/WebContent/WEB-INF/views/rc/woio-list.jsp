@@ -6,8 +6,13 @@
 <%@include file="/common/repairSubMenu.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script> 
-function formSubmit(){ 
-	document.getElementById("frm").submit();
+function bnt1(wo2_no) {
+	//alert(c_no);
+	if (confirm("삭제하시겠습니까?") == true) {
+		location.href="wo2-delete.do?wo2_no="+wo2_no;
+	} else {
+		return;
+	}
 }
 </script>
 <style type="text/css">
@@ -27,32 +32,37 @@ line-height:1.5;
 <body>
 	<main>
  	 <!-- <script language="javascript"> -->
-	 <form action="" method="post" id="frm">
+	 <form action="" method="post" >
 			<div class="table100 ver2 m-b-110">
 			<table data-vertable="ver2" id=ma>
-				<thead>
 				<tr class="row100 head">
 							<th class="column100 column1" data-column="column1">No</th>
 							<th class="column100 column2" data-column="column2">입/출고</th>
-							<th class="column100 column3" data-column="column3">종류</th>
-							<th class="column100 column4" data-column="column4">수량</th>
-							<th class="column100 column5" data-column="column4">입/출고 날짜</th>
+							<th class="column100 column3" data-column="column3">버스번호</th>
+							<th class="column100 column4" data-column="column4">종류</th>
+							<th class="column100 column5" data-column="column5">수량</th>
+							<th class="column100 column6" data-column="column6">입/출고 날짜</th>
+							<th class="column100 column7" data-column="column7"></th>
 						</tr>
 			<c:forEach items="${wo2}" var="wo2">
 			<tr>
 				<td>${wo2.wo2_no}</td>
 				<td>${wo2.wo2_iptype}</td>
+				<td>${wo2.wo2_b_no}</td>
 				<td>${wo2.wo2_type}</td>
 				<td>${wo2.wo2_number} 개</td>
 			<td><fmt:parseDate value='${wo2.wo2_date}' var='wo2_date' pattern='yyyy-mm-dd'/>
              <fmt:formatDate value="${wo2_date}" pattern="yyyy.mm.dd"/></td>
+             		<td>
+					<input type="button" value="삭제" class="button type red"
+					onclick="bnt1(${wo2.wo2_no})"></td>
 				<!-- <input type="submit" value="수정"></td> -->
 				<!-- <td><input type="button" value="수정" name="button" onclick="myfun()"></td> -->
 				</tr>
 			</c:forEach>	
 		</thead></table></div><br><br>
-		<input type="button" value="입고/출고 입력" onclick="location.href='woio-insertform.do'">
-		<input type="button" value="수량목록" onclick="location.href='wo-list.do'">
+		<input type="button" value="입고/출고 입력" class="button type blue" onclick="location.href='woio-insertform.do'">
+		<input type="button" value="수량목록" class="button type " onclick="location.href='wo-list.do'">
 		</form>
 	 <table width="600" class="pgTable">
 		<tr>

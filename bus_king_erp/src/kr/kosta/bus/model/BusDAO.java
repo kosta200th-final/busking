@@ -13,4 +13,5 @@ public interface BusDAO {
 	public BusDTO busSelect(String b_no);
 	public void busRepairInsert(String b_no);
 	public void stateUpdateRrepair(String b_no);
+	public int bnoCheck(String b_no);
 }
