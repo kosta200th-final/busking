@@ -6,23 +6,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<mapper namespace="Wonlyo2_DAO">
 	
 			<select id="wonlyo2List" parameterType="HashMap" resultType="kr.kosta.bus.model.Wonlyo2_DTO">
-				select * from (select A.*, rownum r from (select * from wonlyo2 order by wo2_no) A)
+				select * from (select A.*, rownum r from (select * from wonlyo2 order by wo2_no desc) A)
 				where r >= #{start} and r &lt;= #{end}
 			</select>
 			
 		 <insert id="wonlyo2Insert" parameterType="kr.kosta.bus.model.Wonlyo2_DTO" >
-			insert into wonlyo2 values(NEXT_WO2_CODE, #{wo2_iptype}, #{wo2_type},#{wo2_number},#{wo2_date})
+			insert into wonlyo2(wo2_no,wo2_iptype,wo2_b_no,wo2_type,wo2_number,wo2_date) values(NEXT_WO2_CODE,#{wo2_iptype},#{wo2_b_no} ,#{wo2_type},#{wo2_number},#{wo2_date})
 		</insert> 
 		
-<!-- 		<delete id="repairDelete" parameterType="String">
-				delete from repair where re_code = #{re_code}
-			</delete>
-			<select id="getRepairCount" resultType="Integer">
-				select count(*) from repair	
+		<select id="wobuslist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
+					select b_no from bus order by b_no
+		</select>
+		
+			<select id="wo2List" parameterType="HashMap" resultType="kr.kosta.bus.model.WonlyoDTO">
+					select wo_type from wonlyo order by wo_type
+		</select>
 
-			</select> --> 
-
+		<select id="totalselect" resultType="int">
+			select * from
+			(select wo_total from wonlyo a join wonlyo2 b on a.wo_type=b.wo2_type order by b.wo2_no desc)
+			where rownum=1 
+		</select>
+		
+		<insert id="accoInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+				insert into account(ac_code, ac_cost, ac_date, ac_bigo, ac_name, ac_state)   
+				select re_code, re_cost, re_date2, re_bigo, re_breakdown,'매입' from repair where re_code = #{re_code}
+		</insert>
+			
+			
+		<update id="wonlyototal" parameterType="kr.kosta.bus.model.Wonlyo2_DTO">
+			update wonlyo set wo_total=#{wo2_total} where wo_type=#{wo2_type} 
+		</update>
+		
 			<select id="getwonlyo2Count" resultType="Integer">
 				select count(*) from wonlyo2
 			</select>
+			
+			<delete id="delete" parameterType="kr.kosta.bus.model.Wonlyo2_DTO">
+				delete from wonlyo2 where wo2_no =#{wo2_no}
+			</delete>
 </mapper>

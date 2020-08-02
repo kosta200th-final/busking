@@ -13,12 +13,12 @@
 		<ul>
 			<li class="hidden-li">
 				<input class="hidden" type="text" name="f_code"
-					id="f_code">
+					id="f_code" placeholder="f_code">
 			</li>
 			<li>
 				<!-- 버스번호가 select 안에서 보이지 않음 -->
 				<span>버스번호</span>
-				<select name="re_b_no">
+				<select name="f_b_no">
 					<option>버스번호</option>
 					<c:forEach items="${blist}" var="blist">
 						<option>${blist.b_no}</option>
@@ -59,7 +59,7 @@
 			</li>
 			<li>
 				<span>요약</span>
-			 <input type="text" name="f_nametag" id="f_nametag" placeholder="차량번호/날짜/주유 비" class="resized-input">
+			 <input type="text" name="f_nametag" id="f_nametag" placeholder="차량번호/주유종류" class="resized-input">
 			</li>
 			<li>
 				<span>비고(특이사항)</span>
@@ -68,7 +68,7 @@
 		</ul>
 		<div class="btn-wrap">
 			<input type="submit" value="수정" class="editBtn formBtn">
-			<input type="reset" value="취소" class="editBtn formBtn red" onclick="location.href='f-list.do()'">
+			<input type="reset" value="취소" class="editBtn formBtn red" onclick="location.href='f-list.do'">
 		</div>
 	</div>
 	</fieldset>

@@ -6,9 +6,6 @@
 <%@include file="/common/repairSubMenu.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script>
-	function formSubmit() {
-		document.getElementById("frm").submit();
-	}
 	function showPopup() {
 		window.open("re-list.do", "리스트",
 				"width=1400, height=300, left=100, top=50");
@@ -50,11 +47,7 @@
 									<td>${wonlyolist.wo_type}</td>
 									<td>${wonlyolist.wo_total}개</td>
 									<td>${wonlyolist.wo_cost}원</td>
-									<td>
-									<input type="button" value="수정" class="editBtn formBtn" style="background: #1FD0F3; color: white;" 
-									onclick="location.href='wo-updateform.do?wo_code=${wonlyolist.wo_code}'"></td>
-									<!-- <input type="submit" value="수정"></td> -->
-									<!-- <td><input type="button" value="수정" name="button" onclick="myfun()"></td> -->
+									
 								</tr>
 							</c:forEach>
 					</thead>
@@ -69,8 +62,8 @@
 					onclick="location.href='woio-list.do'"> 
 			    <input type="button" value="월별 내역 그래프" class="editBtn formBtn">
 			</div>
-			발주메일 <i class="fa fa-envelope"></i> 
-			 <a href="mailto:aa@gmail.com?cc=cc@cc.com&bcc=bcc@cc.com@subject=제목입니다&body=메일 내용 설정"></a><br>
+			 <i class="fa fa-envelope"></i> 
+					 <a href="mailto:aa@gmail.com">발주 메일 </a><br>
 		</form>
 	</main>
 </body>

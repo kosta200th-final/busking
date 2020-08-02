@@ -4,16 +4,24 @@ import java.sql.Date;
 
 public class EmployerDTO {
 	
-	private String e_no, e_name, e_jumin, e_dname, e_position, e_b_no, e_license, e_contract;
+	private String e_no, e_name, e_jumin, e_dname, e_position, e_b_no, e_license, e_contract, authority;
 	private String e_marriage, e_disabled, e_hobby, e_speciality, e_phone, e_pwd;
 	private String e_mail, e_add;
-	private int e_career, e_break;
+	private int e_career, e_break, enabled;
 	private Date e_start,e_end;
 	
-	
-	
-	
-	
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
 	public String getE_no() {
 		return e_no;
 	}

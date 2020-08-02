@@ -309,11 +309,11 @@ public class AccidentController {
 		mav.setViewName("ad/acc-chart");
 		
 		String str = "[";
-		str += "['면허번호', '사고횟수'],";
+		str += "['월', '사고횟수'],";
 		int num = 0;
 		for(AccidentDTO dto:list) {
 			str +="['";
-			str += dto.getAcc_e_license();
+			str += dto.getAcc_date();
 			str +="',";
 			str += dto.getAcc_b_no();
 			str +="]";
@@ -345,13 +345,12 @@ public class AccidentController {
 	@RequestMapping(value = "acc-insert.do", method = RequestMethod.POST)
 	public String accidentinsert(HttpServletRequest request, AccidentDTO dto) {
 
-		dto.setAcc_no(Integer.parseInt(request.getParameter("acc_no")));
 		dto.setAcc_b_no(request.getParameter("acc_b_no"));
 		dto.setAcc_e_no(request.getParameter("acc_e_no"));
 		dto.setAcc_e_license(request.getParameter("acc_e_license"));
 		dto.setAcc_state(request.getParameter("acc_state"));
-		System.out.println("상태");
-		System.out.println(dto.getAcc_state());
+		System.out.println("====================");
+		System.out.println(request.getParameter("acc_date"));
 		dto.setAcc_date(request.getParameter("acc_date"));
 		dto.setAcc_located(request.getParameter("acc_located"));
 		dto.setAcc_breakdown(request.getParameter("acc_breakdown"));

@@ -52,4 +52,9 @@ public class BusDAOImpl implements BusDAO {
 	public void stateUpdateRrepair(String b_no) {
 		sqlSession.update("BusDAO.stateUpdateRrepair", b_no);
 	}
+	
+	@Override
+	public int bnoCheck(String b_no) {
+		return sqlSession.selectOne("BusDAO.bnoCheck", b_no);
+	}
 }

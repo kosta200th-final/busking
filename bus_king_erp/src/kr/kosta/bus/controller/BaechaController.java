@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.w3c.dom.Document;
@@ -95,23 +96,22 @@ public class BaechaController {
 
 	@RequestMapping(value = "b-insert.do", method = RequestMethod.POST)
 	public String b_insert(HttpServletRequest request, Model model) {
-		 BusDTO dto = new BusDTO();
+		BusDTO dto = new BusDTO();
 		if (request.getParameter("b_no").length() > 0 && request.getParameter("b_year").length() > 0
 				&& request.getParameter("b_acc").length() > 0 && request.getParameter("b_mile").length() > 0) {
 			dto.setB_no(request.getParameter("b_no"));
 			dto.setB_year(Integer.parseInt(request.getParameter("b_year")));
 			dto.setB_energy(request.getParameter("b_energy"));
-			dto.setB_start(Date.valueOf(request.getParameter("b_start")));
 			dto.setB_type(request.getParameter("b_type"));
 			dto.setB_acc(Integer.parseInt(request.getParameter("b_acc")));
-
 			dto.setB_mile(Integer.parseInt(request.getParameter("b_mile")));
+
+			dto.setB_start(Date.valueOf(request.getParameter("b_start")));
 			dto.setB_recent(Date.valueOf(request.getParameter("b_recent")));
 			bservice.busInsert(dto);
 			return "redirect:b-list.do";
-		}
-		else {
-			model.addAttribute("reject", "잘못된 입력입니다.");
+		} else {
+			model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
 			model.addAttribute("url", "b-insertform.do");
 			return "/bc/bc-reject";
 		}
@@ -223,7 +223,7 @@ public class BaechaController {
 		model.addAttribute("fromPage", fromPage);
 		model.addAttribute("toPage", toPage);
 
-		return "/bc/r-list";
+		return "/bc/r-list"; 
 	}
 
 	// r-insert
@@ -234,15 +234,18 @@ public class BaechaController {
 
 	@RequestMapping(value = "r-insert.do", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request, Model model) {
-		if (	request.getParameter("r_no").length() > 0 && request.getParameter("r_start").length() > 0 && request.getParameter("r_end").length() > 0 && request.getParameter("r_s_time").length() > 0 && 
-				request.getParameter("r_e_time").length() > 0 && request.getParameter("r_interval").length() > 0 && request.getParameter("r_pay_adult").length() > 0 && request.getParameter("r_pay_adult2").length() > 0 &&
+		if (	request.getParameter("r_no").length() > 0 && request.getParameter("r_start").length() > 0 && request.getParameter("r_end").length() > 0 && 
+				request.getParameter("r_s_time_h").length() > 0 && request.getParameter("r_s_time_m").length() > 0 && request.getParameter("r_e_time_h").length() > 0 && request.getParameter("r_e_time_m").length() > 0 &&
+				 request.getParameter("r_interval").length() > 0 && request.getParameter("r_pay_adult").length() > 0 && request.getParameter("r_pay_adult2").length() > 0 &&
 				request.getParameter("r_pay_teen").length() > 0 && request.getParameter("r_pay_teen2").length() > 0 && request.getParameter("r_pay_kid").length() > 0 && request.getParameter("r_pay_kid2").length() > 0) {
 			RouteDTO dto = new RouteDTO();
 			dto.setR_no(request.getParameter("r_no"));
 			dto.setR_start(request.getParameter("r_start"));
 			dto.setR_end(request.getParameter("r_end"));
-			dto.setR_s_time(request.getParameter("r_s_time"));
-			dto.setR_e_time(request.getParameter("r_e_time"));
+			
+			dto.setR_s_time(request.getParameter("r_s_time_h") + ":" + request.getParameter("r_s_time_m"));
+			dto.setR_e_time(request.getParameter("r_e_time_h") + ":" +  request.getParameter("r_e_time_m"));
+			
 			dto.setR_interval(Integer.parseInt(request.getParameter("r_interval")));
 
 			dto.setR_map(request.getParameter("r_map"));
@@ -256,7 +259,7 @@ public class BaechaController {
 			return "redirect:r-list.do";
 		}
 		else {
-			model.addAttribute("reject", "잘못된 입력입니다.");
+			model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
 			model.addAttribute("url", "r-insertform.do");
 			return "/bc/bc-reject";
 		}
@@ -267,21 +270,34 @@ public class BaechaController {
 	public String routeupdateform(RouteDTO dto, Model model) {
 		dto = rservice.routeSelect(dto);
 		model.addAttribute("dto", dto);
+		String[] s = dto.getR_s_time().split(":", 2);
+		String[] e = dto.getR_e_time().split(":", 2);
+		model.addAttribute("r_s_time_h", s[0]);
+		model.addAttribute("r_s_time_m", s[1]);
+		model.addAttribute("r_e_time_h", e[0]);
+		model.addAttribute("r_e_time_m", e[1]);
 		System.out.println(dto.toString());
 		return "/bc/r-updateform";
 	}
 
 	@RequestMapping(value = "r-update.do", method = RequestMethod.POST)
 	public String routeupdate(HttpServletRequest request, Model model) {
-		if (	request.getParameter("r_no").length() > 0 && request.getParameter("r_start").length() > 0 && request.getParameter("r_end").length() > 0 && request.getParameter("r_s_time").length() > 0 && request.getParameter("r_e_time").length() > 0 &&
+		if (	request.getParameter("r_no").length() > 0 && request.getParameter("r_start").length() > 0 && request.getParameter("r_end").length() > 0 && 
+				request.getParameter("r_s_time_h").length() > 0 && request.getParameter("r_s_time_m").length() > 0 && request.getParameter("r_e_time_h").length() > 0 && request.getParameter("r_e_time_m").length() > 0 &&
 				request.getParameter("r_interval").length() > 0 && request.getParameter("r_pay_adult").length() > 0 && request.getParameter("r_pay_adult2").length() > 0 &&
 				request.getParameter("r_pay_teen").length() > 0 && request.getParameter("r_pay_teen2").length() > 0 && request.getParameter("r_pay_kid").length() > 0 && request.getParameter("r_pay_kid2").length() > 0) {
 			RouteDTO dto = new RouteDTO();
 			dto.setR_no(request.getParameter("r_no"));
 			dto.setR_start(request.getParameter("r_start"));
 			dto.setR_end(request.getParameter("r_end"));
-			dto.setR_s_time(request.getParameter("r_s_time"));
-			dto.setR_e_time(request.getParameter("r_e_time"));
+			
+			System.out.println(request.getParameter("r_s_time_h"));
+			System.out.println(request.getParameter("r_s_time_m"));
+			System.out.println(request.getParameter("r_e_time_h"));
+			System.out.println(request.getParameter("r_e_time_m"));
+			
+			dto.setR_s_time(request.getParameter("r_s_time_h") + ":" + request.getParameter("r_s_time_m"));
+			dto.setR_e_time(request.getParameter("r_e_time_h") + ":" +  request.getParameter("r_e_time_m"));
 			
 			dto.setR_interval(Integer.parseInt(request.getParameter("r_interval")));
 			dto.setR_map(request.getParameter("r_map"));
@@ -316,24 +332,37 @@ public class BaechaController {
 			return "/bc/bc-reject";
 		}
 	}
+	
+	// r-img
+	@RequestMapping("r-img.do")
+	public String routeimg(String r_no, Model model) {
+		RouteDTO dto = new RouteDTO();
+		dto.setR_no(r_no);
+		dto = rservice.routeSelect(dto);
+		model.addAttribute("dto", dto);
+		return "/bc/r-img";
+	}
 
 	
-	public static String time = "%";
-	public static String nosun = "%";
+	
 	// ###############################
 	// 배차
 	@RequestMapping("a-list.do")
 	public String a_list(HttpServletRequest request, Model model) {
-		
-		String a_time = request.getParameter("time");
-		if(a_time != null && a_time.length() > 0) time = a_time;
-		if(time.equals("전체")) time = "%";
-		System.out.println(time);
+		String nosun = "%";
+		String time = "%";
 		
 		String a_r = request.getParameter("a_r");
 		if(a_r != null && a_r.length() > 0) nosun = a_r;
+		else if(request.getParameter("rno") != null && request.getParameter("rno").length() > 0) nosun = request.getParameter("rno");
 		if(nosun.equals("전체")) nosun = "%";
 		System.out.println(nosun);
+
+		String a_time = request.getParameter("time");
+		if(a_time != null && a_time.length() > 0) time = a_time;
+		else if(request.getParameter("zo") != null && request.getParameter("zo").length() > 0) time = request.getParameter("zo");
+		if(time.equals("전체")) time = "%";
+		System.out.println(time);
 		
 		int pg = 1;
 		String strPg = request.getParameter("pg");
@@ -345,8 +374,14 @@ public class BaechaController {
 		int rowSize = 10;
 		int start = (pg * rowSize) - (rowSize - 1);
 		int end = pg * rowSize;
+		
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("nosun", nosun);
+		map.put("time", time);
 
-		int total = aservice.getAllocationCount(time);
+		int total = aservice.getAllocationCount(map);
 		System.out.println("start : " + start + " end : " + end);
 		System.out.println("wtire count : " + total);
 
@@ -361,13 +396,6 @@ public class BaechaController {
 		if (toPage > allPage) {
 			toPage = allPage;
 		}
-	
-		HashMap map = new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("zo", time);
-		map.put("nosun", nosun);
-		
 
 		List<AllocationDTO> dto = aservice.allocationList(map);
 		List<BusDTO> blist = aservice.blist(map);
@@ -382,6 +410,12 @@ public class BaechaController {
 		model.addAttribute("block", block);
 		model.addAttribute("fromPage", fromPage);
 		model.addAttribute("toPage", toPage);
+		
+		if(nosun.equals("%")) nosun = "전체";
+		if(time.equals("%")) time = "전체";
+		
+		model.addAttribute("rno", nosun);
+		model.addAttribute("zo", time);
 
 		return "/bc/a-list";
 	}
@@ -505,7 +539,7 @@ public class BaechaController {
 			e.printStackTrace();
 		} // try~catch end
 		
-		return "/bc/bri2";
+		return "/bc/bri";
 	} // main end
 	
 	
