@@ -11,16 +11,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 order by ac_code) A)
 			where r >= #{start} and r &lt;= #{end}
 	</select> -->
-
-	<select id="accountList" parameterType="HashMap" resultType="kr.kosta.bus.model.AccountDTO">
+	
+	<select id="accountListState" parameterType="HashMap" resultType="kr.kosta.bus.model.AccountDTO">
 		select * from (select A.*, rownum r from (select * from
-			account where ac_state like #{state} and ac_code LIKE #{ac_code} order by ac_code) A)
-				where r >= #{start} and r &lt;= #{end}
+			account where ac_state like #{cnt_state} order by ac_code desc) A)
 	</select>
 	
-	<select id="getAccountCount" parameterType="HashMap" resultType="Integer">
+	<select id="accountListCode" parameterType="HashMap" resultType="kr.kosta.bus.model.AccountDTO">
+		select * from (select A.*, rownum r from (select * from
+			account where ac_code like #{cnt_code} order by ac_code desc) A)
+	</select>
+	
+	<select id="getAccountCountState" parameterType="String" resultType="Integer">
 		select count(*) from account
-			where ac_state like #{state} and ac_code like #{ac_code}
+			where ac_state like #{cnt_state}
+	</select>
+	
+	<select id="getAccountCountCode" parameterType="String" resultType="Integer">
+		select count(*) from account
+			where ac_code like #{cnt_code}
 	</select>
 	
 	<select id="getAccount" parameterType="String" resultType="kr.kosta.bus.model.AccountDTO">

@@ -8,10 +8,12 @@ import kr.kosta.bus.model.AccountDTO;
 public interface AccountService {
 
 		//public List<AccountDTO> selboxlist(HashMap map);
-		public List<AccountDTO> accountList(HashMap map);
+		public List<AccountDTO> accountListState(HashMap map);
+		public List<AccountDTO> accountListCode(HashMap map);
 		public void accountUpdate(AccountDTO dto);	
 		public AccountDTO getAccount(String ac_code);
-		public int getAccountCount(HashMap map);
+		public int getAccountCountState(String cnt_state);
+		public int getAccountCountCode(String cnt_code);
 		
 	}
 

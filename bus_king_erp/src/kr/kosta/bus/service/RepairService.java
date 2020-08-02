@@ -17,5 +17,11 @@ public interface RepairService {
 	public void busUpdatestate(RepairDTO dto);
 	//버스번호 
 	public List<BusDTO> buslist(HashMap map);
+	//범칙금(처리)차량
 	public void accUpdatestate(RepairDTO dto);
+	//회계
+	public void accoInsert(RepairDTO dto);
+	//처리완료
+	public void repairUpdateState(RepairDTO dto);
+	public void state(RepairDTO dto);
 }

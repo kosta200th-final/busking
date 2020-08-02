@@ -4,37 +4,72 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
+
+<style>
+.miniform{
+	width: 50%;
+	display: inline;
+	float: left;
+}
+</style>
+
 <body>
 
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/hrSubMenu.jsp" %>
 
 <main>
-<form action="pay-insert.do" method="post">
-	사원넘버<input type="text" name="pay_e_no" id="pay_e_no"><br>
-	사원이름<input type="text" name="pay_e_name" id="pay_e_name"><br>
-	부서<input type="text" name="pay_e_dname" id="pay_e_dname"><br>
-	직급<input type="text" name="pay_e_position" id="pay_e_position"><br>
-	네임태그<input type="text" name="pay_nametag" id="pay_nametag"><br>	
-	비고<input type="text" name="pay_bigo" id="pay_bigo"><br>
-	
-	해당년도<input type="number" name="pay_year" id="pay_year"><br>
-	해당월<input type="number" name="pay_month" id="pay_month"><br>
-	지급일<input type="date" name="pay_day" id="pay_day"><br>
-	출근일수<input type="number" name="pay_chul" id="pay_chul"><br>
-	근무시간<input type="number" name="pay_work" id="pay_work"><br>
-	특근시간<input type="number" name="pay_work_t" id="pay_work_t"><br>
-	기본급<input type="number" name="pay_p" id="pay_p"><br>
-	특근수당<input type="number" name="pay_p_t" id="pay_p_t"><br>
-	식대<input type="number" name="pay_bob" id="pay_bob"><br>
-	차량지원비<input type="number" name="pay_car" id="pay_car"><br>
-	만차수당<input type="number" name="pay_m" id="pay_m"><br>
-	세금공재액<input type="number" name="pay_tax" id="pay_tax"><br>
-	급여합계<input type="number" name="pay_total" id="pay_total"><br>
-	
-	<input type="submit" value="추가">
+<form action="pay-insert.do" method="post" class="form">
+		<fieldset>
+		<legend style="text-align: center"><!-- <img alt="icon" src="../resources/img/regi.png" class="formImg"> -->급여 내역 등록</legend>
+		<div class="form-con">
+			<ul>
+				<li>
+					<div class="miniform"> <span>사원번호</span><br><input type="text" name="pay_e_no" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>사원이름</span><br><input type="text" name="pay_e_name" style="display: inline; width: 130px"> </div> 
+				</li>
+				<li>
+					<div class="miniform"> <span>부서</span> <input type="text" name="pay_e_dname" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>직급</span> <input type="text" name="pay_e_position" style="display: inline; width: 130px"> </div>
+				</li>
+				<li>
+					<div class="miniform"> <span>해당년도</span><input type="text" name="pay_year" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>해당월</span><input type="text" name="pay_month" style="display: inline; width: 130px"> </div>
+				</li>
+				<li>
+					<span>지급일</span><input type="date" name="pay_day">
+				</li>
+				<li>
+					<div class="miniform"> <span>출근일수</span> <input type="text" name="pay_chul" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>근무시간</span> <input type="text" name="pay_work" style="display: inline; width: 130px"></div>
+					
+				</li>
+				<li>
+					<div class="miniform"> <span>특근시간</span> <input type="text" name="pay_work_t" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>특근수당</span> <input type="text" name="pay_p_t" style="display: inline; width: 130px"></div>
+				</li>
+				<li>
+					<div class="miniform"> <span> 기본급</span> <input type="text" name="pay_p" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>만근수당</span> <input type="text" name="pay_m" style="display: inline; width: 130px"></div>
+				</li>
+				<li>
+					<span>세금공제액</span><input type="text" name="pay_tax"><br>
+				<li>
+					<span>회계처리 설명</span><input type="text" name="pay_nametag">
+				</li>
+				<li>
+					<span>비고</span><input type="text" name="pay_bigo">
+				</li>
+				
+				<div class="btn-wrap">
+					<input type="submit" value="추가" class="editBtn formBtn">
+					<input type="reset" value="취소" class="editBtn formBtn red" onclick="location.href='pay-list.do'">
+				</div>
+			</ul>
+		</div>
+	</fieldset>
 </form>
 </main>
 

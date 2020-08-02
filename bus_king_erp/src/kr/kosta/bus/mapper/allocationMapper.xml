@@ -21,12 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="allocationList" parameterType="HashMap" resultType="kr.kosta.bus.model.AllocationDTO">
 		select * from (select A.*, rownum r from (select * from
-			allocation where a_time like #{zo} and a_r_no like #{nosun} order by a_r_no, a_b_no) A)
+			allocation where a_time like #{time} and a_r_no like #{nosun} order by a_r_no, a_b_no) A)
 			where r >= #{start} and r &lt;= #{end}
 	</select>
 	<select id="getAllocationCount" parameterType="String" resultType="Integer">
 		select count(*) from allocation
-		where a_time like #{zo} and a_r_no like #{nosun}
+		where a_time like #{time} and a_r_no like #{nosun}
 	</select>
 
 	<insert id="allocationInsert" parameterType="kr.kosta.bus.model.AllocationDTO">

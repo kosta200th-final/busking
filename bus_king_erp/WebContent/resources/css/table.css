@@ -49,10 +49,10 @@ ul, li {
 
 /* ------------------------------------ */
 input {
-  	display: block;
-	outline: none;
-	border: none;
-	padding-left: 5px
+     display: block;
+   outline: none;
+   border: none;
+/*    padding-left: 5px */
 }
 
 textarea {
@@ -66,17 +66,17 @@ textarea:focus, input:focus {
 
 /* ------------------------------------ */
 button {
-	outline: none !important;
-	border: none;
-	background: transparent;
+   outline: none !important;
+   border: none;
+   background: transparent;
 }
 
 button:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 iframe {
-	border: none !important;
+   border: none !important;
 }
 
 
@@ -118,6 +118,7 @@ table {
   margin-top: 20px;
 /*   border-radius: 10px; */
 }
+
 .pgTable {
   background-color: transparent !important;
   margin-bottom: 50px
@@ -128,91 +129,91 @@ th, td {
   padding: 5px 0;
 }
 .price {
-	text-align: right;
-	width: 100px
+   text-align: right;
+   width: 100px
 }
 .note {
-	width: 200p;
-	font-size: 12px !important;
-	padding-left: 10px
+   width: 200p;
+   font-size: 12px !important;
+   padding-left: 10px
 }
 .bigo {
-	width: 80px
+   width: 80px
 }
 .code {
-	width: 100px;
-	text-align: center;
-/* 	padding-left: 10px */
+   width: 100px;
+   text-align: center;
+/*    padding-left: 10px */
 }
 .last {
-	width: 70px
+   width: 70px
 }
 .column100 {
   width: 130px
 }
 .centre {
-	text-align: center
+   text-align: center
 }
 .date {
-	text-align: center;
-	width: 130px;
+   text-align: center;
+   width: 130px;
 }
 .carNum {
-	width: 80px;
-	text-align: center
+   width: 80px;
+   text-align: center
 }
 
 .type {
-	display: block;
-	float: right;
-	padding: 3px 10px;
-	margin: 2px 10px 2px 10px;
-/* 	border-radius: 10px; */
+   display: block;
+   float: right;
+   padding: 3px 10px;
+   margin: 2px 10px 2px 10px;
+/*    border-radius: 10px; */
 } 
 .type:nth-child(2) {
-	margin: 2px 0px
+   margin: 2px 0px
 }
 
 /* -----------BUTTON----------- */
 table .button {
-	padding: 5px 10px;
-	display: block;
-	float: left;
-/* 	border-radius: 10px; */
+   padding: 5px 10px;
+   display: block;
+   float: left;
+/*    border-radius: 10px; */
     font-size: 12px;
     cursor: pointer;
     transition: all .1s
 }
 table .button:hover {
-	background: #999;
-	color: white
+   background: #999;
+   color: white
 }
 table .modifyBtn {
-	float: none;
-	margin: auto
+   float: none;
+   margin: auto
 }
 table .addBtn {
-	height: 25px;
-	padding: 5px 10px;
-	background: #83d160;
-	background: #ff8f26;
-	background: #FF7336;
-	border-radius: 10px;
-	transition: all .2s;
-	margin: auto;
-	color: white
+   height: 25px;
+   padding: 5px 10px;
+   background: #83d160;
+   background: #ff8f26;
+   background: #FF7336;
+   border-radius: 10px;
+   transition: all .2s;
+   margin: auto;
+   color: white
 }
 
 table .addBtn:hover {
-	cursor: pointer;
-	background: #57b846;
-	color: #eee
+   cursor: pointer;
+   background: #57b846;
+   color: #eee
 }
 
 /* -----------검색버튼----------- */
 table .okBtn {
-	border: .5px solid #eee;
-	padding: .3em .5em;
+   border: .5px solid #eee;
+   padding: .3em .5em;
     position: relative;
     z-index: 1;/* 
     border-radius: 5px; */
@@ -224,7 +225,7 @@ table .okBtn {
     cursor: pointer;
 }
 table .okBtn:after {
-	content: "";
+   content: "";
     width: 0%;
     height: 100%;
     top: 0;
@@ -238,71 +239,71 @@ table .okBtn:after {
     background: #eee;
 }
 table .okBtn:hover {
-	color: #333;
+   color: #333;
 }
 table .okBtn:hover:after {
-	width: 100%;
+   width: 100%;
     z-index: -1;
 }
 
 input.editBtn {
-	margin: auto;
-	padding-left: 0px;
-	padding: 5px 10px;
-	font-size: 12px;
-	border: solid .5px #60ad5e;
-	color: #4c8c4a;
-/* 	background: transparent; */
-	cursor: pointer
+   margin: auto;
+   padding-left: 0px;
+   padding: 5px 10px;
+   font-size: 12px;
+   border: solid .5px #60ad5e;
+   color: #4c8c4a;
+/*    background: transparent; */
+   cursor: pointer
 }
 input.editBtn:hover {
-	background: #60ad5e;
-	color: #eee
+   background: #60ad5e;
+   color: #eee
 }
 /* -----------매입매출 색상변경----------- */
 .button.all {
-	border: solid .5px #333
+   border: solid .5px #333
 }
 
 .button.all:hover {
-	background: #333;
-	color: #eee
+   background: #333;
+   color: #eee
 }
 
 .button.blue {
-	color: #0062C1;
-	transition: all 0s;
-	border: solid .5px #0062C1
+   color: #0062C1;
+   transition: all 0s;
+   border: solid .5px #0062C1
 }
 .button.blue:hover {
-	color: #eee;
-	background: #0062C1;
+   color: #eee;
+   background: #0062C1;
 }
 .button.red {
-	color: #A72734;
-	transition: all 0s;
-	border: solid .5px #A72734
+   color: #A72734;
+   transition: all 0s;
+   border: solid .5px #A72734
 }
 .button.red:hover {
-	color: #eee;
-	background: #A72734;
+   color: #eee;
+   background: #A72734;
 }
 /* -----------SELECT BOX----------- */
 select {
-	width: 50px;
-	padding: .3em .5em;
-	border: 1px solid #eee;
-	color: #333;
-	font-family: inherit;
-	background: url('../img/arrow.png') no-repeat 90% 50%;
-	background-color: #eee;
-	/* border-radius: 5px; */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
+   width: 50px;
+   padding: .3em .5em;
+   border: 1px solid #eee;
+   color: #333;
+   font-family: inherit;
+   background: url('../img/arrow.png') no-repeat 90% 50%;
+   background-color: #eee;
+   /* border-radius: 5px; */
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
 }
 select::-ms-expand {
-	display: none;
+   display: none;
 }
 
 
@@ -342,10 +343,10 @@ select::-ms-expand {
 }
 
 /* .table100.ver2 th:first-child {
-	border-radius: 10px 0 0 0;
+   border-radius: 10px 0 0 0;
 }
 .table100.ver2 th:last-child {
-	border-radius: 0 10px 0 0;
+   border-radius: 0 10px 0 0;
 } */
 
 .table100.ver2 .row100:hover td {
@@ -410,33 +411,33 @@ select::-ms-expand {
 
 /*============================== 사고범칙금 ====================================*/
 .accTable .state {
-	width: 15%;
-	text-align: center
+   width: 15%;
+   text-align: center
 }
 .stateBtn {
-	display: inline-block;
-	width: 60%;
-	text-align: center;
-	margin-left: 20%;
-	text-decoration: underline;
-	cursor: pointer
+   display: inline-block;
+   width: 60%;
+   text-align: center;
+   margin-left: 20%;
+   text-decoration: underline;
+   cursor: pointer
 }
 .stateBtn:hover {
-	text-decoration: underline;
+   text-decoration: underline;
 }
 .accTable .result {
-	width:15% !important
+   width:15% !important
 }
 /* aside {
-	margin-top: 31px
+   margin-top: 31px
 } */
 .btn-width {
-	width: 25%
+   width: 25%
 }
 .btn-wrap {
-	width: 80%;
-	display: inline-block;
-	margin-left: 11%;
+   width: 80%;
+   display: inline-block;
+   margin-left: 11%;
 }
 .button.green {
     color: #60ad5e;
@@ -444,5 +445,62 @@ select::-ms-expand {
     border: solid .5px #60ad5e;
 }
 .button.green:hover {
-	background: #60ad5e
+   background: #60ad5e
 }
+
+/*============================== 매입매출  ====================================*/
+.acTHead, .acUl {
+   width: 95%;
+   margin: auto;
+   font-size: 12px
+}
+.acTHead .button {
+   display: block;
+   padding: 3px 10px;
+   margin: 0;
+   height: 25px;
+}
+input.acTHead-input {
+   display: inline-block !important;
+   margin: 0 10px;
+   height: 25px;
+   padding: 3px 10px;
+}
+select.acTHead-select {
+   width: 100px;
+   margin: 0 10px;
+   height: 25px;
+   padding: 3px 10px;
+   background-color: #fff;
+   border: solid .5px #eaf8e6;
+}
+.acTHead form {
+   float: right;
+   margin: 20px 0 10px 20px
+}
+input.mLeft {
+   margin-left: 0;
+   border: solid .5px;
+   cursor: pointer 
+}
+input.mLeft:hover {
+   background: #333;
+   color: #eee
+}
+.acUl .acUl-con {
+   float: right;
+   width: auto;
+   margin-top: 10px;
+   background: #eee;
+   border: solid .5px #999
+}
+
+.acUl ul {
+   float: left;
+   padding: 15px
+}
+.acUl li {
+   margin-bottom: 5px
+   
+}
+   

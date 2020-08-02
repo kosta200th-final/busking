@@ -14,8 +14,13 @@ public class AccountDAOImpl implements AccountDAO {
 	SqlSession sqlsession;
 	
 	@Override
-	public List<AccountDTO> accountList(HashMap map) {
-		return sqlsession.selectList("AccountDAO.accountList", map);
+	public List<AccountDTO> accountListState(HashMap map) {
+		return sqlsession.selectList("AccountDAO.accountListState", map);
+	}
+	
+	@Override
+	public List<AccountDTO> accountListCode(HashMap map) {
+		return sqlsession.selectList("AccountDAO.accountListCode", map);
 	}
 
 //	@Override
@@ -34,8 +39,13 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public int getAccountCount(HashMap map) {
-		return sqlsession.selectOne("AccountDAO.getAccountCount", map);
+	public int getAccountCountState(String cnt_state) {
+		return sqlsession.selectOne("AccountDAO.getAccountCountState", cnt_state);
+	}
+	
+	@Override
+	public int getAccountCountCode(String cnt_code) {
+		return sqlsession.selectOne("AccountDAO.getAccountCountCode", cnt_code);
 	}
 
 

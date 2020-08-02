@@ -41,4 +41,14 @@ public class CalculateServiceImpl implements CalculateService {
 		return calculateDAO.getCalculate(cal_code);
 	}
 
+	@Override
+	public void accountInsert(CalculateDTO dto) {
+		calculateDAO.accountInsert(dto);
+	}
+
+	@Override
+	public String calCode() {
+		return calculateDAO.calCode();
+	}
+
 }

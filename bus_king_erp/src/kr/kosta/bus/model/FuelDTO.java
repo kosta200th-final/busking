@@ -73,5 +73,6 @@ public class FuelDTO {
 				+ f_date2 + ", f_cost=" + f_cost + ", f_charge=" + f_charge + "]";
 	}
 
+
 	
 }

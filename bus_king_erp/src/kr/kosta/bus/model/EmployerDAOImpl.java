@@ -46,5 +46,21 @@ public class EmployerDAOImpl implements EmployerDAO {
 	public int getEmployerCount() {
 		return sqlSession.selectOne("EmployerDAO.getEmployerCount");
 	}
+	
+	@Override
+	public String employerSelect(String e_jumin) {
+		return sqlSession.selectOne("EmployerDAO.employerSelect", e_jumin);
+	}
+
+	@Override
+	public void employerUpdate3(HashMap map) {
+		 sqlSession.update("EmployerDAO.employerUpdate3", map);
+	}
+	
+	@Override
+	public void employerUpdateNopwd(EmployerDTO dto) {
+		sqlSession.update("EmployerDAO.employerUpdateNopwd", dto);
+	}
+	
 
 }

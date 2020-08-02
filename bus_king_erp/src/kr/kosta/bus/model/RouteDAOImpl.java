@@ -48,4 +48,9 @@ public class RouteDAOImpl implements RouteDAO {
 		return sqlSession.selectOne("RouteDAO.routealloc", r_no);
 	}
 	
+	@Override
+	public int rnoCheck(String r_no) {
+		return sqlSession.selectOne("RouteDAO.rnoCheck", r_no);
+	}
+	
 }

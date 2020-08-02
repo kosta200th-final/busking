@@ -49,8 +49,8 @@ public class AllocationDAOImpl implements AllocationDAO {
 	}
 
 	@Override
-	public int getAllocationCount(String zo) {
-		return sqlSession.selectOne("AllocationDAO.getAllocationCount", zo);
+	public int getAllocationCount(HashMap map) {
+		return sqlSession.selectOne("AllocationDAO.getAllocationCount", map);
 	}
 
 	@Override

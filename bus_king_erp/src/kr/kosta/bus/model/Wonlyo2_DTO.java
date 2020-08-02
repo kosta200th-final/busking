@@ -2,9 +2,15 @@ package kr.kosta.bus.model;
 
 public class Wonlyo2_DTO {
 
-	private String wo2_iptype,wo2_date,wo2_type,wo2_no;
-	private int  wo2_number;
+	private String wo2_iptype,wo2_date,wo2_type,wo2_no,wo2_b_no,wo2_code;
+	private int  wo2_number,wo2_total;
 	
+	public String getWo2_code() {
+		return wo2_code;
+	}
+	public void setWo2_code(String wo2_code) {
+		this.wo2_code = wo2_code;
+	}
 	public String getWo2_iptype() {
 		return wo2_iptype;
 	}
@@ -41,6 +47,18 @@ public class Wonlyo2_DTO {
 	public String toString() {
 		return "Wonlyo2_DTO [wo2_iptype=" + wo2_iptype + ", wo2_date=" + wo2_date + ", wo2_type=" + wo2_type
 				+ ", wo2_no=" + wo2_no + ", wo2_number=" + wo2_number + "]";
+	}
+	public String getWo2_b_no() {
+		return wo2_b_no;
+	}
+	public int getWo2_total() {
+		return wo2_total;
+	}
+	public void setWo2_total(int wo2_total) {
+		this.wo2_total = wo2_total;
+	}
+	public void setWo2_b_no(String wo2_b_no) {
+		this.wo2_b_no = wo2_b_no;
 	}
 	
 	

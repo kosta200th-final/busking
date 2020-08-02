@@ -43,9 +43,9 @@
 					납부완료 
 				</c:if>
 				<c:if test="${penaltyupdate.p_payment =='납부완료'}">
-					<input type="radio" name="p_payment" value="납부전">
+					<input type="radio" name="p_payment" value="납부전" class="radio">
 					납부전
-					<input type="radio" name="p_payment" value="납부완료" checked="checked">
+					<input type="radio" name="p_payment" value="납부완료" class="radio" checked="checked">
 					납부완료 
 				</c:if>
 			</li>

@@ -2,6 +2,7 @@ package kr.kosta.bus.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -51,5 +52,21 @@ public class EmployerServiceImpl implements EmployerService {
 	public int getEmployerCount() {
 		return employerDAO.getEmployerCount();
 	}
+	
+	@Override
+	public String employerSelect(String e_jumin) {
+		return employerDAO.employerSelect(e_jumin);
+	}
+
+	@Override
+	public void employerUpdate3(HashMap map) {
+		 employerDAO.employerUpdate3(map);
+	}
+	
+	@Override
+	public void employerUpdateNopwd(EmployerDTO dto) {
+		employerDAO.employerUpdateNopwd(dto);
+	}
+
 
 }

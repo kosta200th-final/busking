@@ -12,6 +12,14 @@
 	display: inline;
 	float: left;
 }
+.miniinput{
+	width: 130px;
+	display: inline;
+}
+.tinyinput{
+	width: 40px;
+	display: inline;
+}
 </style>
 
 <body>
@@ -25,33 +33,35 @@
 		<div class="form-con">
 			<ul>
 		<li>
-					<span>노선번호</span> <input type="text" value="${dto.r_no}" value="${dto.r_no}" name="r_no" style="display: inline; width: 80px"> 
+					<span>노선번호</span> <input type="text" value="${dto.r_no}" value="${dto.r_no}" name="r_no" readonly="readonly" style="display: inline; width: 70px"> 
 				</li>
 				<li>
-				<div class="miniform"> <span>출발지</span><br><input type="text" value="${dto.r_start}" name="r_start" style="display: inline; width: 130px"> </div>
-				<div class="miniform"> <span>도착지</span><br><input type="text" value="${dto.r_end}" name="r_end" style="display: inline; width: 130px"> </div> 
+				<div class="miniform"> <span>출발지</span><br><input type="text" value="${dto.r_start}" name="r_start" class="miniinput"> </div>
+				<div class="miniform"> <span>도착지</span><br><input type="text" value="${dto.r_end}" name="r_end" class="miniinput"> </div> 
 				</li>
 				<li>
-					<div class="miniform"> <span>첫차시간</span><input type="text" value="${dto.r_s_time}" name="r_s_time" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>막차시간</span><input type="text" value="${dto.r_e_time}" name="r_e_time" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>첫차시간</span><br><input type="text" value="${r_s_time_h}" name="r_s_time_h" class="tinyinput"> 시 
+						<input type="text" value="${r_s_time_m}" name="r_s_time_m" class="tinyinput"> 분</div>
+					<div class="miniform"> <span>막차시간</span><br><input type="text" value="${r_e_time_h}" name="r_e_time_h" class="tinyinput"> 시 
+						<input type="text" value="${r_e_time_m}" name="r_e_time_m" class="tinyinput"> 분</div>
 				</li>
 				<li>
-					<span>배차간격(분)</span><input type="text" value="${dto.r_interval}" name="r_interval"> 
+					<span>배차간격(분)</span><br><input type="text" value="${dto.r_interval}" name="r_interval" class="tinyinput"> 
 				</li>
 				<li>
-					<span>노선도(이미지)</span><input type="text" value="${dto.r_map}" name="r_map"> 
+					<span>노선도(이미지) </span><input type="text" value="${dto.r_map}" name="r_map" style="display: inline; width:170px;"> 
 				</li>
 				<li>
-					<div class="miniform"> <span>성인요금(카드)</span><input type="text" value="${dto.r_pay_adult}" name="r_pay_adult" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>성인요금(현금)</span><input type="text" value="${dto.r_pay_adult2}" name="r_pay_adult2" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>성인요금(카드)</span><input type="text" value="${dto.r_pay_adult}" name="r_pay_adult" class="miniinput"> </div>
+					<div class="miniform"> <span>성인요금(현금)</span><input type="text" value="${dto.r_pay_adult2}" name="r_pay_adult2" class="miniinput"> </div>
 				</li>
 				<li>
-					<div class="miniform"> <span>청소년요금(카드)</span><input type="text" value="${dto.r_pay_teen}" name="r_pay_teen" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>청소년요금(현금)</span><input type="text" value="${dto.r_pay_teen2}" name="r_pay_teen2" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>청소년요금(카드)</span><input type="text" value="${dto.r_pay_teen}" name="r_pay_teen" class="miniinput"> </div>
+					<div class="miniform"> <span>청소년요금(현금)</span><input type="text" value="${dto.r_pay_teen2}" name="r_pay_teen2" class="miniinput"> </div>
 				</li>
 				<li>
-					<div class="miniform"> <span>어린이요금(카드)</span><input type="text" value="${dto.r_pay_kid}" name="r_pay_kid" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>어린이요금(현금)</span><input type="text" value="${dto.r_pay_kid2}" name="r_pay_kid2" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>어린이요금(카드)</span><input type="text" value="${dto.r_pay_kid}" name="r_pay_kid" class="miniinput"> </div>
+					<div class="miniform"> <span>어린이요금(현금)</span><input type="text" value="${dto.r_pay_kid2}" name="r_pay_kid2" class="miniinput"> </div>
 				</li>
 				<div class="btn-wrap">
 					<input type="submit" value="수정" class="editBtn formBtn">
