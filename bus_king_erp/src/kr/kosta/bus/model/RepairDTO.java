@@ -52,16 +52,18 @@ public class RepairDTO {
 	public void setRe_date(String re_date) {
 		this.re_date = re_date;
 	}
-	@Override
-	public String toString() {
-		return "RepairDTO [re_code=" + re_code + ", re_b_no=" + re_b_no + ", re_state=" + re_state + ", re_bigo="
-				+ re_bigo + ", re_breakdown=" + re_breakdown + ", re_date=" + re_date + ", re_cost=" + re_cost + "]";
-	}
+
 	public String getRe_date2() {
 		return re_date2;
 	}
 	public void setRe_date2(String re_date2) {
 		this.re_date2 = re_date2;
+	}
+	@Override
+	public String toString() {
+		return "RepairDTO [re_code=" + re_code + ", re_b_no=" + re_b_no + ", re_state=" + re_state + ", re_bigo="
+				+ re_bigo + ", re_breakdown=" + re_breakdown + ", re_date=" + re_date + ", re_date2=" + re_date2
+				+ ", re_cost=" + re_cost + "]";
 	}
 
 

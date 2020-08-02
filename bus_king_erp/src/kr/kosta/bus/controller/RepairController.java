@@ -4,6 +4,7 @@ package kr.kosta.bus.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.FuelDTO;
+import kr.kosta.bus.model.PenaltyDTO;
 import kr.kosta.bus.model.RepairDTO;
 import kr.kosta.bus.model.Wonlyo2_DTO;
 import kr.kosta.bus.model.WonlyoDTO;
@@ -98,7 +100,6 @@ public class RepairController {
 	@RequestMapping(value = "re-insert.do", method = RequestMethod.POST)
 	public  String insert(HttpServletRequest request, RepairDTO dto){
 	
-		System.out.println(dto.toString());
 		dto.setRe_code(request.getParameter("re_code"));
 		dto.setRe_b_no(request.getParameter("re_b_no"));
 		dto.setRe_date(request.getParameter("re_date"));
@@ -107,6 +108,7 @@ public class RepairController {
 //		dto.setRe_breakdown(request.getParameter("re_breakdown"));
 //		dto.setRe_bigo(request.getParameter("re_bigo"));
 //		dto.setRe_date2(request.getParameter("re_date2"));
+		System.out.println(dto.toString());
 		Reservice.repairInsert(dto);
 		return "redirect:re-list.do";
 		
@@ -120,12 +122,9 @@ public class RepairController {
 	}
 	@RequestMapping(value="re-update.do", method=RequestMethod.POST)
 	public String routeupdate(RepairDTO dto,Model model) {
-		model.addAttribute("repair",dto);
-		Reservice.repairUpdate(dto);
-		if(dto.getRe_state().equals("정비완료")) dto.setRe_state("대기중");
-		Reservice.busUpdatestate(dto);
-		if(dto.getRe_state().equals("대기중")) dto.setRe_state("운행가능");
-		Reservice.accUpdatestate(dto);
+			model.addAttribute("repair",dto);
+			Reservice.repairUpdate(dto);
+			Reservice.busUpdatestate(dto);
 		return "redirect:re-list.do";
 	}
 	
@@ -134,9 +133,29 @@ public class RepairController {
     	Reservice.repairDelete(re_code);
       return "redirect:re-list.do";
     }
-
     
+	   @RequestMapping(value="re-ac.do", method=RequestMethod.GET)
+	   public String reupdate2(RepairDTO dto) {
+//		   System.out.println(dto.toString());
+		   Reservice.repairUpdateState(dto);
+		   System.out.println(dto.toString());
+//		   	System.out.println(dto);
+//		   Reservice.state(dto);
+			if(dto.getRe_state().equals("정비완료")) dto.setRe_state("대기중");
+			Reservice.busUpdatestate(dto);
+			if(dto.getRe_state().equals("대기중")) dto.setRe_state("운행가능");
+			Reservice.accUpdatestate(dto);
+		   Reservice.accoInsert(dto);
+		  return "redirect:re-list.do";
+	   }
     
+//		@RequestMapping(value = "re-ac.do", method = RequestMethod.GET)
+//		public String penaltyupdate(RepairDTO dto,String re_code,Model model) {
+//			Reservice.repairUpdateState(re_code);
+//			Reservice.accoInsert(dto);
+//
+//			return "redirect:re-list.do";
+//		}
 //-------------------------------------------------------------------------------------FUEL
     
     
@@ -155,12 +174,12 @@ public class RepairController {
 		int end = pg*rowSize;
 		
 		int total = fservice.getfuelCount();
-		System.out.println("start : " + start + " end : " + end);
-		System.out.println("wtire count : " + total);
+//		System.out.println("start : " + start + " end : " + end);
+//		System.out.println("wtire count : " + total);
 		
 		int allPage = (int)Math.ceil(total/(double)rowSize);
 //		int totalPage = total / rowSize + (total % rowSiez == 0 ? 0 : 1);
-		System.out.println("page count : " + allPage);
+//		System.out.println("page count : " + allPage);
 		
 		int block = 5;
 		int fromPage = ((pg-1) / block*block) + 1;
@@ -169,7 +188,6 @@ public class RepairController {
 		if(toPage > allPage) {
 			toPage = allPage;
 		}
-		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
@@ -186,12 +204,10 @@ public class RepairController {
 		return "/rc/f-list";
 		
 	}
-	
 	@RequestMapping(value = "f-insertform.do", method = RequestMethod.GET)
 	public String finsertform(Model model) {
 		HashMap map = new HashMap();
-		
-		List<BusDTO> blist = Reservice.buslist(map);
+		List<BusDTO> blist = fservice.bflist(map);
 		model.addAttribute("blist", blist);
 		return "/rc/f-insertform";
 	}
@@ -206,15 +222,18 @@ public class RepairController {
 		dto.setF_charge(Integer.parseInt(request.getParameter("f_charge")));
 		dto.setF_cost(Integer.parseInt(request.getParameter("f_cost")));
 		dto.setF_payment(request.getParameter("f_payment"));
-		dto.setF_nametag(request.getParameter("f_nametage"));
+		dto.setF_nametag(request.getParameter("f_nametag"));
 		dto.setF_bigo(request.getParameter("f_bigo"));
+		System.out.println(dto.toString());
 		fservice.fuelInsert(dto);
 		return "redirect:f-list.do";
 		
 	}
-	   @RequestMapping(value="f-update.do", method=RequestMethod.GET)
-	   public String fuelupdate(String f_code,Model model) {
-	      fservice.fuelUpdate(f_code);
+	   @RequestMapping(value= "f-update.do", method=RequestMethod.GET)
+	   public String fuelupdate(FuelDTO dto) {
+	      fservice.fuelUpdate(dto);
+	      System.out.println(dto.toString());
+	      fservice.faccInsert(dto);
 	      return "redirect:f-list.do";
 	   }
 //	 @RequestMapping(value="f-update.do", method=RequestMethod.GET)
@@ -232,7 +251,7 @@ public class RepairController {
 	
     @RequestMapping("f-delete.do")
     public String fdelete(String f_code) {
-     fservice.fuelDelete(f_code);
+    	fservice.fuelDelete(f_code);
       return "redirect:f-list.do";
     }
     
@@ -318,22 +337,63 @@ public class RepairController {
 			
 		}
 	   @RequestMapping(value = "woio-insertform.do", method = RequestMethod.GET)
-		public String woioinsertform() {
+		public String woioinsertform(Model model) {
+			HashMap map = new HashMap();
+			List<BusDTO> wo2blist = Wo2service.wobuslist(map);
+			List<WonlyoDTO> wonlyo = Wo2service.wo2List(map);
+			model.addAttribute("wlist",wonlyo);
+			model.addAttribute("blist", wo2blist);
 			return "/rc/woio-insertform";
 		}
 		@RequestMapping(value = "woio-insert.do", method = RequestMethod.POST)
 		public  String woipinsert(HttpServletRequest request, Wonlyo2_DTO dto){
-			
 			System.out.println(dto.toString());
 			dto.setWo2_no(request.getParameter("wo2_no"));
 			dto.setWo2_iptype(request.getParameter("wo2_iptype"));
+			dto.setWo2_b_no(request.getParameter("wo2_b_no"));
 			dto.setWo2_type(request.getParameter("wo2_type"));
 			dto.setWo2_number(Integer.parseInt(request.getParameter("wo2_number")));
 			dto.setWo2_date(request.getParameter("wo2_date"));
+			if(dto.getWo2_b_no().equals("버스번호")) dto.setWo2_b_no("");
 			Wo2service.wonlyo2Insert(dto);
+			
+			System.out.println("dto를 찍겠다...");
+			System.out.println(dto.toString());
+
+			int a = Wo2service.totalselect();
+			int b = Integer.parseInt(request.getParameter("wo2_number"));
+			if(dto.getWo2_iptype().equals("입고")){
+			System.out.println(dto.getWo2_iptype());
+			int result = a+b;
+			System.out.println(result);
+			dto.setWo2_total(result);
+			Wo2service.wonlyototal(dto);
+			}else if(dto.getWo2_iptype().equals("출고")){
+			int result = a-b;
+			System.out.println(a);
+			System.out.println(b);
+			System.out.println(result);
+			dto.setWo2_total(result);
+//			System.out.println(a);
+//			System.out.println(b);
+//			System.out.println(result);
+//			WonlyoDTO dto2 = new WonlyoDTO();
+//			dto2.setWo_total(result);
+			
+			Wo2service.wonlyototal(dto);
+			}
+			System.out.println(dto);
+		
 			return "redirect:woio-list.do";
 			
 		}
+		
+		
+	    @RequestMapping("wo2-delete.do")
+	    public String delete(Wonlyo2_DTO dto) {
+	    	Wo2service.delete(dto);
+	      return "redirect:woio-list.do";
+	    }
 }
     
 

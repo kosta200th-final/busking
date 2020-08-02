@@ -39,10 +39,10 @@ margin-right: auto;
 				<fmt:parseDate value='${dto.re_date}' var='re_date' pattern='yyyy-mm-dd'/>
              <fmt:formatDate value="${re_date}" pattern="yyyy.mm.dd"/>
 			</li>
-			<li>
+<!-- 			<li>
 				<span>완료 날짜</span>
 				<input type="date" name="re_date2">
-			</li>
+			</li> -->
 			<li>
 				<span>정비가격</span>
 				<input type="text" name="re_cost" class="resized-input">
@@ -67,8 +67,6 @@ margin-right: auto;
 				<label for="re_state" class="br">정비상태 </label>
 				<input type="radio" name="re_state" value="정비중"  class="radio">
 				정비중
-				<input type="radio" name="re_state" value="정비완료"  class="radio">
-				정비완료
 			</li>
 			<li>
 				<span>비고(특이사항)

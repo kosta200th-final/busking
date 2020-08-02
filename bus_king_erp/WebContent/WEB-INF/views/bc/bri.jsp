@@ -7,6 +7,8 @@
 
 <html>
 <head>
+<!-- 2초후 메인페이지로 이동 -->
+<meta http-equiv="refresh" content="10, ${pageContext.request.contextPath}/bc/bri.do">
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <style type="text/css">
   </style>
@@ -43,25 +45,25 @@ td{
 <div class="routeimg">
 	<table class="nosun">
 				<tr align="center">
-					<td id="st1"></td>
-					<td id="st2"></td>
-					<td id="st3"></td>
-					<td id="st4"></td>
-					<td id="st5"></td>
+					<td id="st1">&nbsp;&nbsp;</td>
+					<td id="st2">&nbsp;&nbsp;</td>
+					<td id="st3">&nbsp;&nbsp;</td>
+					<td id="st4">&nbsp;</td>
+					<td id="st5">&nbsp;</td>
 				</tr>
 				<tr align="center">
-					<td id="st10"></td>
-					<td id="st9"></td>
-					<td id="st8"></td>
-					<td id="st7"></td>
-					<td id="st6"></td>
+					<td id="st10">&nbsp;</td>
+					<td id="st9">&nbsp;</td>
+					<td id="st8">&nbsp;</td>
+					<td id="st7">&nbsp;</td>
+					<td id="st6">&nbsp;</td>
 				</tr>
 				<tr align="center">
-					<td id="st11"></td>
-					<td id="st12"></td>
-					<td id="st13"></td>
-					<td id="st14"></td>
-					<td id="st15"></td>
+					<td id="st11">&nbsp;</td>
+					<td id="st12">&nbsp;</td>
+					<td id="st13">&nbsp;</td>
+					<td id="st14">&nbsp;</td>
+					<td id="st15">&nbsp;</td>
 				</tr>
 			</table>
  </div>

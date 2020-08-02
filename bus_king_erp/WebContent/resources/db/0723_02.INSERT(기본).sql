@@ -45,6 +45,7 @@ INSERT INTO ROUTE VALUES('구로01번', '개봉역', '금옥여고', '05:50', '23:50', 8, 
 INSERT INTO ROUTE VALUES('구로02번', '개봉역', '개봉중학교', '05:50', '23:50', 10, 'r010.jpg', 1000, 1100, 700, 800, 400, 500);
 
 
+
 -- EMPLOYER
 -- 사번, 이름, 주민번호, 부서이름, 직급, 운행차량, 운전면허, 근로계약서, 운전경력, 휴가일수, 결혼, 장애, 취미, 특기, 연락처, ㅣ번, 이메일, 주소, 입사일, 퇴사일, 계정확인?, 권한
 INSERT INTO EMPLOYER VALUES(NEXT_E_NO, '가길동', '111111-1111111', '배차팀', '기사님', NULL, '면허01', '작성', 1, 15, '미혼', '비장애', NULL, NULL, '010-0000-0000', '1234', '가길동@ANVER.COM', '서울 구로구 가산동', SYSDATE, NULL, 1, 'ROLE_ADMIN');
@@ -106,9 +107,6 @@ INSERT INTO FUEL VALUES(NEXT_F_CODE, '11카0011', '천연가스', SYSDATE, NULL, 30, 
 INSERT INTO FUEL VALUES(NEXT_F_CODE, '12타0012', '천연가스', SYSDATE, NULL, 50, 50000, '결제전', '12타0012 천연가스 50L 충전', NULL);
 
 
--- 소모품 이쪽은 다시 얘기해봐야 할듯...
-
-COMMIT;
 -- ACCDIENT
 -- PK, 차량번호, 기산미사번, 면허, 차량상태, 사고시각, 사고장소, 사고내용
 INSERT INTO ACCIDENT VALUES(ACC_SEQ.NEXTVAL, '28하0028', 'E0010', '면허10', '운행가능', SYSDATE, '학교 앞', '접촉사고');
@@ -150,6 +148,6 @@ insert into wonlyo values('F006','점퍼케이블',10,24000);
 
 COMMIT;
 
-SELECT * FROM WONLYO;
+-- 인서트 기본 끝
 
-SELECT * FROM WONLYO2;
+

@@ -65,6 +65,23 @@ public class RepairDAOImpl implements RepairDAO{
 			
 		}
 
+		@Override
+		public void accoInsert(RepairDTO dto) {
+			sqlSession.insert("RepairDAO.accoInsert",dto);
+			
+		}
+
+		@Override
+		public void repairUpdateState(RepairDTO dto) {
+			sqlSession.update("RepairDAO.repairUpdateState",dto);
+		}
+
+		@Override
+		public void state(RepairDTO dto) {
+			sqlSession.update("RepairDAO.state",dto);
+			
+		}
+
 
 
 	

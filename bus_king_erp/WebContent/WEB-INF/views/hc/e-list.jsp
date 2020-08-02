@@ -5,6 +5,14 @@
 <%@ page import="java.util.*, kr.kosta.bus.mapper.*"%>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/hrSubMenu.jsp" %>
+<style>
+.inputEmp {
+	border: solid .5px #777;
+	padding: 4px 10px;
+	margin-right: 5px
+}
+
+</style>
 <script>
 function formSubmit(){ 
 	document.getElementById("frm").submit();
@@ -15,13 +23,13 @@ function formSubmit(){
 			<div class="table100 ver2 m-b-110">
 			<table data-vertable="ver2">
 				<thead>
-		<input type="text" name="search" >
-		<input type="submit" value="검색">
-		<input type="button" onclick="location.href='e-list.do'" value="전체보기">
+<tr>
+		<td><input type="button" value="사원등록" onclick="location.href='e-insertform.do'" class="type button blue"></td>
+		<td><input type="button" onclick="location.href='e-list.do'" value="전체보기" class="type button all"></td>
+		<td><input type="text"  maxlength="6" name="search" placeholder="사원번호 입력"class="inputEmp"></td>
+		<td><input type="submit" value="검색" class="type button red" ></td>
 		
-		<input type="button" value="사원등록"
-					onclick="location.href='e-insertform.do'">
-	
+</tr>
 			<tr class="row100 head">
 						<th class="column100 column1" data-column="column1">사원번호</th>
 						<th class="column100 column2" data-column="column2">이름</th>
@@ -33,8 +41,6 @@ function formSubmit(){
 						<th class="column100 column8" data-column="column8">계약서 작성여부</th>
 						<th class="column100 column9" data-column="column9">운전경력</th>
 						<th class="column100 column10" data-column="column10">남은 휴가일</th>
-						
-				
 			</tr>
 			</thead>
 			<c:forEach items="${employerlist}" var="list">

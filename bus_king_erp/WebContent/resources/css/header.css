@@ -12,8 +12,8 @@ body {
 }
 .gnb {
     font-family: 'Gothic A1', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: normal;
+    font-size: 14px;
 }
 header h1 {
     font-family: 'Arimo', sans-serif;
@@ -32,7 +32,7 @@ header {
     background: rgba(25, 103, 46, 0.83);
     color: #eef8e8;
 }
-header h1, .gnb {
+header h1, .gnb, header ul {
     position: absolute;
     top: 15px;
     height: 20px;
@@ -50,6 +50,33 @@ header h1 img {
 	left:0;
 	top: -2px
 }
+header ul {
+	left: 17.5%;
+	font-size: 12px
+}
+header li {
+	float: left;
+}
+header .logout-li {
+	margin-left: 50px
+}
+header .logout {
+	border: solid .5px #eee;
+	padding: 3px 10px;
+	line-height: 1.5px;
+	padding-bottom: 5px;
+	transition: all .1s
+}
+header .logout:hover {
+	background: #333;
+	color: #eee;
+	border: solid .5px #333;
+}
+header .saan {
+	display: block;
+	margin-top: 10px
+	
+}
 .gnb {
     right: 0;
     width: auto;
@@ -66,20 +93,15 @@ header h1 img {
     color: #222;
 }
 
-
-
 .lnb {
     position: fixed;
     top: 50px;
     left: 0;
     width: 15%;
     height: 95%;
-background: #eee;
+    background: #eee;
     float: left;
     z-index: 30;
-box-shadow: 1px 1px 4px 0px rgba(76,76,76,0.25);
--webkit-box-shadow: 1px 1px 4px 0px rgba(76,76,76,0.25);
--moz-box-shadow: 1px 1px 4px 0px rgba(76,76,76,0.25);
 }
 .lnb .lnb-con {
     position: absolute;
@@ -107,7 +129,7 @@ box-shadow: 1px 1px 4px 0px rgba(76,76,76,0.25);
     transition: all .3s
 }
 /*jQuery*/
-.lnb .lnb-con.on, .lnb .lnb-con.on:active {
+.lnb .lnb-con.on {
     opacity: 1;
     z-index: 3
 }
