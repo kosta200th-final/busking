@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="penaltyUpdate" parameterType="kr.kosta.bus.model.PenaltyDTO">
-		update penalty set p_payment = #{p_payment}, p_bigo = #{p_bigo} where p_code = #{p_code}
+		update penalty set p_bigo = #{p_bigo} where p_code = #{p_code}
 	</update>
 	
 	<update id="p_paymentUpdate" parameterType="kr.kosta.bus.model.PenaltyDTO">

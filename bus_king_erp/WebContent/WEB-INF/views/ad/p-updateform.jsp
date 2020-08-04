@@ -35,19 +35,8 @@
 				<input type="text" name="p_cost" id="p_cost" placeholder="부과 금액" readonly="readonly" value="${penaltyupdate.p_cost}">
 			</li>
 			<li>
-				<label for="p_payment" class="br">납부상태 </label>
-				<c:if test="${penaltyupdate.p_payment =='납부전'}">
-					<input type="radio" name="p_payment" value="납부전" class="radio" checked="checked">
-					납부전
-					<input type="radio" name="p_payment" value="납부완료" class="radio">
-					납부완료 
-				</c:if>
-				<c:if test="${penaltyupdate.p_payment =='납부완료'}">
-					<input type="radio" name="p_payment" value="납부전" class="radio">
-					납부전
-					<input type="radio" name="p_payment" value="납부완료" class="radio" checked="checked">
-					납부완료 
-				</c:if>
+				<span>납부상태</span>
+				<input type="text" name="p_payment" id="p_payment" placeholder="납부상태" readonly="readonly" value="${penaltyupdate.p_payment}">
 			</li>
 			<li>
 				<span>위반일시</span>
