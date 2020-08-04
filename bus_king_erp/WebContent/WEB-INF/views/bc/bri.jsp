@@ -7,8 +7,8 @@
 
 <html>
 <head>
-<!-- 2초후 메인페이지로 이동 -->
-<meta http-equiv="refresh" content="10, ${pageContext.request.contextPath}/bc/bri.do">
+<!-- 30초후 페이지 새로고침 -->
+<meta http-equiv="refresh" content="30, ${pageContext.request.contextPath}/bc/bri.do">
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <style type="text/css">
   </style>

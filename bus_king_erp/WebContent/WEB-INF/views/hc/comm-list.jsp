@@ -45,32 +45,41 @@
 </script>
 
 <main>
-   <h2>부서별 근태 현황</h2><br>   
+	<br>
+   	<h2>부서별 근태 현황</h2><br>
+    <div class="acThead">
    <form action="comm-list.do" method="get" id="frm">
-      <div class="table100 ver2 m-b-110">
-         <select name="comm_year_d" id="comm_year_d" style="width: 100px;">
-            <option>==연도==</option>
+         <select name="comm_year_d" id="comm_year_d" style="width: 80px;"> <!-- class="acTHead-select" -->
+            <option>=연도=</option>
                 <c:forEach items="${ylist}" var="ylist">
-                  <option value="${ylist.comm_year}">${ylist.comm_year}연도</option>
+                  <option value="${ylist.comm_year}">${ylist.comm_year}년</option>
                </c:forEach>
-         </select>&nbsp;&nbsp; <select name="comm_month_d" style="width: 80px;">
-            <option>==월==</option>
+         </select>&nbsp;&nbsp; <select name="comm_month_d" style="width: 60px;">
+            <option>=월=</option>
                <c:forEach items="${mlist}" var="mlist">
                   <option value="${mlist.comm_month}">${mlist.comm_month}월</option>
                </c:forEach>
-         </select>&nbsp;&nbsp; <select name="comm_day_d" style="width: 100px;">
-            <option>==일자==</option>
+         </select>&nbsp;&nbsp; <select name="comm_day_d" style="width: 80px;">
+            <option>=일자=</option>
                <c:forEach items="${dlist}" var="dlist">
                   <option value="${dlist.comm_day}">${dlist.comm_day}일</option>
                </c:forEach>
          </select>&nbsp;
-         <a class="okBtn" onclick="formSubmit(); return false;">검색</a>
-         <!-- <input type="submit" value="검색"><br> -->
-         </div>
+         <input type="submit" value="조회" class="acTHead-input mLeft"><br><br>
+         
+        	${comm_year_d}년 ${comm_month_d}월 ${comm_day_d}일
+        	 	
+<%--          <input type="TEXT" name="comm_year_d" value="${comm_year_d}">
+         <input type="TEXT" name="comm_month_d" value="${comm_month_d}">
+         <input type="TEXT" name="comm_day_d" value="${comm_day_d}"> --%>
+         
+        <!--  <a class="button red" onclick="formSubmit(); return false;">검색</a> -->
+        
          <input type="hidden" name="comm_year_m" value="${comm_year_m}">
          <input type="hidden" name="comm_month_m" value="${comm_month_m}">
          <input type="hidden" name="comm_e_no_m" value="${comm_e_no_m}">
          </form>
+         </div>
          
          <form action="comm-list.do" method="get" id="frm">
          <div class="table100 ver2 m-b-110">
@@ -111,18 +120,18 @@
 
    <h2>사원별 근태 현황</h2><br>
    <form action="comm-list.do" id="frm2">
-      <select name="comm_year_m" style="width: 100px;">
-         <option>==연도==</option>
+      <select name="comm_year_m" style="width: 80px;">
+         <option>=연도=</option>
             <c:forEach items="${ylist}" var="ylist">
-               <option value="${ylist.comm_year}">${ylist.comm_year}연도</option>
+               <option value="${ylist.comm_year}">${ylist.comm_year}년</option>
             </c:forEach>
-      </select>&nbsp;&nbsp; <select name="comm_month_m" style="width: 80px;">
-         <option>==월==</option>
+      </select>&nbsp;&nbsp; <select name="comm_month_m" style="width: 60px;">
+         <option>=월=</option>
             <c:forEach items="${mlist}" var="mlist">
                <option value="${mlist.comm_month}">${mlist.comm_month}월</option>
             </c:forEach>
-      </select>&nbsp;&nbsp; <select name="comm_e_no_m" style="width: 100px;">
-         <option>==사번==</option>
+      </select>&nbsp;&nbsp; <select name="comm_e_no_m" style="width: 80px;">
+         <option>=사번=</option>
             <c:forEach items="${elist}" var="elist">
                <option value="${elist.comm_e_no}">${elist.comm_e_no}번</option>
             </c:forEach>
@@ -130,7 +139,8 @@
          <input type="hidden" name="comm_year_d" value="${comm_year_d}">
          <input type="hidden" name="comm_month_d" value="${comm_month_d}">
          <input type="hidden" name="comm_day_d" value="${comm_day_d}">
-      <a class="okBtn" onclick="formSubmit2(); return false;">검색</a>
+         <input type="submit" value="조회" class="acTHead-input mLeft">
+     <!--  <a class="button blue" onclick="formSubmit2(); return false;">검색</a> -->
 
       <div class="table100 ver2 m-b-110">
          <table data-vertable="ver2">

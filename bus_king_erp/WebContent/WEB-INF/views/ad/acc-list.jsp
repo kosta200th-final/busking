@@ -36,7 +36,7 @@
                   </c:if>
                   <c:if test="${list.acc_state == '수리요함'}">
                      <td class="result">
-                        <a href="acc-repair.do?acc_no=${list.acc_no}" class="stateBtn">정비접수</a>   
+                        <a href="acc-repair.do?acc_no=${list.acc_no}&acc_b_no=${list.acc_b_no}" class="stateBtn">정비접수</a>   
                      </td>
                   </c:if>
                   <c:if test="${list.acc_state == '정비접수'}">
