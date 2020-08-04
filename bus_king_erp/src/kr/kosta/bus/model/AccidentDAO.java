@@ -28,5 +28,7 @@ public interface AccidentDAO {
 	
 	public List<AccidentDTO> getChart();
 	
+	public void busStateUpdate(String b_no);
 	
+	public String busState(String b_no);
 }

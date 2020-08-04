@@ -91,7 +91,7 @@
 
 </style>
 	<main>
-		<div class="table100 ver2 m-b-110">
+ 		<div class="table100 ver2 m-b-110">
 		<br>
 		<input type="button" value="추가하기" class="bussub button modifyBtn"
 						onclick="location.href='b-insertform.do'">

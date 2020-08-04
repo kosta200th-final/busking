@@ -98,7 +98,7 @@ function formSubmit(){
       <form action="ac-list.do" method="post">
          <input type="hidden" value="${temp }" name="temp">
           <input type="hidden" value="${datetemp }" name="datetemp">
-         <select name="month"class="acTHead-select">
+         <select name="month" class="acTHead-select">
             <option>월별조회</option>
             <option>1월</option>
             <option>2월</option>

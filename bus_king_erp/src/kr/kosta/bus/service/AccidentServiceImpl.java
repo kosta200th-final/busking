@@ -73,5 +73,13 @@ public class AccidentServiceImpl implements AccidentService {
 		return accidentDAO.getChart();
 	}
 	
-
+	@Override
+	public void busStateUpdate(String b_no) {
+		accidentDAO.busStateUpdate(b_no);
+	}
+	
+	@Override
+	public String busState(String b_no) {
+		return accidentDAO.busState(b_no);
+	}
 }
