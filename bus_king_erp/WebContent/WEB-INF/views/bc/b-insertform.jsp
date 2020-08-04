@@ -63,9 +63,7 @@ function binsert(){
 			<li>
 				<span>연료</span>
 				<select name="b_energy" style="width: 100px;">
-				<option>휘발유</option>
 					<option>경유</option>
-					<option>LPG</option>
 					<option>천연가스</option>
 					<option>전기</option>
 				</select>

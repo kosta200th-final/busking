@@ -18,7 +18,7 @@ public class PayServiceImpl implements PayService {
 	PayDAO payDAO;
 
 	@Override
-	public List<PayDTO> payList(HashMap map) {
+	public PayDTO payList(HashMap map) {
 		return payDAO.payList(map);
 	}
 
@@ -42,5 +42,22 @@ public class PayServiceImpl implements PayService {
 	public List<PayDTO> elist(HashMap map) {
 		return payDAO.elist(map);
 	}
+
+	@Override
+	public void accoInsert(PayDTO dto) {
+		payDAO.accoInsert(dto);
+	}
+
+	@Override
+	public String payCode() {
+		return payDAO.payCode();
+	}
+	
+	@Override
+	public int payCheck(PayDTO dto) {
+		return payDAO.payCheck(dto);
+	}
+	
+	
 	
 }

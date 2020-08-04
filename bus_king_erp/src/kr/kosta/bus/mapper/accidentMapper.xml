@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 	
 	<update id="accidentUpdate" parameterType="kr.kosta.bus.model.AccidentDTO">
-		update accident set acc_state = #{acc_state} where acc_no = #{acc_no}
+		update accident set acc_located = #{acc_located}, acc_breakdown = #{acc_breakdown} where acc_no = #{acc_no}
 	</update>
 	
 	<update id="acc_stateUpdate" parameterType="kr.kosta.bus.model.AccidentDTO">
@@ -68,6 +68,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- select acc_e_license, count(acc_b_no) as "acc_b_no" from accident group by acc_e_license -->
 		select substr(acc_date,4,2) as acc_date, count(acc_b_no) as acc_b_no
 from 	accident where acc_date between '2020-01-01' and '2020-12-31'group by substr(acc_date,4,2) order by acc_date
+	</select>
+	
+	<update id="busStateUpdate" parameterType="String">
+		update bus set b_state = '정비접수' where b_no = #{b_no}
+	</update>
+	
+	<select id="busState" parameterType="String" resultType="String">
+		select b_state from bus where b_no = #{b_no}
 	</select>
 
 </mapper>

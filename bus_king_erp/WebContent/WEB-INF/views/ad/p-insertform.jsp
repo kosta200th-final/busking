@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accidentSubMenu.jsp" %>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
 <main>
 <form action="p-insert.do" method="post" class="form">
 <fieldset>
@@ -11,7 +12,6 @@
 			<li>
 				<span>버스번호</span>
 				<select name="p_b_no">
-					<option>버스번호</option>
 					<c:forEach items="${blist}" var="blist">
 						<option>${blist.b_no}</option>
 					</c:forEach>
@@ -20,7 +20,6 @@
 			<li>
 				<span>사원번호</span>
 				<select name="p_e_no">
-					<option>사원번호</option>
 					<c:forEach items="${elist}" var="elist">
 						<option>${elist.e_no}</option>
 					</c:forEach>
@@ -29,7 +28,6 @@
 			<li>
 				<span>면허번호</span>
 				<select name="p_e_license">
-					<option>면허번호</option>
 					<c:forEach items="${elist}" var="elist">
 						<option>${elist.e_license}</option>
 					</c:forEach>
@@ -38,7 +36,6 @@
 			<li>
 				<span>직원이름</span>
 				<select name="p_e_name">
-					<option>직원이름</option>
 					<c:forEach items="${elist}" var="elist">
 						<option>${elist.e_name}</option>
 					</c:forEach>
@@ -65,7 +62,7 @@
 			</li>
 			<li>
 				<span>담당경찰서</span>
-				<input type="text" name=p_police id="p_police" placeholder="담당경찰서">
+				<input type="text" name="p_police" id="p_police" placeholder="담당경찰서">
 			</li>
 			<li>
 				<span>내용</span>

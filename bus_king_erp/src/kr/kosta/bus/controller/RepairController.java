@@ -98,20 +98,27 @@ public class RepairController {
 		return "/rc/re-insertform";
 	}
 	@RequestMapping(value = "re-insert.do", method = RequestMethod.POST)
-	public  String insert(HttpServletRequest request, RepairDTO dto){
-	
-		dto.setRe_code(request.getParameter("re_code"));
+	public  String insert(HttpServletRequest request,Model model){
+		 RepairDTO dto = new RepairDTO();
+		if (request.getParameter("re_b_no").length() > 0 && request.getParameter("re_date").length() > 0 && 
+			request.getParameter("re_state").length()> 0 && request.getParameter("re_breakdown").length() > 0
+			) {
+			
+//		dto.setRe_code(request.getParameter("re_code"));
 		dto.setRe_b_no(request.getParameter("re_b_no"));
 		dto.setRe_date(request.getParameter("re_date"));
 //		dto.setRe_cost(Integer.parseInt(request.getParameter("re_cost")));
 		dto.setRe_state(request.getParameter("re_state"));
-//		dto.setRe_breakdown(request.getParameter("re_breakdown"));
-//		dto.setRe_bigo(request.getParameter("re_bigo"));
-//		dto.setRe_date2(request.getParameter("re_date2"));
-		System.out.println(dto.toString());
+		dto.setRe_breakdown(request.getParameter("re_breakdown"));
+		dto.setRe_bigo(request.getParameter("re_bigo"));
+		dto.setRe_date2(request.getParameter("re_date2"));
 		Reservice.repairInsert(dto);
 		return "redirect:re-list.do";
-		
+		}else {
+		model.addAttribute("reject", "입력이 잘못됬습니다.");
+		model.addAttribute("url", "re-insertform.do");
+		return "/rc/re-reject";
+		}
 	}
 	
 	@RequestMapping(value="re-updateform.do", method=RequestMethod.GET)
@@ -119,13 +126,29 @@ public class RepairController {
 		dto = Reservice.select(dto);
 		model.addAttribute("dto",dto);
 		return "/rc/re-updateform";
-	}
+		}
 	@RequestMapping(value="re-update.do", method=RequestMethod.POST)
-	public String routeupdate(RepairDTO dto,Model model) {
+	public String routeupdate(HttpServletRequest request,Model model) {
+		if (request.getParameter("re_cost").length() > 0 && request.getParameter("re_state").length() > 0 && 
+				request.getParameter("re_breakdown").length()> 0) {
+			RepairDTO dto = new RepairDTO();
+			dto.setRe_code(request.getParameter("re_code"));
+			dto.setRe_b_no(request.getParameter("re_b_no"));
+			dto.setRe_date(request.getParameter("re_date"));
+			dto.setRe_cost(Integer.parseInt(request.getParameter("re_cost")));
+			dto.setRe_state(request.getParameter("re_state"));
+			dto.setRe_breakdown(request.getParameter("re_breakdown"));
+			dto.setRe_bigo(request.getParameter("re_bigo"));
+//			dto.setRe_date2(request.getParameter("re_date2"));
 			model.addAttribute("repair",dto);
 			Reservice.repairUpdate(dto);
 			Reservice.busUpdatestate(dto);
 		return "redirect:re-list.do";
+	}else {
+			model.addAttribute("reject", "잘못된 입력입니다.");
+			model.addAttribute("url", "re-list.do");
+			return "/rc/re-reject";
+			}
 	}
 	
     @RequestMapping("re-delete.do")
@@ -213,9 +236,19 @@ public class RepairController {
 	}
 	@RequestMapping(value = "f-insert.do", method = RequestMethod.POST)
 	public  String finsert(HttpServletRequest request, FuelDTO dto){
-	
-		System.out.println(dto.toString());
-		dto.setF_code(request.getParameter("f_code"));
+		
+//		  FuelDTO dto = new FuelDTO(); 
+//		  if (
+//		   request.getParameter("f_b_no").length() > 0 && 
+//		  request.getParameter("f_b_energy").length() > 0 &&
+//		  request.getParameter("f_date").length()> 0 &&
+//		  request.getParameter("f_charge").length() > 0 &&
+//		  request.getParameter("f_cost").length() > 0 &&
+//		  request.getParameter("f_payment").length() > 0 &&
+//		  request.getParameter("f_nametag").length() > 0 &&
+//		  request.getParameter("f_cost").length() > 0 ) {
+//	
+//		dto.setF_code(request.getParameter("f_code"));
 		dto.setF_b_no(request.getParameter("f_b_no"));
 		dto.setF_b_energy(request.getParameter("f_b_energy"));
 		dto.setF_date(request.getParameter("f_date"));
@@ -224,11 +257,16 @@ public class RepairController {
 		dto.setF_payment(request.getParameter("f_payment"));
 		dto.setF_nametag(request.getParameter("f_nametag"));
 		dto.setF_bigo(request.getParameter("f_bigo"));
-		System.out.println(dto.toString());
 		fservice.fuelInsert(dto);
 		return "redirect:f-list.do";
-		
-	}
+	} 
+//		 else {
+//		model.addAttribute("reject", "잘못된 입력입니다."); 
+//		 model.addAttribute("url","f-insertform.do");
+//		 return "/rc/re-reject"; 
+//		 }
+//	
+//	}
 	   @RequestMapping(value= "f-update.do", method=RequestMethod.GET)
 	   public String fuelupdate(FuelDTO dto) {
 	      fservice.fuelUpdate(dto);
