@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where r >= #{start} and r &lt;= #{end}
 			</select>
 			<select id="bflist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
-					select b_no from bus order by b_no
+					select b_no,b_energy from bus order by b_no 
 				</select>
 			
 		<!--<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">

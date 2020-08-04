@@ -68,4 +68,13 @@ public class AccidentDAOImpl implements AccidentDAO {
 		return sqlSession.selectList("AccidentDAO.getChart");
 	}
 	
+	@Override
+	public void busStateUpdate(String b_no) {	
+		sqlSession.update("AccidentDAO.busStateUpdate", b_no);
+	}
+	
+	@Override
+	public String busState(String b_no) {
+		return sqlSession.selectOne("AccidentDAO.busState", b_no);
+	}
 }

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accidentSubMenu.jsp" %>
+
 <main>
 <form action="comp-update.do" method="post" class="form">
 <fieldset>
@@ -22,12 +23,21 @@
 				<span>분류</span>
 				<select name="c_type">
 					<option selected="selected">${complaintupdate.c_type}</option>
-					<option value="분류">분류</option>
-					<option value="칭찬">칭찬</option>
-					<option value="불만">불만</option>
-					<option value="제안">제안</option>
-					<option value="건의">건의</option>
-					<option value="기타">기타</option>
+					<c:if test="${complaintupdate.c_type != '칭찬'}">
+						<option value="칭찬">칭찬</option>
+					</c:if>
+					<c:if test="${complaintupdate.c_type != '불만'}">
+						<option value="불만">불만</option>
+					</c:if>
+					<c:if test="${complaintupdate.c_type != '제안'}">
+						<option value="제안">제안</option>
+					</c:if>
+					<c:if test="${complaintupdate.c_type != '건의'}">
+						<option value="건의">건의</option>
+					</c:if>
+					<c:if test="${complaintupdate.c_type != '기타'}">
+						<option value="기타">기타</option>
+					</c:if>
 				</select>
 			</li>
 			<li>
