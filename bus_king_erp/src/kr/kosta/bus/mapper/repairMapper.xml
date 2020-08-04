@@ -10,9 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</select>
 			
 				<select id="buslist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
-					select b_no from bus
-						order by b_no
-				</select>
+              	 select b_no from bus
+              	where b_no not in (select a_b_no from allocation)
+                  order by b_no
+            </select>
 				
 			<select id="select" parameterType="HashMap" resultType="kr.kosta.bus.model.RepairDTO">
 				select * from repair where re_code = #{re_code}
@@ -34,12 +35,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 			<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
-				insert into repair(re_code,re_b_no,re_date,re_cost,re_breakdown,re_state,re_bigo)
-				 values(NEXT_RE_CODE, #{re_b_no}, #{re_date}, #{re_cost},#{re_breakdown}, #{re_state},#{re_bigo})
+				insert into repair(re_code,re_b_no,re_date,re_breakdown,re_state,re_bigo)
+				 values(NEXT_RE_CODE, #{re_b_no}, #{re_date},#{re_breakdown}, #{re_state},#{re_bigo})
 			</insert>
 	
 			<update id="repairUpdate" parameterType="kr.kosta.bus.model.RepairDTO">
-				update repair set re_state =#{re_state},re_cost=#{re_cost},re_breakdown=#{re_breakdown},re_bigo=#{re_bigo} where re_code=#{re_code} 
+				update repair set re_state =#{re_state},re_cost=#{re_cost},re_breakdown=#{re_breakdown,jdbcType=VARCHAR},re_bigo=#{re_bigo,jdbcType=VARCHAR} where re_code=#{re_code} 
 			</update>
 		
 			<update id="busUpdatestate" parameterType="kr.kosta.bus.model.RepairDTO">

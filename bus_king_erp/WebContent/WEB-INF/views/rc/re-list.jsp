@@ -6,6 +6,74 @@
 <%@include file="/common/header.jsp"%>
 <%@include file="/common/repairSubMenu.jsp"%>
 <style>
+<style type="text/css">
+	.page{
+	  text-align: center;  // div 사이즈 영역 안에서의 center
+	  width: 50%;}
+	
+	.pagination {
+	  list-style: none;
+	  display: inline-block;
+	  padding: 0;
+	  margin-top: 20px;}
+	
+	.pagination li {
+	  display: inline;
+	  text-align: center;}
+	
+	// 숫자들에 대한 스타일 지정
+	.pagination a {
+	  float: left;
+	  display: block;
+	  font-size: 14px;
+	  text-decoration: none;
+	  padding: 5px 12px;
+	  color: #96a0ad;
+	  line-height: 1.5;}
+	
+	.first{
+	  margin-right: 15px;}
+	
+	.last{
+	  margin-left: 15px;}
+	
+	.first:hover, .last:hover, .left:hover, .right:hover{
+	  color: #2e9cdf;}
+	
+	.pagination a.active {
+	  cursor: default;
+	  color: #ffffff;}
+	
+	.pagination a:active {
+	  outline: none;}
+	
+	.modal .num {
+	 	margin-left: 3px;
+	    padding: 5px 11px;
+	    width: 20px;
+	    height: 20px;
+	    line-height: 20px;
+	    -moz-border-radius: 100%;
+	    -webkit-border-radius: 100%;
+	    border-radius: 0%;
+  	}
+	
+	.modal .num:hover {
+	  background-color: #2e9cdf;
+	  color: #ffffff;}
+	
+	.modal .num.active, .modal .num:active {
+	  background-color: rgba(25, 103, 46, 0.83);
+	  cursor: pointer;}
+	
+	.arrow-left {
+	  width: 0;
+	  height: 0;
+	  border-top: 10px solid transparent;
+	  border-bottom: 10px solid transparent;
+	  border-right:10px solid blue; }
+
+
 .bussub {
 	float: right;
 	margin-right: 2.5%;
@@ -48,7 +116,7 @@
 						<c:forEach items="${repairlist}" var="repairlist">
 							<tr align="center">
 								<td>${repairlist.re_code}</td>
-								<td>${repairlist.re_b_no}번버스</td>
+								<td width="130px;">${repairlist.re_b_no}번버스</td>
 								<td><fmt:parseDate value='${repairlist.re_date}'
 										var='re_date' pattern='yyyy-mm-dd' /> <fmt:formatDate
 										value="${re_date}" pattern="yyyy.mm.dd" /></td>
@@ -60,51 +128,65 @@
 								<td>${repairlist.re_state}</td>
 								<td>${repairlist.re_bigo}</td>
 								<td class="last" colspan="7" style="background: transparent">
+								<c:if test="${repairlist.re_state == '정비접수'}">
+								<input type="button"  value="정비완료" class="type button all"
+									onclick="location.href='re-ac.do?re_code=${repairlist.re_code}&re_b_no=${repairlist.re_b_no}&re_state=정비완료'" disabled="disabled">
+								<input type="button"  value="수정" class="type button blue"
+									onclick="location.href='re-updateform.do?re_code=${repairlist.re_code}'">
+								<input type="button"  value="삭제" class="type button red"
+									onclick="location.href='re-delete.do?re_code=${repairlist.re_code}'"> 
+								</c:if>
+								<c:if test="${repairlist.re_state == '정비중'}">
 								<input type="button"  value="정비완료" class="type button all"
 									onclick="location.href='re-ac.do?re_code=${repairlist.re_code}&re_b_no=${repairlist.re_b_no}&re_state=정비완료'">
 								<input type="button"  value="수정" class="type button blue"
 									onclick="location.href='re-updateform.do?re_code=${repairlist.re_code}'">
-							<input type="button"  value="삭제" class="type button red"
+								<input type="button"  value="삭제" class="type button red"
 									onclick="location.href='re-delete.do?re_code=${repairlist.re_code}'"> 
+								</c:if>
+								<c:if test="${repairlist.re_state == '정비완료'}">
+								<input type="button"  value="정비완료" class="type button all"
+									onclick="location.href='re-ac.do?re_code=${repairlist.re_code}&re_b_no=${repairlist.re_b_no}&re_state=정비완료'" disabled="disabled">
+								<input type="button"  value="수정" class="type button blue"
+									onclick="location.href='re-updateform.do?re_code=${repairlist.re_code}'" disabled="disabled">
+								<input type="button"  value="삭제" class="type button red"
+									onclick="location.href='re-delete.do?re_code=${repairlist.re_code}'"> 
+								</c:if>
 								</td>
 							</tr>
 						</c:forEach>
-					</thead>
 				</table>
 			</div>
 
 		</form>
-		<table width="600" class="pgTable">
-			<tr>
-				<td align="center">
-					<!-- 처음 이전 링크 --> <c:if test="${pg>block}">
-						<!-- 5>10 : false / 15>10 : true -->
-			[<a href="re-list.do?pg=1">◀◀</a>]
-			[<a href="re-list.do?pg=${fromPage-1}">◀</a>]		
-		</c:if> <c:if test="${pg<=block}">
-						<!-- 5<=10 :true / 15<=10:false -->
-			[<span style="color: gray">◀◀</span>]	
-			[<span style="color: gray">◀</span>]
-		</c:if> <!-- 블록 범위 찍기 --> <c:forEach begin="${fromPage}" end="${toPage}"
-						var="i">
-						<c:if test="${i==pg}">[${i}]</c:if>
+	<div class="page" align="center">
+			<ul class="pagination modal">
+				<li><c:if test="${pg>block}">
+						<a class="first" href="re-list.do?pg=1">처음 페이지</a>
+						<a class="arrow left" href="re-list.do?pg=${fromPage-1}"><<</a>
+					</c:if> <c:if test="${pg<=block}">
+						<a class="first" style="color: gray">처음 페이지</a>
+						<a class="arrow left" style="color: gray"><<</a>
+					</c:if></li>
+
+				<li><c:forEach begin="${fromPage}" end="${toPage}" var="i">
+						<c:if test="${i==pg}">
+							<a class="active num">${i}</a>
+						</c:if>
 						<c:if test="${i!=pg}">
-				[<a href="re-list.do?pg=${i}">${i}</a>]
-			</c:if>
-					</c:forEach> <!-- 다음, 이후 --> <c:if test="${toPage<allPage}">
-						<!-- 20<21 : true -->
-				[<a href="re-list.do?pg=${toPage+1}">▶</a>]
-				[<a href="re-list.do?pg=${allPage}">▶▶</a>]
-		
-		</c:if> <c:if test="${toPage>=allPage}">
-						<!-- 21>=21 :true -->
-				[<span style="color: gray">▶</span>]
-				[<span style="color: gray">▶▶</span>]
-		
-		</c:if>
-				</td>
-			</tr>
-		</table>
+							<a href="re-list.do?pg=${i}">${i}</a>
+						</c:if>
+					</c:forEach></li>
+
+				<li><c:if test="${toPage<allPage}">
+						<a class="arrow right" href="re-list.do?pg=${toPage+1}">>></a>
+						<a class="last" href="re-list.do?pg=${allPage}">끝 페이지</a>
+					</c:if> <c:if test="${toPage>=allPage}">
+						<a class="arrow right" style="color: gray">>></a>
+						<a class="last" style="color: gray">끝 페이지</a>
+					</c:if></li>
+			</ul>
+		</div>
 	</main>
 </body>
 </html>

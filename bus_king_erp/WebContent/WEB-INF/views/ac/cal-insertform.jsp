@@ -56,29 +56,33 @@
 	<div class="form-con">
 		<ul class="left-side">
 			<li>
-				<span>정산날짜</span>
+				<span>*정산날짜</span>
 				<input type="date" name="cal_date" id="cal_date" placeholder="정산날짜" class="resized-input">
 			</li>
 			<li>
-				<span>차량번호</span>
-				<input type="text" name="cal_b_no" id="cal_b_no"placeholder="차량번호" class="resized-input">
+				<span>*차량번호</span>
+				<select name="cal_b_no" id="cal_b_no" style="background-position: 95% 50%; width: 280px; display: block;">
+					<c:forEach items="${blist}" var="blist">
+						<option>${blist.b_no}</option>
+					</c:forEach>
+				</select>
 			</li>
 			<li>
-				<span>카드매출합계</span>
+				<span>*카드매출합계</span>
 				<input type="text" name="cal_hap_c" id="cal_hap_c"placeholder="카드매출합계" class="resized-input">
 			</li>
 			<li>
-				<span>현금매출합계</span>
+				<span>*현금매출합계</span>
 				<input type="text" name="cal_hap_m" id="cal_hap_m"placeholder="현금매출합계" class="resized-input">
 			</li>
 			<li>
-				<span>일별매출합계</span>
+				<span>*일별매출합계</span>
 				<input type="text" name="cal_total" id="cal_total"placeholder="일별매출합계" class="resized-input">
 			</li>
 		</ul>
 		<ul class="right-side">
 			<li>
-				<span>설명
+				<span>*설명
 					<textarea rows="11" cols="30" name="cal_nametag" id="cal_nametag"placeholder="설명"></textarea>
 				</span>
 			</li>

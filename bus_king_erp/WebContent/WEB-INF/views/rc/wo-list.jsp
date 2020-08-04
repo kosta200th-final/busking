@@ -32,7 +32,7 @@
 		<form action="" method="get" id="frm">
 			<div class="table100 ver2 m-b-110">
 				<table data-vertable="ver2" id=ma>
-					<thead>
+					
 						<tr class="row100 head">
 							<th class="column100 column1" data-column="column1">코드값</th>
 							<th class="column100 column2" data-column="column2">종류</th>
@@ -49,18 +49,17 @@
 									<td>${wonlyolist.wo_cost}원</td>
 									
 								</tr>
-							</c:forEach>
-					</thead>
+							</c:forEach> 
+					
 				</table>
 			</div>
 			<br>
 			<br>
-			<div class="btn-wrap">
+			<div class="btn-wrap" align="center">
 				<input type="submit" value="점검접수현황" class="editBtn formBtn"
-					onclick="showPopup();"> 
+					onclick="showPopup();" style="width: 115px; display: inline;" > 
 				<input type="reset"  value="입/출고 내역등록" class="editBtn formBtn" 
-					onclick="location.href='woio-list.do'"> 
-			    <input type="button" value="월별 내역 그래프" class="editBtn formBtn">
+					onclick="location.href='woio-list.do'" style="display: inline;"> 
 			</div>
 			 <i class="fa fa-envelope"></i> 
 					 <a href="mailto:aa@gmail.com">발주 메일 </a><br>

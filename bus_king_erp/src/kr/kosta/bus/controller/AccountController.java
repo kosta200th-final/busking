@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.kosta.bus.model.AccountDTO;
+import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.CalculateDTO;
 import kr.kosta.bus.model.PenaltyDTO;
 import kr.kosta.bus.service.AccountService;
@@ -302,31 +303,43 @@ public class AccountController {
    }
 
    @RequestMapping(value = "cal-insertform.do", method = RequestMethod.GET)
-   public String insertform() {
+   public String insertform(Model model) {
+	   List<BusDTO> dto = calculateService.getBuslist();
+	   model.addAttribute("blist", dto);
       return "/ac/cal-insertform";
    }
 
    @RequestMapping(value = "cal-insert.do", method = RequestMethod.POST)
-   public String insert(HttpServletRequest request, CalculateDTO dto) {
-      System.out.println(dto.toString());
+   public String insert(HttpServletRequest request, Model model) {
+	   if(request.getParameter("cal_date").length() < 1 || request.getParameter("cal_hap_c").length() < 1 || request.getParameter("cal_nametag").length() < 1 || 
+			   request.getParameter("cal_hap_m").length() < 1 || request.getParameter("cal_total").length() < 1) {
+		   model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
+			model.addAttribute("url", "cal-insertform.do");
+			return "/ac/ac-reject";
+	   }
+		else {
+			CalculateDTO dto = new CalculateDTO();
+			System.out.println(dto.toString());
 
-      dto.setCal_b_no(request.getParameter("cal_b_no"));
-      dto.setCal_nametag(request.getParameter("cal_nametag"));
-      dto.setCal_bigo(request.getParameter("cal_bigo"));
+			dto.setCal_date(request.getParameter("cal_date"));
+			dto.setCal_b_no(request.getParameter("cal_b_no"));
+			dto.setCal_nametag(request.getParameter("cal_nametag"));
+			dto.setCal_bigo(request.getParameter("cal_bigo"));
 
-      dto.setCal_hap_c(Integer.parseInt(request.getParameter("cal_hap_c")));
-      dto.setCal_hap_m(Integer.parseInt(request.getParameter("cal_hap_m")));
-      dto.setCal_total(Integer.parseInt(request.getParameter("cal_total")));
+			dto.setCal_hap_c(Integer.parseInt(request.getParameter("cal_hap_c")));
+			dto.setCal_hap_m(Integer.parseInt(request.getParameter("cal_hap_m")));
+			dto.setCal_total(Integer.parseInt(request.getParameter("cal_total")));
 
-      calculateService.calInsert(dto);
+			calculateService.calInsert(dto);
 
-      // 칼코드는 자동증가값이라 dto 셋값이 널, 그래서 방금 입력된 레코드의 칼코드를 가져오는 매퍼를 만들어서 그걸로 디티오셋 해준다.
-      dto.setCal_code(calculateService.calCode());
+			// 칼코드는 자동증가값이라 dto 셋값이 널, 그래서 방금 입력된 레코드의 칼코드를 가져오는 매퍼를 만들어서 그걸로 디티오셋 해준다.
+			dto.setCal_code(calculateService.calCode());
 
-      // 그러고나서 그 dto 를 가지고 회계(어카운트) 테이블에도 인서트 해준다.
-      calculateService.accountInsert(dto);
+			// 그러고나서 그 dto 를 가지고 회계(어카운트) 테이블에도 인서트 해준다.
+			calculateService.accountInsert(dto);
 
-      return "redirect:cal-list.do";
+			return "redirect:cal-list.do";
+		}
    }
 
    @RequestMapping(value = "cal-update.do", method = RequestMethod.GET)

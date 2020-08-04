@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
 </head>
 
 <style>
@@ -27,37 +27,37 @@
 		<div class="form-con">
 			<ul>
 				<li>
-					<div class="miniform"> <span>사원번호</span><br><input type="text" name="pay_e_no" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>사원이름</span><br><input type="text" name="pay_e_name" style="display: inline; width: 130px"> </div> 
+					<div class="miniform"> <span>*사원번호</span><br><input type="text" name="pay_e_no" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>*사원이름</span><br><input type="text" name="pay_e_name" style="display: inline; width: 130px"> </div> 
 				</li>
 				<li>
-					<div class="miniform"> <span>부서</span> <input type="text" name="pay_e_dname" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>직급</span> <input type="text" name="pay_e_position" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>*부서</span> <input type="text" name="pay_e_dname" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>*직급</span> <input type="text" name="pay_e_position" style="display: inline; width: 130px"> </div>
 				</li>
 				<li>
-					<div class="miniform"> <span>해당년도</span><input type="text" name="pay_year" style="display: inline; width: 130px"> </div>
-					<div class="miniform"> <span>해당월</span><input type="text" name="pay_month" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>*해당년도</span><input type="text" name="pay_year" style="display: inline; width: 130px"> </div>
+					<div class="miniform"> <span>*해당월</span><input type="text" name="pay_month" style="display: inline; width: 130px"> </div>
 				</li>
 				<li>
-					<span>지급일</span><input type="date" name="pay_day">
+					<span>*지급일</span><input type="date" name="pay_day">
 				</li>
 				<li>
-					<div class="miniform"> <span>출근일수</span> <input type="text" name="pay_chul" style="display: inline; width: 130px"></div>
-					<div class="miniform"> <span>근무시간</span> <input type="text" name="pay_work" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>*출근일수</span> <input type="text" name="pay_chul" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>*근무시간</span> <input type="text" name="pay_work" style="display: inline; width: 130px"></div>
 					
 				</li>
 				<li>
-					<div class="miniform"> <span>특근시간</span> <input type="text" name="pay_work_t" style="display: inline; width: 130px"></div>
-					<div class="miniform"> <span>특근수당</span> <input type="text" name="pay_p_t" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>*특근시간</span> <input type="text" name="pay_work_t" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>*특근수당</span> <input type="text" name="pay_p_t" style="display: inline; width: 130px"></div>
 				</li>
 				<li>
-					<div class="miniform"> <span> 기본급</span> <input type="text" name="pay_p" style="display: inline; width: 130px"></div>
-					<div class="miniform"> <span>만근수당</span> <input type="text" name="pay_m" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span> *기본급</span> <input type="text" name="pay_p" style="display: inline; width: 130px"></div>
+					<div class="miniform"> <span>*만근수당</span> <input type="text" name="pay_m" style="display: inline; width: 130px"></div>
 				</li>
 				<li>
-					<span>세금공제액</span><input type="text" name="pay_tax"><br>
+					<span>*세금공제액</span><input type="text" name="pay_tax"><br>
 				<li>
-					<span>회계처리 설명</span><input type="text" name="pay_nametag">
+					<span>*회계처리 설명</span><input type="text" name="pay_nametag">
 				</li>
 				<li>
 					<span>비고</span><input type="text" name="pay_bigo">

@@ -48,4 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from (select cal_code from calculate order by cal_code desc) where rownum=1
 	</select>
 	<!-- ************************************************************************************************************** -->
+	
+	<select id="getBuslist" resultType="kr.kosta.bus.model.BusDTO">
+		select b_no from bus
+	</select>
 </mapper>

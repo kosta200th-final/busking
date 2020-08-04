@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/hrSubMenu.jsp" %>
 <style type="text/css">
 	.form {
 		width: 50%;
@@ -80,7 +81,7 @@
 			<input type="text" name="e_jumin" id="e_jumin" placeholder="ex)000000-0000000">
 		</li>
 		<li>
-		<span>부서</span><br>
+<!-- 		<span>부서</span><br>
 			<select name="e_dname">
 								<option>선택하세요</option>
 								<option>인사부</option>
@@ -88,16 +89,16 @@
 								<option>운송팀</option>
 								<option>정비과</option>
 							</select>
-			</li>
+			</li> -->
 			<li>
-			<span>권한</span><br>			
+			<span>부서</span><br>			
 			<select name="authority">
 								<option>선택하세요</option>
 								<option value="ROLE_ADMIN">관리자</option>
-								<option value="ROLE_HC">인사부</option>
-								<option value="ROLE_ACD">총무부</option>
-								<option value="ROLE_BC">운송팀</option>
-								<option value="ROLE_RC">정비과</option>
+								<option value="ROLE_HC">인사팀</option>
+								<option value="ROLE_ACD">총무팀</option>
+								<option value="ROLE_BC">배차팀</option>
+								<option value="ROLE_RC">정비팀</option>
 							</select>
 			</li>
 			<li>
@@ -141,7 +142,7 @@
 			</li>
 			<li>
 			<span>비밀번호</span>
-			<input type="text" name="e_pwd" id="e_pwd" >
+			<input type="password" name="e_pwd" id="e_pwd" value="a12345" >
 			</li>
 		    </ul>
 		    <ul class="right-side">
