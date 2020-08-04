@@ -29,11 +29,11 @@
 				<input type="date" name="re_date" id="re_date" class="resized-input"
 					placeholder="re_date">
 			</li>
-			<li>
+<!-- 			<li>
 				<span>정비가격</span>
 				<input type="text" name="re_cost" id="re_cost" class="resized-input"
 					placeholder="가격">
-			</li>
+			</li> -->
 			<li>
 				<label for="re_breakdown" class="br">정비내역 </label>
 				<input type="radio" name="re_breakdown"

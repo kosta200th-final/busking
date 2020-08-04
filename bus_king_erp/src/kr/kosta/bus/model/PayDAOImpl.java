@@ -14,8 +14,8 @@ public class PayDAOImpl implements PayDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<PayDTO> payList(HashMap map) {
-		return sqlSession.selectList("PayDAO.payList", map);
+	public PayDTO payList(HashMap map) {
+		return sqlSession.selectOne("PayDAO.payList", map);
 	}
 
 	@Override
@@ -36,6 +36,21 @@ public class PayDAOImpl implements PayDAO {
 	@Override
 	public List<PayDTO> elist(HashMap map) {
 		return sqlSession.selectList("PayDAO.elist", map);
+	}
+
+	@Override
+	public void accoInsert(PayDTO dto) {
+		sqlSession.insert("PayDAO.accoInsert", dto);		
+	}
+
+	@Override
+	public String payCode() {
+		return sqlSession.selectOne("PayDAO.payCode");
+	}
+	
+	@Override
+	public int payCheck(PayDTO dto) {
+		return sqlSession.selectOne("PayDAO.payCheck", dto);
 	}
 	
 }

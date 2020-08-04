@@ -503,4 +503,59 @@ input.mLeft:hover {
    margin-bottom: 5px
    
 }
+
+/*============================== 인사쪽.. ====================================*/
+.hcTHead, .hcUl {
+   width: 95%;
+   margin: auto;
+   font-size: 12px
+}
+.hcTHead .button {
+   display: block;
+   padding: 3px 10px;
+   margin: 0;
+   height: 25px;
+}
+input.hcTHead-input {
+   display: inline-block !important;
+   margin: 0 10px;
+   height: 25px;
+   padding: 3px 10px;
+}
+select.hcTHead-select {
+   width: 100px;
+   margin: 0 10px;
+   height: 25px;
+   padding: 3px 10px;
+   background-color: #fff;
+   border: solid .5px #eaf8e6;
+}
+.hcTHead form {
+   float: right;
+   margin: 20px 0 10px 20px
+}
+input.mLeft {
+   margin-left: 0;
+   border: solid .5px;
+   cursor: pointer 
+}
+input.mLeft:hover {
+   background: #333;
+   color: #eee
+}
+.hcUl .hcUl-con {
+   float: right;
+   width: auto;
+   margin-top: 10px;
+   background: #eee;
+   border: solid .5px #999
+}
+
+.hcUl ul {
+   float: left;
+   padding: 15px
+}
+.hcUl li {
+   margin-bottom: 5px
    
+}

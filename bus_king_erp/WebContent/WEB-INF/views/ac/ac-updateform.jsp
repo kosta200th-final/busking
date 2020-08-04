@@ -7,18 +7,19 @@
 <style type="text/css">
 	input {
 		display: inline-block !important;
-		margin-right: 0;
+		margin-right: 0
 	}
 	.code {
 		width: 120px;
 	}
 	.code, .date {
-		padding-left: 0
+		padding-left: 10px
 	}
 	.state {
 		width: 50px;
 		text-align: center
 	}
+	
 </style>
 
 <body>
@@ -42,24 +43,25 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td style="text-align:center"><input type="text"  value="${dto.ac_code}" readonly="readonly" 
+						<td style="align:center"><input type="text"  value="${dto.ac_code}" readonly="readonly" 
 							name="ac_code" id="ac_code" class="code"></td>
-						<td style="text-align:center">
-							<input type="text" name="ac_name" id="ac_name" value="${dto.ac_name}" class="date">
+						<td>
+							<input type="text" name="ac_name" id="ac_name" value="${dto.ac_name}" class="date"  readonly="readonly">
 						</td>
 						<td>
-							<input type="text" name="ac_cost" id="ac_cost" value="${dto.ac_cost}" class="price">
+							<input type="text" name="ac_cost" id="ac_cost" value="${dto.ac_cost}" class="price" readonly="readonly">
 						</td>
-						<td style="width:130px">
+						<td>
 							<fmt:parseDate value='${dto.ac_date}'
 								var='trading_day' pattern='yyyy-mm-dd' />
 							<fmt:formatDate value="${trading_day}"
 								pattern="yyyy.mm.dd" />
 						</td>
-						<td class="state" style="width: 130px">
-							<span name="ac_state" id="ac_state" style="text-align:center">${dto.ac_state}</span>
+						<td class="state">
+							<input type="text" name="ac_state" id="ac_state" value="${dto.ac_state}"
+							style="text-align: center" readonly="readonly" class="">
 						</td>
-						<td><input type="text" name="ac_bigo" id="ac_bigo" value="${dto.ac_bigo}"></td>
+						<td align="center"><input type="text" name="ac_bigo" id="ac_bigo" value="${dto.ac_bigo}" style="background: rgb(232, 240, 254); padding: 5px 2px"></td>
 						<td><input type="submit" value="EDIT" class="button editBtn" style="margin: 0 5px 0 20px">
 							<input type="reset" value="CANCLE" onclick="location.href='ac-list.do'" class="button editBtn red">
 						</td>
@@ -69,11 +71,6 @@
 		</div>
 		</form>
 	</main>
-<script type="text/javascript"> 
 
-$("span:contains('매입')").css({color:"#A72734"});
-$("span:contains('매출')").css({color:"#0062C1"});
-
-</script>
 </body>
 </html>

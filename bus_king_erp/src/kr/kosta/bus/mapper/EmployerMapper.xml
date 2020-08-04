@@ -17,7 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select * from employer where e_no = #{e_no}
    </select>
    
-   
    <insert id="employerInsert" parameterType="kr.kosta.bus.model.EmployerDTO">
       insert into employer values (NEXT_E_NO, #{e_name}, #{e_jumin}, #{e_dname}, #{e_position},
           null, #{e_license}, #{e_contract}, #{e_career}, #{e_break},
@@ -38,14 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       update employer set e_no = #{e_no}, e_name = #{e_name}, e_jumin = #{e_jumin}, e_dname = #{e_dname}, e_position = #{e_position},
       e_license = #{e_license}, e_contract = #{e_contract}, e_career = #{e_career}, e_break = #{e_break}, e_marriage = #{e_marriage}, e_disabled = #{e_disabled},
       e_hobby = #{e_hobby}, e_speciality = #{e_speciality}, e_phone = #{e_phone}, e_mail = #{e_mail}, e_add = #{e_add}, 
-      e_start = #{e_start}, e_end = #{e_end}, enabled = 1, authority = #{authority} where e_no = #{e_no}
+      e_start = #{e_start}, enabled = 1, authority = #{authority} where e_no = #{e_no}
    </update>
    
    <update id="employerUpdate" parameterType="kr.kosta.bus.model.EmployerDTO">
       update employer set e_no = #{e_no}, e_name = #{e_name}, e_jumin = #{e_jumin}, e_dname = #{e_dname}, e_position = #{e_position},
       e_license = #{e_license}, e_contract = #{e_contract}, e_career = #{e_career}, e_break = #{e_break}, e_marriage = #{e_marriage}, e_disabled = #{e_disabled},
       e_hobby = #{e_hobby}, e_speciality = #{e_speciality}, e_phone = #{e_phone}, e_pwd = #{e_pwd}, e_mail = #{e_mail}, e_add = #{e_add}, 
-      e_start = #{e_start}, e_end = #{e_end}, enabled = 1, authority = #{authority} where e_no = #{e_no}
+      e_start = #{e_start}, enabled = 1, authority = #{authority} where e_no = #{e_no}
    </update>
    
    <delete id="employerDelete" parameterType="String">

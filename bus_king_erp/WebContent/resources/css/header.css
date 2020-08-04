@@ -87,6 +87,14 @@ header .saan {
     margin: 0 20px;
     padding: 0 5px
 }
+
+/* 메뉴 선택했을 때 블록 표시? */
+.gnb a.activePage{
+    color: green;
+    border-bottom: solid;
+    border-width: 3px;    
+}
+
 /*jQuery*/
 .gnb a.on {
     background: rgb(151, 190, 161);

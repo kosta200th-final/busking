@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.kosta.bus.model.BusDTO;
 import kr.kosta.bus.model.CalcuateDAO;
 import kr.kosta.bus.model.CalculateDTO;
 
@@ -51,4 +52,8 @@ public class CalculateServiceImpl implements CalculateService {
 		return calculateDAO.calCode();
 	}
 
+	@Override
+	public List<BusDTO> getBuslist() {
+		return calculateDAO.getBuslist();
+	}
 }

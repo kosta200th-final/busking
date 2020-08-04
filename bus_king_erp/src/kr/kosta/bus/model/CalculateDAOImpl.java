@@ -52,7 +52,10 @@ public class CalculateDAOImpl implements CalcuateDAO {
 		return sqlsession.selectOne("CalculateDAO.calCode");
 	}
 	
-	
+	@Override
+	public List<BusDTO> getBuslist() {
+		return sqlsession.selectList("CalculateDAO.getBuslist");
+	}
 	
 	
 

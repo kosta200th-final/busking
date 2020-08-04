@@ -31,7 +31,7 @@
 <body>
 <main style="left: 8%">
 	<div class="table100 ver2 m-b-110" align="center">
-		<img src="../resources/img/${dto.r_map }" width="600px" height="450px" align="middle"/>
+		<img src="../resources/img/route/${dto.r_map }" width="600px" height="450px" align="middle"/>
 		<div class="acUl">
 			<div class="acUl-con" style="padding: 15px;">
 				<div><div class="payname">어른요금</div><div class="rpay">&nbsp;&nbsp;[ 카드 :</div><div class="rprice"><fmt:formatNumber value="${dto.r_pay_adult}" pattern="###,###"/> 원</div><div class="rpay">&nbsp;&nbsp;현금 :</div><div class="rprice"><fmt:formatNumber value="${dto.r_pay_adult}" pattern="###,###"/> 원 ]</div></div><br>

@@ -99,13 +99,20 @@ public class AccidentController {
 	}
 
 	@RequestMapping(value = "comp-insert.do", method = RequestMethod.POST)
-	public String complaintinsert(HttpServletRequest request, ComplaintDTO dto) {
+	public String complaintinsert(HttpServletRequest request, Model model) {
+		if(request.getParameter("c_title").length() < 1 || request.getParameter("c_content").length() < 1 || request.getParameter("c_date").length() < 1) {
+			model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
+			model.addAttribute("url", "comp-insertform.do");
+			return "/ad/ad-reject";
+		}
+		ComplaintDTO dto = new ComplaintDTO();
 		dto.setC_title(request.getParameter("c_title"));
 		dto.setC_type(request.getParameter("c_type"));
 		dto.setC_content(request.getParameter("c_content"));
 		dto.setC_e_no(request.getParameter("c_e_no"));
 		dto.setC_e_name(request.getParameter("c_e_name"));
 		dto.setC_b_no(request.getParameter("c_b_no"));
+		dto.setC_date(request.getParameter("c_date"));
 
 		complaintService.complaintInsert(dto);
 
@@ -123,7 +130,13 @@ public class AccidentController {
 	}
 
 	@RequestMapping(value = "comp-update.do", method = RequestMethod.POST)
-	public String complaintupdate(ComplaintDTO dto, Model model) {
+	public String complaintupdate(HttpServletRequest request, Model model) {
+		if(request.getParameter("c_title").length() < 1 || request.getParameter("c_content").length() < 1) {
+			model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
+			model.addAttribute("url", "comp-list.do");
+			return "/ad/ad-reject";
+		}
+		ComplaintDTO dto = new ComplaintDTO();
 		complaintService.complaintUpdate(dto);
 
 		return "redirect:comp-list.do";
@@ -196,8 +209,14 @@ public class AccidentController {
 	}
 
 	@RequestMapping(value = "p-insert.do", method = RequestMethod.POST)
-	public String penaltyinsert(HttpServletRequest request, PenaltyDTO dto) {
-
+	public String penaltyinsert(HttpServletRequest request, Model model) {
+		if(		request.getParameter("p_cost").length() < 1 || request.getParameter("p_date").length() < 1 || request.getParameter("p_history").length() < 1 || 
+				request.getParameter("p_located").length() < 1 || request.getParameter("p_police").length() < 1) {
+			model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
+			model.addAttribute("url", "p-insertform.do");
+			return "/ad/ad-reject";
+		}
+		PenaltyDTO dto = new PenaltyDTO();
 		dto.setP_code(request.getParameter("p_code"));
 		dto.setP_b_no(request.getParameter("p_b_no"));
 		dto.setP_e_no(request.getParameter("p_e_no"));
@@ -343,8 +362,14 @@ public class AccidentController {
 	}
 
 	@RequestMapping(value = "acc-insert.do", method = RequestMethod.POST)
-	public String accidentinsert(HttpServletRequest request, AccidentDTO dto) {
-
+	public String accidentinsert(HttpServletRequest request, AccidentDTO dto, Model model) {
+		if(	request.getParameter("acc_state") == null || request.getParameter("acc_date").length() < 1 || 
+				request.getParameter("acc_located").length() < 1 || request.getParameter("acc_breakdown").length() < 1) {
+			model.addAttribute("reject", "입력되지 않은 항목이 있습니다.");
+			model.addAttribute("url", "acc-insertform.do");
+			return "/ad/ad-reject";
+		}
+			
 		dto.setAcc_b_no(request.getParameter("acc_b_no"));
 		dto.setAcc_e_no(request.getParameter("acc_e_no"));
 		dto.setAcc_e_license(request.getParameter("acc_e_license"));
@@ -372,9 +397,17 @@ public class AccidentController {
 
 	@RequestMapping(value = "acc-repair.do", method = RequestMethod.GET)
 	public String accidentupdate(AccidentDTO dto, String acc_no, Model model) {
+		String bstate = accidentService.busState(dto.getAcc_b_no());
+		System.out.println("bstate : " + bstate);
+		if(!bstate.equals("대기중")) {
+			model.addAttribute("reject", "운행중이거나 이미 접수된 차량입니다.");
+			model.addAttribute("url", "acc-list.do");
+			return "/ad/ad-reject";
+		}
 		accidentService.acc_stateUpdate(acc_no);
 		
 		accidentService.repairInsert(dto);
+		accidentService.busStateUpdate(dto.getAcc_b_no());
 
 		return "redirect:acc-list.do";
 	}

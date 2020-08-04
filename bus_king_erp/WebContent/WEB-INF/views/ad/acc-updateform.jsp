@@ -25,34 +25,7 @@
 			</li>
 			<li>
 				<span>면허번호</span>
-				<input type="text" name="acc_e_license" id="acc_e_license" placeholder="면허 번호" value="${accidentupdate.acc_e_license}"> 
-			</li>
-			<li>
-				<label for="acc_state" class="br">차량상태 </label>
-				<c:if test="${accidentupdate.acc_state == '운행가능'}">
-					<input type="radio" name="acc_state" value="운행가능" class="radio" checked="checked">
-					운행가능
-					<input type="radio" name="acc_state" value="수리요함" class="radio">
-					수리요함 
-					<input type="radio" name="acc_state" value="정비접수" class="radio">
-					정비접수 
-				</c:if>
-				<c:if test="${accidentupdate.acc_state == '수리요함'}">
-					<input type="radio" name="acc_state" value="운행가능" class="radio">
-					운행가능
-					<input type="radio" name="acc_state" value="수리요함" class="radio" checked="checked">
-					수리요함 
-					<input type="radio" name="acc_state" value="정비접수" class="radio">
-					정비접수 
-				</c:if>
-				<c:if test="${accidentupdate.acc_state == '정비접수'}">
-					<input type="radio" name="acc_state" value="운행가능" class="radio">
-					운행가능
-					<input type="radio" name="acc_state" value="수리요함" class="radio">
-					수리요함 
-					<input type="radio" name="acc_state" value="정비접수" class="radio" checked="checked">
-					정비접수 
-				</c:if>
+				<input type="text" name="acc_e_license" id="acc_e_license" placeholder="면허 번호" readonly="readonly" value="${accidentupdate.acc_e_license}"> 
 			</li>
 			<li>
 				<span>사고난 일자</span>
@@ -61,11 +34,11 @@
 			</li>
 			<li>
 				<span>사고난 장소</span>
-				<input type="text" name="acc_located" id="acc_located" placeholder="사고난 장소" readonly="readonly" value="${accidentupdate.acc_located}"> 
+				<input type="text" name="acc_located" id="acc_located" placeholder="사고난 장소" value="${accidentupdate.acc_located}"> 
 			</li>
 			<li>
 				<span>사고난 내용</span>
-				<textarea rows="10" cols="30"  name="acc_breakdown" id="acc_breakdown" readonly="readonly">${accidentupdate.acc_breakdown}</textarea>
+				<textarea rows="10" cols="30"  name="acc_breakdown" id="acc_breakdown">${accidentupdate.acc_breakdown}</textarea>
 			</li>
 		</ul>
 		<div class="btn-wrap">

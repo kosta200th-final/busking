@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/common/header.jsp" %>
 <%@include file="/common/accidentSubMenu.jsp" %>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
 
 <main>
 <form action="acc-insert.do" method="post" class="form">
@@ -12,16 +13,14 @@
 			<li>
 				<span>버스번호</span>
 				<select name="acc_b_no">
-					<option>버스번호</option>
 					<c:forEach items="${blist}" var="blist">
 						<option>${blist.b_no}</option>
 					</c:forEach>
 				</select>
 			</li>
 			<li>	
-				<span>사원 번호</span>
+				<span>사원번호</span>
 				<select name="acc_e_no">
-					<option>사원번호</option>
 					<c:forEach items="${elist}" var="elist">
 						<option>${elist.e_no}</option>
 					</c:forEach>
@@ -30,7 +29,6 @@
 			<li>	
 				<span>면허번호</span>
 				<select name="acc_e_license">
-					<option>면허번호</option>
 					<c:forEach items="${elist}" var="elist">
 						<option>${elist.e_license}</option>
 					</c:forEach>
@@ -40,8 +38,6 @@
 				<label for="acc_state" class="br">차량상태 </label>
 				<input type="radio" name="acc_state" value="수리요함" class="radio">
 				수리요함
-				<input type="radio" name="acc_state" value="수리접수" class="radio">
-				수리접수 
 				<input type="radio" name="acc_state" value="운행가능" class="radio">
 				운행가능
 			</li>
